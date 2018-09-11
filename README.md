@@ -20,7 +20,7 @@ Gera nýja möppu
 
 git remote
 
-git clone https://github.com/dingolfsson/Throun_Hugbunadar.git
+git clone https://github.com/alli959/Hugbunadarverkefni1
 
 
 Núna ætti ´git remote´ að sýna "origin" á skjánum.
