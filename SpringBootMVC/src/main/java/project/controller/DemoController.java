@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DemoController {
 
 
+
+
     // Notice here that since the class has "/demo", this path is "/demo/page"
     @RequestMapping("/page")
     public String demoPage(){
