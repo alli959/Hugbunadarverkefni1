@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td>Position:</td>
-                    <%--the `path` attribute matches the `note` attribute of the Entity that was passed in the model--%>
+
                 <td><sf:input path="playerPos" type="text" placeholder="C,P,S,SG or PG"/></td>
             </tr>
 
@@ -40,31 +40,24 @@
 
     </sf:form>
 
-    <%--Choose what code to generate based on tests that we implement--%>
     <c:choose>
-        <%--If the model has an attribute with the name `postitNotes`--%>
         <c:when test="${not empty players}">
-            <%--Create a table for the Postit Notes--%>
+
             <table class="allPlayers">
 
-                    <%--For each postit note, that is in the list that was passed in the model--%>
-                    <%--generate a row in the table--%>
-                    <%--Here we set `postit` as a singular item out of the list `postitNotes`--%>
+
                 <c:forEach var="player" items="${players}">
                     <tr>
-                            <%--We can reference attributes of the Entity by just entering the name we gave--%>
-                            <%--it in the singular item var, and then just a dot followed by the attribute name--%>
 
-                            <%--Create a link based on the name attribute value--%>
                         <td><a href="/player/${player.name}">${player.name}</a></td>
-                            <%--The String in the note attribute--%>
+
                         <td>${player.playerPos}</td>
                     </tr>
                 </c:forEach>
             </table>
         </c:when>
 
-        <%--If all tests are false, then do this--%>
+
         <c:otherwise>
             <h3>No players!</h3>
         </c:otherwise>
