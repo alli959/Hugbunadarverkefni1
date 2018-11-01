@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Demo Page</h1>
+<h1><a href="/demo">Demo Page</a></h1>
 
 </body>
 

@@ -8,9 +8,8 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    private Long id;
     private String name;
-    private Long playerNo;
     private String playerPos;
     //private Team<Id> teamId;
     //private Player<Stats> PlayerStats
@@ -20,15 +19,15 @@ public class Player {
 
     }
 
-    public Player(String name, Long playerNo, String playerPos ) {
+    public Player(Long id, String name, String playerPos ) {
+        this.id = id;
         this.name = name;
-        this.playerNo = playerNo;
         this.playerPos = playerPos;
     }
 
-    public Long getPlayerNo() {return playerNo;}
+    public Long getId() {return id;}
 
-    public void setPlayerNo(Long playerNo) {this.playerNo = playerNo;}
+    public void setId(Long id) {this.id = id;}
 
     public String getName() {return name;}
 
@@ -38,6 +37,14 @@ public class Player {
 
     public void setPlayerPos(String playerPos) { this.playerPos = playerPos;}
 
+
+    // This is for easier debug.
+    @Override
+    public String toString() {
+        return String.format(
+                "Player[name=%s, playerPos=%s]",
+                name,playerPos);
+    }
 
 
 }
