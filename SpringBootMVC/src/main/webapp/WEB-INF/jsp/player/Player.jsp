@@ -22,16 +22,31 @@
     <sf:form method="POST" modelAttribute="playerView" action="/player">
 
         <table>
-            <tr>
 
-                    <td>Player nr. ${playerNo + 1}</td>
-                    <td>Name:</td>
-                    <td><sf:input path="name" type="text" placeholder="Enter player name"/></td>
+
+            <tr>
+                <td>Player nr. ${playerNo + 1}  of 12</td>
             </tr>
+
+
+
+            <tr>
+                <td>Name:</td>
+                <td><sf:input path="name" type="text" placeholder="Enter player name"/></td>
+            </tr>
+
+
+
             <tr>
                 <td>Position:</td>
 
                 <td><sf:input path="playerPos" type="text" placeholder="C,P,S,SG or PG"/></td>
+
+            </tr>
+
+            <tr>
+                <td>Jersey number:</td>
+                <td><sf:input path="playerNr" type="number"/></td>
             </tr>
 
         </table>
@@ -44,6 +59,11 @@
         <c:when test="${not empty players}">
 
             <table class="allPlayers">
+                <tr>
+                    <th>Name</th>
+                    <th>Player Position</th>
+                    <th>Jersey Nr.</th>
+                </tr>
 
 
                 <c:forEach var="player" items="${players}">
@@ -52,6 +72,8 @@
                         <td><a href="/player/${player.name}">${player.name}</a></td>
 
                         <td>${player.playerPos}</td>
+
+                        <td>${player.playerNr}</td>
                     </tr>
                 </c:forEach>
             </table>
