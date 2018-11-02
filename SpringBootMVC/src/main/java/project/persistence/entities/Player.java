@@ -1,14 +1,21 @@
 package project.persistence.entities;
 
 import javax.persistence.*;
+import javax.validation.Validator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import static javax.persistence.GenerationType.*;
 
 @Entity
 @Table(name = "player")
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    private Long playerNr;
     private String name;
     private String playerPos;
     //private Team<Id> teamId;
@@ -19,10 +26,11 @@ public class Player {
 
     }
 
-    public Player(Long id, String name, String playerPos ) {
+    public Player(Long id, String name, String playerPos, Long playerNr ) {
         this.id = id;
         this.name = name;
         this.playerPos = playerPos;
+        this.playerNr = playerNr;
     }
 
     public Long getId() {return id;}
@@ -36,6 +44,10 @@ public class Player {
     public String getPlayerPos() { return playerPos;}
 
     public void setPlayerPos(String playerPos) { this.playerPos = playerPos;}
+
+    public Long getPlayerNr() { return playerNr;}
+
+    public void setPlayerNr(Long playerNr) { this.playerNr = playerNr;}
 
 
     // This is for easier debug.
