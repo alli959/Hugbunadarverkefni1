@@ -3,11 +3,10 @@ package project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.Player;
+import project.persistence.entities.Team;
+import project.service.TeamService;
 import project.service.PlayerService;
 
 import java.util.List;
@@ -21,12 +20,11 @@ public class PlayerController {
     @Autowired
     public PlayerController(PlayerService playerService){
         this.playerService = playerService;
-        System.out.println(playerService);
     };
 
 
-    @RequestMapping(value = "/player", method = RequestMethod.GET)
-    public String playerViewGet(Model model){
+    @RequestMapping(value = "/team/player",  method = RequestMethod.GET)
+    public String playerViewGet(@PathVariable Long id, Model model){
 
         model.addAttribute("playerView",new Player());
 
@@ -43,13 +41,13 @@ public class PlayerController {
 
         return "player/Player";
     }
-    @RequestMapping(value = "/player", method = RequestMethod.POST)
+    @RequestMapping(value = "/team/player",  method = RequestMethod.POST)
     public String playerViewPost(@ModelAttribute("playerView") Player player,
+                                 @PathVariable Long id,
                                      Model model){
 
 
         playerService.save(player);
-
 
         model.addAttribute("players", playerService.findAllReverseOrder());
 
@@ -64,8 +62,9 @@ public class PlayerController {
     }
 
 
-    @RequestMapping(value = "/player/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/team/player/{name}",  method = RequestMethod.GET)
     public String playerGetFromName(@PathVariable String name,
+                                    @PathVariable Long id,
                                              Model model){
 
 

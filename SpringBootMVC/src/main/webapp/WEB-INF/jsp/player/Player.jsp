@@ -19,7 +19,7 @@
 
     <h1><a href="/player">Players</a></h1>
 
-    <sf:form method="POST" modelAttribute="playerView" action="/player">
+    <sf:form method="POST" modelAttribute="playerView" action="team/player">
 
         <table>
 
