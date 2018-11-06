@@ -29,13 +29,14 @@ public class RegisterController {
         System.out.println(userService);
     }
 
-    ;
-
     @RequestMapping(value = "/Register", method = RequestMethod.GET)
-    public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("register");
-        mav.addObject("user", new User());
-        return mav;
+    public String registerViewPost(@ModelAttribute("playerView") User user,
+                                        Model model){
+
+
+
+
+        return "register";
 
     }
     @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
