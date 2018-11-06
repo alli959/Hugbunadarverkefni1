@@ -61,4 +61,17 @@ public class PlayerServiceImplementation implements PlayerService {
     public List<Player> findLargestId() {
         return repository.findLargestId();
     }
+
+    @Override
+    public List<Player> countPlayersInTeam(Long teamId) {
+        return repository.countPlayersInTeam(teamId);
+    }
+
+    @Override
+    public List<Player> findPlayersInTeamReverseOrder(Long teamId) {
+
+        List<Player> player = repository.findPlayersInTeamReverseOrder(teamId);
+        Collections.reverse(player);
+        return player;
+    }
 }

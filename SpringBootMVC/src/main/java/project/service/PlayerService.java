@@ -64,6 +64,24 @@ public interface PlayerService {
 
     List<Player> findLargestId();
 
+
+    /**
+     * count {@Link Player}s  in team with {@Link Long teamId}
+     * @param teamId {@Link Long}
+     * @return number of {@Link Player}s with {@Link Long teamId} passed
+     */
+
+    List<Player> countPlayersInTeam(Long teamId);
+
+
+    /**
+     * find all {@Link Player}s in Team with {@Link Long teamId}
+     * @param teamId {@Link long}
+     * @return All {@Link Player}s in Team with {@Link long teamId} passed
+     */
+
+    List<Player> findPlayersInTeamReverseOrder(Long teamId);
+
 }
 
 

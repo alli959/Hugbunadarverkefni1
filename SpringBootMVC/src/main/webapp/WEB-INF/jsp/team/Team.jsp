@@ -9,10 +9,15 @@
 
     <head>
         <title>Team</title>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/team.css"/>"/>
     </head>
     <body>
 
-        <h1><a href="/team">Create Team</a></h1>
+        <ul class = "navBar">
+
+            <li><h2><a href="/team">Create Team</a></h2></li>
+
+        </ul>
 
 
         <sf:form method="POST" modelAttribute="createTeam" action="/team">
@@ -53,7 +58,7 @@
                     <c:forEach var="team" items="${teams}">
                         <tr>
 
-                            <td><a href="/team?id=${team.id}">${team.name}</a></td>
+                            <td><a href="/team/${team.id}">${team.name}</a></td>
 
                             <td>${team.location}</td>
 

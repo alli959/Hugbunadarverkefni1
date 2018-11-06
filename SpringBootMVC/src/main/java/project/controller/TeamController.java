@@ -68,18 +68,20 @@ public class TeamController {
 
     }
 
-    @RequestMapping(value = "/team", params = "id", method = RequestMethod.GET)
-    public String teamGetFromName(@RequestParam Long id,
+    @RequestMapping(value = "/team/{teamId}",  method = RequestMethod.GET)
+    public String teamGetFromName(@PathVariable Long teamId,
                                     Model model){
 
 
-        Team team = teamService.findOne(id);
+        Team team = teamService.findOne(teamId);
 
         System.out.println(team.getName());
 
         model.addAttribute("teamName",team.getName());
 
-        model.addAttribute("id",id);
+        model.addAttribute("teamId",teamId);
+
+        System.out.println(teamId);
 
         return "team/teamView";
 

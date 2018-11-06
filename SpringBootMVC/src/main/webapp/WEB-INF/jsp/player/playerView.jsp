@@ -8,24 +8,19 @@
 <html lang="en">
 
 <head>
-    <title>TeamView</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/css/teamView.css"/>"/>
+    <title>Player</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/playerView.css"/>"/>
 </head>
 <body>
 
     <ul class = "navBar">
-
         <li><h2><a href="/team">Create Team</a></h2></li>
         <li><h2><a href="/team/${teamId}">Team</a></h2></li>
-
+        <li><h2><a href="/team/${teamId}/player">Add Players</a></h2></li>
+        <li><h2><a href="/team/${teamId}/player/${name}">Players</a></h2></li>
     </ul>
 
-
-    <h2>${teamName}</h2>
-
-
-    <button  type="submit" onclick="location.href='/team/${teamId}/player'">Add Players</button>
-
+    <h1> ${name} </h1>
 
 
 

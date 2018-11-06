@@ -23,37 +23,42 @@ public class PlayerController {
     };
 
 
-    @RequestMapping(value = "/team/player",  method = RequestMethod.GET)
-    public String playerViewGet(@PathVariable Long id, Model model){
-
-        model.addAttribute("playerView",new Player());
 
 
-        if(playerService.findLargestId().toArray().length == 0){
-            model.addAttribute("playerNo",0);
-        }
-        else {
-            model.addAttribute("playerNo", playerService.findLargestId().get(0));
-        }
+    @RequestMapping(value = "/team/{teamId}/player", method = RequestMethod.GET)
+    public String playerAddGet(@PathVariable Long teamId,  Model model){
 
 
-        model.addAttribute("players",playerService.findAllReverseOrder());
+        model.addAttribute("teamId", teamId);
+
+        model.addAttribute("playerAdd",new Player());
+
+
+        model.addAttribute("playerNo",playerService.countPlayersInTeam(teamId).get(0));
+
+
+        model.addAttribute("players",playerService.findPlayersInTeamReverseOrder(teamId));
 
         return "player/Player";
     }
-    @RequestMapping(value = "/team/player",  method = RequestMethod.POST)
-    public String playerViewPost(@ModelAttribute("playerView") Player player,
-                                 @PathVariable Long id,
+
+
+
+    @RequestMapping(value = "/team/{teamId}/player", method = RequestMethod.POST)
+    public String playerAddPost(@ModelAttribute("playerAdd") Player player,
+                                @PathVariable Long teamId,
                                      Model model){
 
 
         playerService.save(player);
+        model.addAttribute("teamId", teamId);
 
-        model.addAttribute("players", playerService.findAllReverseOrder());
 
-        model.addAttribute("playerNo",playerService.findLargestId().get(0));
+        model.addAttribute("playerNo",playerService.countPlayersInTeam(teamId).get(0));
+        model.addAttribute("players",playerService.findPlayersInTeamReverseOrder(teamId));
 
-        model.addAttribute("playerView", new Player());
+
+        model.addAttribute("playerAdd", new Player());
 
 
 
@@ -62,19 +67,20 @@ public class PlayerController {
     }
 
 
-    @RequestMapping(value = "/team/player/{name}",  method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/team/{teamId}/player/{name}", method = RequestMethod.GET)
     public String playerGetFromName(@PathVariable String name,
-                                    @PathVariable Long id,
+                                             @PathVariable Long teamId,
                                              Model model){
 
 
-        model.addAttribute("players", playerService.findByName(name));
+        model.addAttribute("teamId", teamId);
+
+        model.addAttribute("name",name);
 
 
-        model.addAttribute("playerView", new Player());
-
-
-        return "player/Player";
+        return "player/playerView";
     }
 }
 

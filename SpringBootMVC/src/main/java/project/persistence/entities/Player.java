@@ -54,6 +54,10 @@ public class Player {
 
     public void setPlayerNr(Long playerNr) { this.playerNr = playerNr;}
 
+    public Long getTeamId() { return teamId;}
+
+    public void setTeamId(Long teamId) {this.teamId =  teamId;}
+
 
     // This is for easier debug.
     @Override
