@@ -2,29 +2,28 @@ package project.persistence.entities;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.*;
+
 @Entity
 @Table(name = "team")
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
-    private int teamId;
     private String name;
-    private Boolean home;
-    private int totalPlayers;
-    // private Player[] player;
+    private String location;
+  //  private Player player;
 
 
     public Team(){
     }
 
-    public Team(int teamId, String name, Boolean home, int totalPlayers){
-        this.teamId = teamId;
+    public Team(Long id, String name, String location){
+        this.id = id;
         this.name = name;
-        this.home = home;
-        this.totalPlayers = totalPlayers;
+        this.location = location;
+        //this.player = player;
     }
 
     public Long getId(){ return id; }
@@ -35,19 +34,20 @@ public class Team {
 
     public void setName(String name) {this.name = name;}
 
-    public boolean getHome() { return home; }
+    public String getlocation() { return location; }
 
-    public void setHome(Boolean home) {this.home = home;}
+    public void setlocation(String location) {this.location = location;}
 
-    public int getTotalPlayers() { return totalPlayers; }
 
-    public void setTotalPlayers(int totalPlayers) {this.totalPlayers = totalPlayers;}
+    //public Player getPlayer() {return player;}
 
+    //public void setPlayer(Player player) {this.player = player;}
     // This is for easier debug.
     @Override
     public String toString() {
         return String.format(
-                "Team [teamId=%s, name=%s, home=%s, totalPlayers=%s]",
-                teamId, name, home, totalPlayers);
+                "Team [id=%s, name=%s, location=%s]",
+                id, name, location);
     }
+
 }

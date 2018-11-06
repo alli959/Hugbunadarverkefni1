@@ -34,6 +34,14 @@ public interface PlayerRepository extends JpaRepository<Player, Long > {
     @Query(value = "SELECT p.id FROM Player p WHERE p.id = (select MAX(p.id) FROM Player p)")
     List<Player> findLargestId();
 
+    @Query(value = "SELECT COUNT(p.teamId) FROM Player p WHERE p.teamId = ?1")
+    List<Player> countPlayersInTeam(Long teamId);
+
+
+    //It's not in reverse order so It's changed in the PlayerServiceImplementation
+    @Query(value = "SELECT p FROM Player p WHERE p.teamId = ?1")
+    List<Player> findPlayersInTeamReverseOrder(Long teamId);
+
 
 
 

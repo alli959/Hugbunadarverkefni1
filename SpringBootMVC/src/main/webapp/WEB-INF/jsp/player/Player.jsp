@@ -13,13 +13,21 @@
     private String playerPos;--%>
     <head>
         <title>Create Players</title>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/css/player.css"/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/players.css"/>"/>
     </head>
     <body>
 
-    <h1><a href="/player">Players</a></h1>
 
-    <sf:form method="POST" modelAttribute="playerView" action="/player">
+    <ul class = "navBar">
+        <li><h2><a href="/team">Create Team</a></h2></li>
+        <li><h2><a href="/team/${teamId}">Team</a></h2></li>
+        <li><h2><a href="/team/${teamId}/player">Add Players</a></h2></li>
+
+    </ul>
+
+    <sf:form method="POST" modelAttribute="playerAdd" action="player">
+
+
 
         <table>
 
@@ -69,7 +77,7 @@
                 <c:forEach var="player" items="${players}">
                     <tr>
 
-                        <td><a href="/player/${player.name}">${player.name}</a></td>
+                        <td><a href ="player/${player.name}">${player.name}</a></td>
 
                         <td>${player.playerPos}</td>
 
