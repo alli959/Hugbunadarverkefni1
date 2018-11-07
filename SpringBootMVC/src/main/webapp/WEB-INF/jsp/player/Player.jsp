@@ -13,25 +13,49 @@
     private String playerPos;--%>
     <head>
         <title>Create Players</title>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/css/player.css"/>"/>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/players.css"/>"/>
     </head>
     <body>
 
-    <h1><a href="/player">Players</a></h1>
 
-    <sf:form method="POST" modelAttribute="playerView" action="/player">
+    <ul class = "navBar">
+        <li><h2><a href="/team">Create Team</a></h2></li>
+        <li><h2><a href="/team/${teamId}">Team</a></h2></li>
+        <li><h2><a href="/team/${teamId}/player">Add Players</a></h2></li>
+
+    </ul>
+
+    <sf:form method="POST" modelAttribute="playerAdd" action="player">
+
+
 
         <table>
-            <tr>
 
-                    <td>Player nr. ${playerNo + 1}</td>
-                    <td>Name:</td>
-                    <td><sf:input path="name" type="text" placeholder="Enter player name"/></td>
+
+            <tr>
+                <td>Player nr. ${playerNo + 1}  of 12</td>
             </tr>
+
+
+
+            <tr>
+                <td>Name:</td>
+                <td><sf:input path="name" type="text" placeholder="Enter player name"/></td>
+            </tr>
+
+
+
             <tr>
                 <td>Position:</td>
 
-                <td><sf:input path="playerPos" type="text" placeholder="C,PF,SF,SG or PG"/></td>
+
+                <td><sf:input path="playerPos" type="text" placeholder="C,P,S,SG or PG"/></td>
+
+            </tr>
+
+            <tr>
+                <td>Jersey number:</td>
+                <td><sf:input path="playerNr" type="number"/></td>
             </tr>
 
         </table>
@@ -44,14 +68,21 @@
         <c:when test="${not empty players}">
 
             <table class="allPlayers">
+                <tr>
+                    <th>Name</th>
+                    <th>Player Position</th>
+                    <th>Jersey Nr.</th>
+                </tr>
 
 
                 <c:forEach var="player" items="${players}">
                     <tr>
 
-                        <td><a href="/player/${player.name}">${player.name}</a></td>
+                        <td><a href ="player/${player.name}">${player.name}</a></td>
 
                         <td>${player.playerPos}</td>
+
+                        <td>${player.playerNr}</td>
                     </tr>
                 </c:forEach>
             </table>
