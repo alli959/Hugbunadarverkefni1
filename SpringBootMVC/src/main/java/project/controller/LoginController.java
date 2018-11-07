@@ -7,40 +7,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import project.persistence.entities.User;
-import project.persistence.entities.Login;
-import project.service.UserService;
+import org.springframework.ui.Model;
 
 @Controller
 public class LoginController {
 
-    private UserService userService;
-
-    @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
-        System.out.println(userService);
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String init(Model model) {
+        model.addAttribute("msg", "Please Enter Your Login Details");
+        return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("login");
-        mav.addObject("login", new Login());
-        return mav;
-    }
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-                                     @ModelAttribute("login") Login login) {
-        ModelAndView mav = null;
-        User user = userService.validateUser(login);
-        if (null != user) {
-            mav = new ModelAndView("welcome");
-            mav.addObject("name", user.getName());
+
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String submit(Model model, @ModelAttribute("user") User user) {
+        if (user != null && user.getUserName() != null
+                & user.getPassword() != null) {
+            if (user.getUserName().equals("alex")
+                    && user.getPassword().equals("12345")) {
+                model.addAttribute("msg", user.getUserName());
+                return "success";
+            } else {
+                model.addAttribute("error", "Invalid Details");
+                return "login";
+            }
         } else {
-            mav = new ModelAndView("login");
-            mav.addObject("message", "Username or Password is wrong!!");
+            model.addAttribute("error", "Please enter Details");
+            return "login";
         }
-        return mav;
     }
+
+
+
 }

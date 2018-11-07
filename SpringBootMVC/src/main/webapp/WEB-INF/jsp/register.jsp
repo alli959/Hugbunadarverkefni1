@@ -1,58 +1,59 @@
-<!DOCTYPE html>
-
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <title>Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Register Form</title>
 </head>
 <body>
-<sf:form id="regForm" modelAttribute="registerViewPost" action="registerProcess" method="post">
+<form:form name="registerForm" method="POST">
+    <div style="color: blue" >${msg}</div>
     <table align="center">
         <tr>
             <td>
-                <sf:label path="username">Username</sf:label>
+                <label path="username">Username</label>
             </td>
             <td>
-                <sf:input path="username" name="username" id="username" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <sf:label path="password">Password</sf:label>
-            </td>
-            <td>
-                <sf:password path="password" name="password" id="password" />
+                <input path="username" name="username" id="username" />
             </td>
         </tr>
         <tr>
             <td>
-                <sf:label path="firstname">FirstName</sf:label>
+                <label path="password">Password</label>
             </td>
             <td>
-                <sf:input path="firstname" name="firstname" id="firstname" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <sf:label path="lastname">LastName</sf:label>
-            </td>
-            <td>
-                <sf:input path="lastname" name="lastname" id="lastname" />
+                <password path="password" name="password" id="password" />
             </td>
         </tr>
         <tr>
             <td>
-                <sf:label path="email">Email</sf:label>
+                <label path="firstname">FirstName</label>
             </td>
             <td>
-                <sf:input path="email" name="email" id="email" />
+                <input path="firstname" name="firstname" id="firstname" />
             </td>
         </tr>
         <tr>
             <td>
-                <sf:button id="register" name="register">Register</sf:button>
+                <label path="lastname">LastName</label>
+            </td>
+            <td>
+                <input path="lastname" name="lastname" id="lastname" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label path="email">Email</label>
+            </td>
+            <td>
+                <input path="email" name="email" id="email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="register" name="register">Register</button>
             </td>
         </tr>
         <tr></tr>
@@ -62,6 +63,6 @@
             </td>
         </tr>
     </table>
-</sf:form>
+</form:form>
 </body>
 </html>

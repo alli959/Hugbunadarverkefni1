@@ -10,9 +10,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long USERID;
 
-    private Integer USERID;
     private String name;
     private String userName;
     private String password;
@@ -23,7 +22,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer USERID, String name, String userName, String password, String email) {
+    public User(Long USERID, String name, String userName, String password, String email) {
         this.USERID = USERID;
         this.name = name;
         this.userName = userName;
@@ -31,19 +30,11 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getUSERID() {
+    public Long getUSERID() {
         return USERID;
     }
 
-    public void setUSERID(Integer USERID) {
+    public void setUSERID(Long USERID) {
         this.USERID = USERID;
     }
 
@@ -78,5 +69,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
 }
