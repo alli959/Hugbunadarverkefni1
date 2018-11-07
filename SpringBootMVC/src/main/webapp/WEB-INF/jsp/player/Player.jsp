@@ -55,7 +55,9 @@
 
             <tr>
                 <td>Jersey number:</td>
-                <td><sf:input path="playerNr" type="number"/></td
+
+                <td><sf:input path="playerNr" type="number"/></td>
+
             </tr>
 
         </table>
