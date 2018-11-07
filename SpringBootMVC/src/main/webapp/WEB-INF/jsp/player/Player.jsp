@@ -48,6 +48,7 @@
             <tr>
                 <td>Position:</td>
 
+
                 <td><sf:input path="playerPos" type="text" placeholder="C,P,S,SG or PG"/></td>
 
             </tr>
