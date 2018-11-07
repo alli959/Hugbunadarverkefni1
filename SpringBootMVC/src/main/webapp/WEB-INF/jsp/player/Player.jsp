@@ -48,13 +48,14 @@
             <tr>
                 <td>Position:</td>
 
+
                 <td><sf:input path="playerPos" type="text" placeholder="C,P,S,SG or PG"/></td>
 
             </tr>
 
             <tr>
                 <td>Jersey number:</td>
-                <td><sf:input path="playerNr" type="number"/></td>
+                <td><sf:input path="playerNr" type="number"/></td
             </tr>
 
         </table>

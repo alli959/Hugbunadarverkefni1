@@ -34,8 +34,8 @@ public class HomeController {
     }
 
     // To call this method, enter "localhost:8080/user" into a browser
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(Model model){
+    @RequestMapping(value = "/userNew", method = RequestMethod.GET)
+    public String userNew(Model model){
 
         // Here we will show how to add attributes to a model and send it to the view
 
@@ -68,7 +68,7 @@ public class HomeController {
 
         // By adding attributes to the model, we can pass information from the controller
         // to the view (the .jsp file).
-        // Look at the User.jsp file in /main/webapp/WEB-INF/jsp/ to see how the data is accessed
-        return "User";
+        // Look at the UserNew.jsp file in /main/webapp/WEB-INF/jsp/ to see how the data is accessed
+        return "UserNew";
     }
 }
