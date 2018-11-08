@@ -8,10 +8,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.User;
+import project.service.UserService;
 import org.springframework.ui.Model;
+import java.util.List;
 
 @Controller
 public class LoginController {
+
+    private UserService userService;
+
+    @Autowired
+    public LoginController(UserService userService){this.userService = userService;}
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String init(Model model) {
@@ -21,24 +28,25 @@ public class LoginController {
 
 
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(Model model, @ModelAttribute("user") User user) {
-        if (user != null && user.getUserName() != null
-                & user.getPassword() != null) {
-            if (user.getUserName().equals("alex")
-                    && user.getPassword().equals("12345")) {
-                model.addAttribute("msg", user.getUserName());
-                return "success";
-            } else {
+        String userName = user.getUserName();
+        String password = user.getPassword();
+        List<User> exists = userService.getUserByName(userName);
+
+        if (exists != null && userName != null
+                && password != null) {
+
+            model.addAttribute("msg", userName);
+            return "success";
+        }
+                 else {
                 model.addAttribute("error", "Invalid Details");
                 return "login";
             }
-        } else {
-            model.addAttribute("error", "Please enter Details");
-            return "login";
-        }
-    }
 
 
 
-}
+
+
+}}

@@ -32,6 +32,8 @@ public interface UserService {
      */
 
 
+
+
     List<User> findAll();
 
     /**
@@ -42,4 +44,13 @@ public interface UserService {
     //void register(User user);
 
     //User validateUser(Login login);
+
+    /**
+     * get  {@Link User} by {@String name}
+     * @param name
+     * @return A @Link(User}
+     */
+
+
+    List<User> getUserByName(String name);
 }
