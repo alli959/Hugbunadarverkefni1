@@ -13,41 +13,46 @@ import java.util.List;
 @Service
 public class UserServiceImplementation implements UserService{
 
-    public UserRepository userRep;
+    UserRepository userRepository;
 
 
     @Autowired
-    public UserServiceImplementation(UserRepository repository) { this.userRep = repository;}
+    public UserServiceImplementation(UserRepository repository) { this.userRepository = repository;}
 
 
     @Override
     public User save(User user) {
-        return userRep.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public void delete(User user) {
 
-        userRep.delete(user);
+        userRepository.delete(user);
 
     }
 
     @Override
     public List<User> findAll() {
-        return userRep.findAll();
+        return userRepository.findAll();
     }
 
-    public void register(User user) {
+    @Override
+    public List<User> getUserByName(String name) {
+        return userRepository.getUserByName(name);
+    }
+
+    //public void register(User user) {
         // TODO Auto-generated method stub
-        //userRep.register(user);
-    }
+        //userRepository.register(user);
+    //}
 
 
-    public User validateUser(Login login) {
+    //public User validateUser(Login login) {
         // TODO Auto-generated method stub
 
-        return null;
-        //return userRep.validateUser(login);
-    }
+        //return null;
+        //return userRepository.validateUser(login);
+    //}
 
 }

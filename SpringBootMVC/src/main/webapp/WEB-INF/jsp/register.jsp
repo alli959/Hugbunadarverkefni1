@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,39 +9,31 @@
     <title>Register Form</title>
 </head>
 <body>
-<form:form name="registerForm" method="POST">
+<sf:form name="registerForm" modelAttribute="createUser" method="POST" action="/register">
     <div style="color: blue" >${msg}</div>
     <table align="center">
         <tr>
             <td>
-                <label path="username">Username</label>
+                <label path="name">Name:</label>
             </td>
             <td>
-                <input path="username" name="username" id="username" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label path="password">Password</label>
-            </td>
-            <td>
-                <password path="password" name="password" id="password" />
+                <sf:input type="text" path="name" name="name" id="name" />
             </td>
         </tr>
         <tr>
             <td>
-                <label path="firstname">FirstName</label>
+                <label path="userName">User Name:</label>
             </td>
             <td>
-                <input path="firstname" name="firstname" id="firstname" />
+                <sf:input path="userName" name="userName" id="userName" />
             </td>
         </tr>
         <tr>
             <td>
-                <label path="lastname">LastName</label>
+                <label path="password">Password:</label>
             </td>
             <td>
-                <input path="lastname" name="lastname" id="lastname" />
+                <sf:input type="password" path="password" name="password" id="password" />
             </td>
         </tr>
         <tr>
@@ -48,12 +41,12 @@
                 <label path="email">Email</label>
             </td>
             <td>
-                <input path="email" name="email" id="email" />
+                <sf:input type="email" path="email" name="email" id="email" />
             </td>
         </tr>
         <tr>
             <td>
-                <button id="register" name="register">Register</button>
+                <sf:button id="register" name="register">Register</sf:button>
             </td>
         </tr>
         <tr></tr>
@@ -63,6 +56,6 @@
             </td>
         </tr>
     </table>
-</form:form>
+</sf:form>
 </body>
 </html>

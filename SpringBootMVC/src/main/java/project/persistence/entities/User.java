@@ -5,13 +5,21 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long USERID;
-
+    @Column(name = "id", unique = true, columnDefinition = "serial")
+    private Long id;
     private String name;
     private String userName;
     private String password;
@@ -22,21 +30,13 @@ public class User {
     public User() {
     }
 
-    public User(Long USERID, String name, String userName, String password, String email) {
-        this.USERID = USERID;
+    public User(String name, String userName, String password, String email) {
         this.name = name;
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
-    public Long getUSERID() {
-        return USERID;
-    }
-
-    public void setUSERID(Long USERID) {
-        this.USERID = USERID;
-    }
 
     public String getName() {
         return name;

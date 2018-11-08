@@ -18,7 +18,6 @@ public class Player {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private Long playerNr;
     private String name;
     private String playerPos;

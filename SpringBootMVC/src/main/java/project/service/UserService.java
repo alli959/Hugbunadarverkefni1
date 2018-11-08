@@ -32,6 +32,8 @@ public interface UserService {
      */
 
 
+
+
     List<User> findAll();
 
     /**
@@ -39,7 +41,16 @@ public interface UserService {
      * @return A reversed list of {@link User}s
      */
 
-    void register(User user);
+    //void register(User user);
 
-    User validateUser(Login login);
+    //User validateUser(Login login);
+
+    /**
+     * get  {@Link User} by {@String name}
+     * @param name
+     * @return A @Link(User}
+     */
+
+
+    List<User> getUserByName(String name);
 }
