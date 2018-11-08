@@ -1,0 +1,27 @@
+.navBar{
+    display: inline-flex;
+    border: 2px solid;
+    background-color: #ff4000
+}
+
+.navBar li{
+    list-style-type: none;
+}
+
+.navBar a{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-right: 2px solid;
+    text-decoration: none;
+    color: #000000
+}
+
+
+.navBar li:last-of-type a{
+    border: 0;
+    color: #ffffff
+}
+
+
+
+
