@@ -13,14 +13,15 @@ import project.persistence.entities.Login;
 
 public interface UserRepository extends JpaRepository<User, Long > {
 
-    User save(User player);
+    User save(User user);
 
-    void delete(User player);
+    //void delete(User user);
 
-    List<User> findAll();
+    //List<User> findAll();
 
-    //@Query(value = "")
     //void register(User user);
+
+//    User validateUser(Login login);
 
     //@Query(value = "SELECT p FROM Player p where length(p.name) >= 3 ")
     //List<Player> findAllWithNameLongerThan3Chars();

@@ -39,7 +39,7 @@ public interface UserService {
      * @return A reversed list of {@link User}s
      */
 
-    void register(User user);
+    //void register(User user);
 
-    User validateUser(Login login);
+    //User validateUser(Login login);
 }

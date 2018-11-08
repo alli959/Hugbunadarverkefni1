@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserServiceImplementation implements UserService{
 
-    public UserRepository userRep;
+    UserRepository userRep;
 
 
     @Autowired
@@ -37,17 +37,17 @@ public class UserServiceImplementation implements UserService{
         return userRep.findAll();
     }
 
-    public void register(User user) {
+    //public void register(User user) {
         // TODO Auto-generated method stub
         //userRep.register(user);
-    }
+    //}
 
 
-    public User validateUser(Login login) {
+    //public User validateUser(Login login) {
         // TODO Auto-generated method stub
 
-        return null;
+        //return null;
         //return userRep.validateUser(login);
-    }
+    //}
 
 }
