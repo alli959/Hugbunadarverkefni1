@@ -1,15 +1,12 @@
 package project.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import project.persistence.entities.User;
-import project.service.UserService;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import project.persistence.entities.Users;
+import project.service.UserService;
+
 import java.util.List;
 
 @Controller
@@ -20,7 +17,7 @@ public class LoginController {
     @Autowired
     public LoginController(UserService userService){this.userService = userService;}
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String init(Model model) {
         model.addAttribute("msg", "Please Enter Your Login Details");
         return "login";
@@ -29,12 +26,15 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String submit(Model model, @ModelAttribute("user") User user) {
-        String userName = user.getUserName();
-        String password = user.getPassword();
-        List<User> exists = userService.getUserByName(userName);
+    public String submit(@ModelAttribute("users") Users users, Model model) {
 
-        if (exists != null && userName != null
+
+        model.addAttribute("users",new Users());
+        String userName = users.getUserName();
+        String password = users.getPassword();
+        List<Users> exists = userService.getByUserName(userName);;
+
+        if (exists.size() != 0 && userName != null
                 && password != null) {
 
             model.addAttribute("msg", userName);
@@ -49,4 +49,5 @@ public class LoginController {
 
 
 
-}}
+    }
+}

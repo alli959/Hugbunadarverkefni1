@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import project.persistence.entities.User;
+import project.persistence.entities.Users;
 import project.service.UserService;
 
 @Controller
@@ -27,18 +27,18 @@ public class RegisterController {
     public String createUser(Model model) {
         model.addAttribute("msg", "Please Enter Your Information");
 
-        model.addAttribute("createUser", new User());
+        model.addAttribute("createUser", new Users());
 
         return "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String createUserPost(@ModelAttribute("createUser") User user,
+    public String createUserPost(@ModelAttribute("createUser") Users users,
                                  Model model) {
 
-        userService.save(user);
+        userService.save(users);
 
-        model.addAttribute("createUser", new User());
+        model.addAttribute("createUser", new Users());
 
         return "login";
     }

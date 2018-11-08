@@ -1,44 +1,41 @@
 package project.persistence.repositories;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import project.persistence.entities.User;
-import project.persistence.entities.Login;
+import project.persistence.entities.Users;
 
 
-public interface UserRepository extends JpaRepository<User, Long > {
+public interface UserRepository extends JpaRepository<Users, Long > {
 
-    User save(User user);
+    Users save(Users users);
 
-    void delete(User user);
+    void delete(Users users);
 
-    List<User> findAll();
+    List<Users> findAll();
 
-    @Query(value = "SELECT p FROM User p WHERE p.name = ?1")
-    List<User> getUserByName(String name);
+    @Query(value = "SELECT p FROM Users p WHERE p.userName = ?1")
+    List<Users> getByUserName(String userName);
 
-    //void register(User user);
+    //void register(Users user);
 
-//    User validateUser(Login login);
+//    Users validateUser(Login login);
 
     //@Query(value = "SELECT p FROM Player p where length(p.name) >= 3 ")
     //List<Player> findAllWithNameLongerThan3Chars();
 
 
-    //public void register(User user) {
+    //public void register(Users user) {
       //  String sql = "insert into users values(?,?,?,?,?,?,?)";
         //jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getFirstname(),
           //      user.getLastname(), user.getEmail(), user.getAddress(), user.getPhone() });
    // }
-   // public User validateUser(Login login) {
+   // public Users validateUser(Login login) {
      //   String sql = "select * from users where username='" + login.getUsername() + "' and password='" + login.getPassword()
       //          + "'";
-    //    List<User> users = jdbcTemplate.query(sql, new UserMapper());
+    //    List<Users> users = jdbcTemplate.query(sql, new UserMapper());
     //    return users.size() > 0 ? users.get(0) : null;
    // }
 }
