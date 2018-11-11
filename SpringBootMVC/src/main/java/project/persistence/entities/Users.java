@@ -3,22 +3,17 @@ package project.persistence.entities;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.*;
+
+
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, columnDefinition = "serial")
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
     private String userName;
@@ -27,16 +22,26 @@ public class User {
     //private Team team;
 
 
-    public User() {
+    public Users() {
     }
 
-    public User(String name, String userName, String password, String email) {
+    public Users(Long id, String name, String userName, String password, String email) {
+        this.id = id;
         this.name = name;
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -53,6 +58,7 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
     public String getPassword() {
         return password;

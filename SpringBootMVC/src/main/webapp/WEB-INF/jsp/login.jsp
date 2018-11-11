@@ -10,7 +10,7 @@
     <title>Spring Login Form</title>
 </head>
 <body>
-<sf:form method="POST" modelAttribute="user" action="login">
+<sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
         <div style="color: blue" >${msg}</div>
@@ -24,13 +24,14 @@
                 <td><input type="password" name="password" /></td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Submit" /></td>
+
             </tr>
         </table>
         <div style="color: red">${error}</div>
 
+
     </div>
+    <input type="submit" value="Submit" />
 </sf:form>
 </body>
 </html>
