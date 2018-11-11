@@ -32,13 +32,15 @@ public class LoginController {
         model.addAttribute("users",new Users());
         String userName = users.getUserName();
         String password = users.getPassword();
+        String name = users.getName(); // Afh er þetta null?
+        System.out.println(name);
         List<Users> exists = userService.getByUserName(userName);;
 
         if (exists.size() != 0 && userName != null
                 && password != null) {
 
             model.addAttribute("msg", userName);
-            return "success";
+            return "main/Main";
         }
                  else {
                 model.addAttribute("error", "Invalid Details");
