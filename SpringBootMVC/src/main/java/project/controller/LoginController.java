@@ -39,7 +39,7 @@ public class LoginController {
         if (exists.size() != 0 && userName != null
                 && password != null) {
 
-            model.addAttribute("msg", userName);
+            model.addAttribute("msg", exists.get(0).getName());
             return "main/Main";
         }
                  else {
