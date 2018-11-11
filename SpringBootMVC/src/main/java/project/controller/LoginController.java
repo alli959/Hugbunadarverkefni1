@@ -34,6 +34,8 @@ public class LoginController {
         String password = user.getPassword();
         List<User> exists = userService.getUserByName(userName);
 
+        System.out.println(userName);
+        System.out.println(exists);
         if (exists != null && userName != null
                 && password != null) {
 
