@@ -32,8 +32,7 @@ public class LoginController {
         model.addAttribute("users",new Users());
         String userName = users.getUserName();
         String password = users.getPassword();
-        String name = users.getName(); // Afh er þetta null?
-        System.out.println(name);
+        //Sækja allar upplýsingar um notandan.
         List<Users> exists = userService.getByUserName(userName);;
 
         if (exists.size() != 0 && userName != null

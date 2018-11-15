@@ -63,6 +63,7 @@ html {
 .main {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .main html,body{
@@ -112,4 +113,15 @@ html {
 .main button:hover:before,button:hover:after{
     width:100%;
     transition:800ms ease all;
+}
+
+.image img{
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
 }
