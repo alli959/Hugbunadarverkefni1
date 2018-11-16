@@ -15,12 +15,12 @@
 
         <ul class = "navBar">
 
-            <li><h2><a href="/team">Create Team</a></h2></li>
+            <li><h2><a href="/user/team">Create Team</a></h2></li>
 
         </ul>
 
 
-        <sf:form method="POST" modelAttribute="createTeam" action="/team">
+        <sf:form method="POST" modelAttribute="createTeam" action="team">
 
             <table>
 
@@ -58,7 +58,7 @@
                     <c:forEach var="team" items="${teams}">
                         <tr>
 
-                            <td><a href="/team/${team.id}">${team.name}</a></td>
+                            <td><a href="/user/team/${team.id}">${team.name}</a></td>
 
                             <td>${team.location}</td>
 

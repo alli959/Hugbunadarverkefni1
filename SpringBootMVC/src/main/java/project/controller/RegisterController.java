@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.Users;
 import project.service.UserService;
 
+import java.util.List;
+
 @Controller
 public class RegisterController {
 
@@ -36,11 +38,18 @@ public class RegisterController {
     public String createUserPost(@ModelAttribute("createUser") Users users,
                                  Model model) {
 
+        Users exists = this.userService.getByUserName(users.getName());
+
+
+        if(exists != null){
+            model.addAttribute("error","Users already exists");
+            return "/register";
+        }
         userService.save(users);
 
         model.addAttribute("createUser", new Users());
 
-        return "login";
+        return "redirect:login";
     }
 
 

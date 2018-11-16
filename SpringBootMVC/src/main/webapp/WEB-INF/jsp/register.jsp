@@ -56,6 +56,7 @@
             </td>
         </tr>
     </table>
+    <div style="color: red">${error}</div>
 </sf:form>
 </body>
 </html>

@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<Users, Long > {
     List<Users> findAll();
 
     @Query(value = "SELECT p FROM Users p WHERE p.userName = ?1")
-    List<Users> getByUserName(String userName);
+    Users getByUserName(String userName);
 
     //void register(Users user);
 

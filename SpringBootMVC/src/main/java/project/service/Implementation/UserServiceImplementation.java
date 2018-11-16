@@ -37,7 +37,7 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public List<Users> getByUserName(String userName) {
+    public Users getByUserName(String userName) {
         return userRepository.getByUserName(userName);
     }
 

@@ -15,8 +15,8 @@
 
     <ul class = "navBar">
 
-        <li><h2><a href="/team">Create Team</a></h2></li>
-        <li><h2><a href="/team/${teamId}">Team</a></h2></li>
+        <li><h2><a href="/user/team">Create Team</a></h2></li>
+        <li><h2><a href="/user/team/${teamId}">Team</a></h2></li>
 
     </ul>
 
@@ -24,7 +24,7 @@
     <h2>${teamName}</h2>
 
 
-    <button  type="submit" onclick="location.href='/team/${teamId}/player'">Add Players</button>
+    <button  type="submit" onclick="location.href='/user/team/${teamId}/player'">Add Players</button>
 
 
 

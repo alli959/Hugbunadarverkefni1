@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.Player;
 import project.persistence.entities.Team;
+import project.persistence.entities.Users;
 import project.service.TeamService;
 import project.service.PlayerService;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,26 +26,30 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @RequestMapping(value = "/team", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/team", method = RequestMethod.GET)
 
-    public String createTeamGet(Model model){
+    public String createTeamGet(HttpSession session, Model model){
+        Users loggedInUser = (Users)session.getAttribute("login");
 
-        List<String> location = new ArrayList<String>();
+        if(loggedInUser != null) {
+            List<String> location = new ArrayList<String>();
 
-        location.add("Home");
-        location.add("Away");
+            location.add("Home");
+            location.add("Away");
 
-        model.addAttribute("locations", location);
+            model.addAttribute("locations", location);
 
 
-        model.addAttribute("createTeam", new Team());
+            model.addAttribute("createTeam", new Team());
 
-        model.addAttribute("teams",teamService.findAllReverseOrder());
+            model.addAttribute("teams", teamService.findAllReverseOrder());
 
-        return "team/Team";
+            return "team/Team";
+        }
+        return "redirect:/login";
     }
 
-    @RequestMapping(value = "/team", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/team", method = RequestMethod.POST)
     public String createTeamPost(@ModelAttribute("createTeam") Team team,
                                  Model model) {
 
@@ -68,22 +74,27 @@ public class TeamController {
 
     }
 
-    @RequestMapping(value = "/team/{teamId}",  method = RequestMethod.GET)
+    @RequestMapping(value = "/user/team/{teamId}",  method = RequestMethod.GET)
     public String teamGetFromName(@PathVariable Long teamId,
+                                    HttpSession session,
                                     Model model){
 
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null) {
+            Team team = teamService.findOne(teamId);
 
-        Team team = teamService.findOne(teamId);
+            System.out.println(team.getName());
 
-        System.out.println(team.getName());
+            model.addAttribute("teamName", team.getName());
 
-        model.addAttribute("teamName",team.getName());
+            model.addAttribute("teamId", teamId);
 
-        model.addAttribute("teamId",teamId);
+            System.out.println(teamId);
 
-        System.out.println(teamId);
+            return "team/teamView";
+        }
 
-        return "team/teamView";
+        return "redirect:/login";
 
     }
 

@@ -51,5 +51,5 @@ public interface UserService {
      */
 
 
-    List<Users> getByUserName(String userName);
+    Users getByUserName(String userName);
 }

@@ -2,13 +2,11 @@ package project.persistence.entities;
 
 
 import javax.persistence.*;
-
 import static javax.persistence.GenerationType.*;
 
 
 
 @Entity
-@Table(name = "users")
 public class Users {
 
 
@@ -19,6 +17,7 @@ public class Users {
     private String userName;
     private String password;
     private String email;
+
     //private Team team;
 
 
