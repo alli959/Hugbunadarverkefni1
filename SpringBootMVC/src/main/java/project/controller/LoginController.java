@@ -28,13 +28,14 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("users") User user, Model model) {
 
-
+        
         model.addAttribute("users",new User());
         String userName = user.getUserName();
         String password = user.getPassword();
         String name = user.getName(); // Afh er þetta null?
         System.out.println(name);
         List<User> exists = userService.getByUserName(userName);;
+
 
         if (exists.size() != 0 && userName != null
                 && password != null) {
