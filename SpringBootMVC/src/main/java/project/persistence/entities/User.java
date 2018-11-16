@@ -2,14 +2,12 @@ package project.persistence.entities;
 
 
 import javax.persistence.*;
-
 import static javax.persistence.GenerationType.*;
 
 
 
 @Entity
-@Table(name = "users")
-public class Users {
+public class User {
 
 
     @Id
@@ -22,10 +20,10 @@ public class Users {
     //private Team team;
 
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Long id, String name, String userName, String password, String email) {
+    public User(Long id, String name, String userName, String password, String email) {
         this.id = id;
         this.name = name;
         this.userName = userName;

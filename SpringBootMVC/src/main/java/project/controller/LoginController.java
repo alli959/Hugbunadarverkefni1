@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.persistence.entities.Users;
+import project.persistence.entities.User;
 import project.service.UserService;
 
 import java.util.List;
@@ -26,15 +26,15 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("users") Users users, Model model) {
+    public String submit(@ModelAttribute("users") User user, Model model) {
 
 
-        model.addAttribute("users",new Users());
-        String userName = users.getUserName();
-        String password = users.getPassword();
-        String name = users.getName(); // Afh er þetta null?
+        model.addAttribute("users",new User());
+        String userName = user.getUserName();
+        String password = user.getPassword();
+        String name = user.getName(); // Afh er þetta null?
         System.out.println(name);
-        List<Users> exists = userService.getByUserName(userName);;
+        List<User> exists = userService.getByUserName(userName);;
 
         if (exists.size() != 0 && userName != null
                 && password != null) {

@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import project.persistence.entities.Users;
+import project.persistence.entities.User;
 import project.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -27,20 +29,28 @@ public class RegisterController {
     public String createUser(Model model) {
         model.addAttribute("msg", "Please Enter Your Information");
 
-        model.addAttribute("createUser", new Users());
+        model.addAttribute("createUser", new User());
 
         return "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String createUserPost(@ModelAttribute("createUser") Users users,
+    public String createUserPost(@ModelAttribute("createUser") User user,
                                  Model model) {
 
-        userService.save(users);
+        List<User> exists = this.userService.getByUserName(user.getName());
 
-        model.addAttribute("createUser", new Users());
+        System.out.println(user);
 
-        return "login";
+        if(exists.size() != 0){
+            model.addAttribute("error","User already exists");
+            return "/register";
+        }
+        userService.save(user);
+
+        model.addAttribute("createUser", new User());
+
+        return "redirect:login";
     }
 
 
