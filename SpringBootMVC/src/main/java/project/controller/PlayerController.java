@@ -6,9 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.Player;
 import project.persistence.entities.Team;
+import project.persistence.entities.Users;
 import project.service.TeamService;
 import project.service.PlayerService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -25,26 +27,29 @@ public class PlayerController {
 
 
 
-    @RequestMapping(value = "/team/{teamId}/player", method = RequestMethod.GET)
-    public String playerAddGet(@PathVariable Long teamId,  Model model){
+    @RequestMapping(value = "/user/team/{teamId}/player", method = RequestMethod.GET)
+    public String playerAddGet(@PathVariable Long teamId, HttpSession session, Model model){
+
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null) {
+            model.addAttribute("teamId", teamId);
+
+            model.addAttribute("playerAdd", new Player());
 
 
-        model.addAttribute("teamId", teamId);
-
-        model.addAttribute("playerAdd",new Player());
+            model.addAttribute("playerNo", playerService.countPlayersInTeam(teamId).get(0));
 
 
-        model.addAttribute("playerNo",playerService.countPlayersInTeam(teamId).get(0));
+            model.addAttribute("players", playerService.findPlayersInTeamReverseOrder(teamId));
 
-
-        model.addAttribute("players",playerService.findPlayersInTeamReverseOrder(teamId));
-
-        return "player/Player";
+            return "player/Player";
+        }
+        return "redirect:/login";
     }
 
 
 
-    @RequestMapping(value = "/team/{teamId}/player", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/team/{teamId}/player", method = RequestMethod.POST)
     public String playerAddPost(@ModelAttribute("playerAdd") Player player,
                                 @PathVariable Long teamId,
                                      Model model){
@@ -69,18 +74,23 @@ public class PlayerController {
 
 
 
-    @RequestMapping(value = "/team/{teamId}/player/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/team/{teamId}/player/{name}", method = RequestMethod.GET)
     public String playerGetFromName(@PathVariable String name,
                                              @PathVariable Long teamId,
+                                             HttpSession session,
                                              Model model){
 
 
-        model.addAttribute("teamId", teamId);
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null) {
+            model.addAttribute("teamId", teamId);
 
-        model.addAttribute("name",name);
+            model.addAttribute("name", name);
 
 
-        return "player/playerView";
+            return "player/playerView";
+        }
+        return "redirect:/login";
     }
 }
 

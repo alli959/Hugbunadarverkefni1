@@ -2,7 +2,7 @@ package project.service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.persistence.entities.User;
+import project.persistence.entities.Users;
 //import project.persistence.repositories.PlayerRepository;
 import project.persistence.repositories.UserRepository;
 import project.service.UserService;
@@ -20,34 +20,34 @@ public class UserServiceImplementation implements UserService{
 
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public Users save(Users users) {
+        return userRepository.save(users);
     }
 
     @Override
-    public void delete(User users) {
+    public void delete(Users users) {
 
         userRepository.delete(users);
 
     }
 
     @Override
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public List<User> getByUserName(String userName) {
+    public Users getByUserName(String userName) {
         return userRepository.getByUserName(userName);
     }
 
-    //public void register(User user) {
+    //public void register(Users user) {
         // TODO Auto-generated method stub
         //userRepository.register(user);
     //}
 
 
-    //public User validateUser(Login login) {
+    //public Users validateUser(Login login) {
         // TODO Auto-generated method stub
 
         //return null;

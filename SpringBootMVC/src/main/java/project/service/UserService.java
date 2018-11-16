@@ -1,55 +1,55 @@
 package project.service;
 
-import project.persistence.entities.User;
+import project.persistence.entities.Users;
 
 import java.util.List;
 
 public interface UserService {
 
     /**
-     * save a {@Link User}
-     * @param user {@Link User} to be saved
-     * @return {@Link User} that was saved
+     * save a {@Link Users}
+     * @param users {@Link Users} to be saved
+     * @return {@Link Users} that was saved
      */
 
 
 
-    User save(User user);
+    Users save(Users users);
 
     /**
-     * Delete {@link User}
-     * @param user {@link User} to be deleted
+     * Delete {@link Users}
+     * @param users {@link Users} to be deleted
      */
 
 
 
-    void delete(User user);
+    void delete(Users users);
 
     /**
-     * Get all {@link User}s
-     * @return A list of {@link User}s
+     * Get all {@link Users}s
+     * @return A list of {@link Users}s
      */
 
 
 
 
-    List<User> findAll();
+    List<Users> findAll();
 
     /**
-     * Get all {@link User}s in a reverse order
-     * @return A reversed list of {@link User}s
+     * Get all {@link Users}s in a reverse order
+     * @return A reversed list of {@link Users}s
      */
 
-    //void register(User user);
+    //void register(Users user);
 
-    //User validateUser(Login login);
+    //Users validateUser(Login login);
 
     /**
-     * get  {@Link User} by {@String userName}
+     * get  {@Link Users} by {@String userName}
      * @param userName
-     * @return A @Link(User}
+     * @return A @Link(Users}
      */
 
 
-    List<User> getByUserName(String userName);
+    Users getByUserName(String userName);
 }

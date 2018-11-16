@@ -10,7 +10,7 @@
     <title>Spring Login Form</title>
 </head>
 <body>
-<sf:form method="POST" modelAttribute="user" action="/login">
+<sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
         <div style="color: blue" >${msg}</div>

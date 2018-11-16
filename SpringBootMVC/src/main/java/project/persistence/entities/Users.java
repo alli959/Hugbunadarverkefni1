@@ -7,7 +7,7 @@ import static javax.persistence.GenerationType.*;
 
 
 @Entity
-public class User {
+public class Users {
 
 
     @Id
@@ -21,10 +21,10 @@ public class User {
     //private Team team;
 
 
-    public User() {
+    public Users() {
     }
 
-    public User(Long id, String name, String userName, String password, String email) {
+    public Users(Long id, String name, String userName, String password, String email) {
         this.id = id;
         this.name = name;
         this.userName = userName;
