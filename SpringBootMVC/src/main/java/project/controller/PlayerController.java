@@ -32,6 +32,8 @@ public class PlayerController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
+
+            model.addAttribute("msg",loggedInUser.getName());
             model.addAttribute("teamId", teamId);
 
             model.addAttribute("playerAdd", new Player());
@@ -51,24 +53,28 @@ public class PlayerController {
 
     @RequestMapping(value = "/user/team/{teamId}/player", method = RequestMethod.POST)
     public String playerAddPost(@ModelAttribute("playerAdd") Player player,
+                                HttpSession session,
                                 @PathVariable Long teamId,
                                      Model model){
 
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null) {
+            playerService.save(player);
+            model.addAttribute("msg", loggedInUser.getName());
 
-        playerService.save(player);
-        model.addAttribute("teamId", teamId);
-
-
-        model.addAttribute("playerNo",playerService.countPlayersInTeam(teamId).get(0));
-        model.addAttribute("players",playerService.findPlayersInTeamReverseOrder(teamId));
-
-
-        model.addAttribute("playerAdd", new Player());
+            model.addAttribute("teamId", teamId);
 
 
+            model.addAttribute("playerNo", playerService.countPlayersInTeam(teamId).get(0));
+            model.addAttribute("players", playerService.findPlayersInTeamReverseOrder(teamId));
 
 
-        return "player/Player";
+            model.addAttribute("playerAdd", new Player());
+
+
+            return "player/Player";
+        }
+        return "redirect:/login";
     }
 
 
@@ -83,6 +89,7 @@ public class PlayerController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
+            model.addAttribute("msg", loggedInUser.getName());
             model.addAttribute("teamId", teamId);
 
             model.addAttribute("name", name);

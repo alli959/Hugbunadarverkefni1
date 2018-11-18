@@ -17,6 +17,18 @@
     </head>
     <body>
 
+    <header class="header">
+        <div class="header__contents">
+            <input type="button" onclick="location.href = '/user'" value="<== Back To User"/>
+            <div class="header__menu">
+                <div class="header__menu__user">
+                    <a class="header__menu__item">${msg}</a>
+                    <input type="button" onclick="location.href = '/logout'" value="Logout" />
+                </div>
+            </div>
+        </div>
+    </header>
+
 
     <ul class = "navBar">
         <li><h2><a href="/user/team">Create Team</a></h2></li>

@@ -20,10 +20,12 @@ import java.util.List;
 public class TeamController {
 
     private TeamService teamService;
+    private PlayerService playerService;
 
     @Autowired
-    public TeamController(TeamService teamService){
+    public TeamController(TeamService teamService, PlayerService playerService){
         this.teamService = teamService;
+        this.playerService = playerService;
     }
 
     @RequestMapping(value = "/user/team", method = RequestMethod.GET)
@@ -32,17 +34,13 @@ public class TeamController {
         Users loggedInUser = (Users)session.getAttribute("login");
 
         if(loggedInUser != null) {
-            List<String> location = new ArrayList<String>();
 
-            location.add("Home");
-            location.add("Away");
-
-            model.addAttribute("locations", location);
-
+            model.addAttribute("msg", loggedInUser.getName());
 
             model.addAttribute("createTeam", new Team());
 
-            model.addAttribute("teams", teamService.findAllReverseOrder());
+
+            model.addAttribute("teams", teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
 
             return "team/Team";
         }
@@ -51,25 +49,26 @@ public class TeamController {
 
     @RequestMapping(value = "/user/team", method = RequestMethod.POST)
     public String createTeamPost(@ModelAttribute("createTeam") Team team,
+                                 HttpSession session,
                                  Model model) {
 
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null) {
+            team.setUserOwner(loggedInUser.getUserName());
+            teamService.save(team);
 
-        teamService.save(team);
-
-        List<String> location = new ArrayList<String>();
-
-        location.add("Home");
-        location.add("Away");
-
-        model.addAttribute("locations", location);
-
-        model.addAttribute("teams", teamService.findAllReverseOrder());
-
-        model.addAttribute("createTeam", new Team());
+            model.addAttribute("msg", loggedInUser.getName());
 
 
 
-        return "team/Team";
+            model.addAttribute("teams", teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
+
+            model.addAttribute("createTeam", new Team());
+
+
+            return "team/Team";
+        }
+        return "redirect:/login";
 
 
     }
@@ -81,15 +80,19 @@ public class TeamController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
+
+
             Team team = teamService.findOne(teamId);
 
-            System.out.println(team.getName());
+            if(!team.getUserOwner().equals(loggedInUser.getUserName())){
+                model.addAttribute("Message","Team not owned by User");
+                return "Error";
+            }
 
-            model.addAttribute("teamName", team.getName());
+            model.addAttribute("msg", loggedInUser.getName());
 
-            model.addAttribute("teamId", teamId);
+            model.addAttribute("players", playerService.findPlayersInTeamReverseOrder(teamId));
 
-            System.out.println(teamId);
 
             return "team/teamView";
         }
