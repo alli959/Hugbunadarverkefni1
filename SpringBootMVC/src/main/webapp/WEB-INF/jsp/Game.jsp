@@ -15,11 +15,17 @@
 </div>
 
 <map name="image-map">
-    <area target="" alt="LeftWingThree" title="LeftWingThree" href="" coords="480,550,481,359,299,357,250,436,174,482,173,555,287,554" shape="poly">
-    <area target="" alt="RightWingThree" title="RightWingThree" href="" coords="481,25,168,23,168,96,239,132,289,195,480,196" shape="poly">
-    <area target="" alt="TopThree" title="TopThree" href="" coords="480,196,287,195,312,282,299,357,482,359" shape="poly">
-    <area target="" alt="LeftCornerThree" title="LeftCornerThree" href="" coords="44,555,43,491,126,491,174,481,172,556" shape="poly">
-    <area target="" alt="RightCornerThree" title="RightCornerThree" href="" coords="43,24,43,86,132,87,167,95,167,22" shape="poly">
+    <area target="" alt="LeftWingThree" title="LeftWingThree" href="" coords="479,554,481,367,293,367,250,436,165,481,164,557,287,554,386,555" shape="poly">
+    <area target="" alt="RightWingThree" title="RightWingThree" href="" coords="481,25,168,23,168,96,240,132,294,202,480,204" shape="poly">
+    <area target="" alt="TopThree" title="TopThree" href="" coords="482,204,294,203,312,282,294,366,479,366" shape="poly">
+    <area target="" alt="LeftCornerThree" title="LeftCornerThree" href="" coords="44,555,43,491,126,491,164,482,163,556" shape="poly">
+    <area target="" alt="RightCornerThree" title="RightCornerThree" href="" coords="43,24,43,86,132,87,167,95,167,22,122,23" shape="poly">
+    <area target="" alt="LeftShortCorner" title="LeftShortCorner" href="" coords="45,360,45,490,123,490,125,360" shape="poly">
+    <area target="" alt="RightShortCorner" title="RightShortCorner" href="" coords="43,87,45,218,125,217,127,87" shape="poly">
+    <area target="" alt="LeftTopKey" title="LeftTopKey" href="" coords="126,358,124,492,165,482,225,450,252,434,298,359" shape="poly">
+    <area target="" alt="RightTopKey" title="RightTopKey" href="" coords="124,217,128,87,168,95,240,133,292,199,297,220" shape="poly">
+    <area target="" alt="TopKey" title="TopKey" href="" coords="178,218,179,359,296,358,312,284,299,218" shape="poly">
+    <area target="" alt="LayUp" title="LayUp" href="" coords="46,218,178,359" shape="rect">
 </map>
 </body>
 </html>
