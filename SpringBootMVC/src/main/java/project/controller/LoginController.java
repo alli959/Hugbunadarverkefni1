@@ -29,7 +29,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("users") Users users, HttpSession session, Model model) {
 
-        
+
         model.addAttribute("users",new Users());
         String userName = users.getUserName();
         String password = users.getPassword();
@@ -44,7 +44,6 @@ public class LoginController {
                 && password != null) {
 
             session.setAttribute("login", exists);
-            model.addAttribute("msg", exists.getName());
             return "redirect:/user";
         }
                  else {
@@ -58,13 +57,5 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(HttpSession session, Model model) {
-        Users loggedInUser = (Users)session.getAttribute("login");
-        if(loggedInUser != null){
-            return "main/Main";
-        }
-        return "redirect:/login";
 
-    }
 }

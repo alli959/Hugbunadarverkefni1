@@ -13,6 +13,7 @@
 <sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
+        <div style="color: black">${infoMessage}</div>
         <div style="color: blue" >${msg}</div>
         <table>
             <tr>

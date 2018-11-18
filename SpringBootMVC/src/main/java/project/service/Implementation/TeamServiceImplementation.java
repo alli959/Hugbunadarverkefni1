@@ -6,8 +6,7 @@ import project.persistence.entities.Team;
 import project.persistence.repositories.TeamRepository;
 import project.service.TeamService;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -55,6 +54,13 @@ public class TeamServiceImplementation implements TeamService {
     @Override
     public List<Team> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public List<Team> findAllReverseOrderOwnedByUser(String userName) {
+        List<Team> teams = repository.findAllReverseOrderOwnedByUser(userName);
+        Collections.reverse(teams);
+        return teams;
     }
 
 }

@@ -13,6 +13,19 @@
     </head>
     <body>
 
+    <header class="header">
+        <div class="header__contents">
+            <input type="button" onclick="location.href = '/user'" value="<== Back To User"/>
+            <div class="header__menu">
+                <div class="header__menu__user">
+                    <a class="header__menu__item">${msg}</a>
+                    <input type="button" onclick="location.href = '/logout'" value="Logout" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+
         <ul class = "navBar">
 
             <li><h2><a href="/user/team">Create Team</a></h2></li>
@@ -29,13 +42,6 @@
                     <td><sf:input path="name" type="text" placeholder="Enter the team name"/></td>
                 </tr>
 
-                <tr>
-                    <td>Home or Away?:</td>
-
-                    <td><sf:radiobuttons path="location" items="${locations}"/></td>
-
-
-                </tr>
 
 
             </table>
@@ -51,7 +57,6 @@
                 <table class="allTeams">
                     <tr>
                         <th>Name</th>
-                        <th>Location?</th>
                     </tr>
 
 
@@ -60,7 +65,6 @@
 
                             <td><a href="/user/team/${team.id}">${team.name}</a></td>
 
-                            <td>${team.location}</td>
 
                         </tr>
                     </c:forEach>

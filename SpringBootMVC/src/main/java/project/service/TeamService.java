@@ -51,6 +51,7 @@ public interface TeamService {
      */
 
 
+
     Team findOne(Long id);
 
     /**
@@ -60,6 +61,16 @@ public interface TeamService {
      * @return All {@link Team}s with the {@link String name} passed
      */
     List<Team> findByName(String name);
+
+
+
+    /**
+     * get all {@Link Team}s owned by {@Link String userName}
+     *
+     * @param userName {@Link String}
+     * @return A list of {@Link Team by userId}
+     */
+    List<Team> findAllReverseOrderOwnedByUser(String userName);
 
 
 }

@@ -34,6 +34,9 @@ public interface TeamRepository extends JpaRepository<Team, Long > {
     @Query(value = "SELECT p.id FROM Team p WHERE p.id = (select MAX(p.id) FROM Team p)")
     List<Team> findLargestId();
 
+    @Query(value = "SELECT p FROM Team p WHERE p.userOwner = ?1")
+    List<Team> findAllReverseOrderOwnedByUser(String userName);
+
 
 
 

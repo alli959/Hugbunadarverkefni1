@@ -12,17 +12,18 @@ public class Team {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
-    private String location;
+    private String userOwner;
 
 
 
     public Team(){
     }
 
-    public Team(Long id, String name, String location){
+    public Team(Long id, String name, String userOwner){
         this.id = id;
         this.name = name;
-        this.location = location;
+        this.userOwner = userOwner;
+
         //this.player = player;
     }
 
@@ -34,9 +35,9 @@ public class Team {
 
     public void setName(String name) {this.name = name;}
 
-    public String getlocation() { return location; }
+    public String getUserOwner() { return userOwner; }
 
-    public void setlocation(String location) {this.location = location;}
+    public void setUserOwner(String userOwner) {this.userOwner = userOwner;}
 
 
     //public Player getPlayer() {return player;}
@@ -46,8 +47,8 @@ public class Team {
     @Override
     public String toString() {
         return String.format(
-                "Team [id=%s, name=%s, location=%s]",
-                id, name, location);
+                "Team [id=%s, name=%s, userOwner=%s]",
+                id, name, userOwner);
     }
 
 }

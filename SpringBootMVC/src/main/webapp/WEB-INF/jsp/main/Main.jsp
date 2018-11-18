@@ -30,9 +30,9 @@
                 </ul>
                 <div class="header__menu__user">
                     <a class="header__menu__item">${msg}</a>
-                    <button class="header__menu__item">Sign out</button>
-                </div>
+                    <input type="button" onclick="location.href = '/logout'" value="Logout" />
             </div>
+        </div>
         </div>
     </header>
 
