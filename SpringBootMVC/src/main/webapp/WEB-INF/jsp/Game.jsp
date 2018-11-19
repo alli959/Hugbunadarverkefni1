@@ -7,15 +7,16 @@
 <head>
     <meta charset="UTF-8">
     <title>The Game</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<!-- Get ekki opnað þetta html, fæ bara 404 error??? !-->
 <div style="display: flex;justify-content: center" class="image">
-    <img style="zoom: 1.2" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
+    <img style="zoom: 1.1" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
 </div>
 
 <map name="image-map">
-    <area target="" alt="LeftWingThree" title="LeftWingThree" href="" coords="479,554,481,367,293,367,250,436,165,481,164,557,287,554,386,555" shape="poly">
+    <area target="" alt="LeftWingThree" title="LeftWingThree" onclick="location.href = '/alert'" coords="479,554,481,367,293,367,250,436,165,481,164,557,287,554,386,555" shape="poly">
     <area target="" alt="RightWingThree" title="RightWingThree" href="" coords="481,25,168,23,168,96,240,132,294,202,480,204" shape="poly">
     <area target="" alt="TopThree" title="TopThree" href="" coords="482,204,294,203,312,282,294,366,479,366" shape="poly">
     <area target="" alt="LeftCornerThree" title="LeftCornerThree" href="" coords="44,555,43,491,126,491,164,482,163,556" shape="poly">
