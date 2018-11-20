@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.apache.catalina.connector.Response;
 import org.springframework.ui.Model;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import project.persistence.entities.Users;
 import project.service.StringManipulationService;
 
 
@@ -33,13 +35,98 @@ public class EventController {
     }
 
     //
-    @RequestMapping(value = "/Game", method = RequestMethod.GET)
-    public String home(){
-
-        return "Game";
+    @RequestMapping(value = "/game", method = RequestMethod.GET)
+    public String home(HttpSession session, Model model){
+        Users loggedInUser = (Users)session.getAttribute("login");
+        String test = (String)session.getAttribute("Action");
+        if(loggedInUser != null) {
+            System.out.println(test);
+            return "Game";
+        }
+        return "redirect:/login";
     }
 
-    @RequestMapping(value = "/alert", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/leftwingthree", method = RequestMethod.GET)
+    public String LeftWingThree(HttpSession session){
+        session.setAttribute("Action","leftwingthree");
+        return "redirect:/game";
+    }
+
+
+
+    @RequestMapping(value = "/rightwingthree", method = RequestMethod.GET)
+    public String RightWingThree(HttpSession session){
+        session.setAttribute("Action","rightwingthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/topthree", method = RequestMethod.GET)
+    public String TopThree(HttpSession session){
+        session.setAttribute("Action","topthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/leftcornerthree", method = RequestMethod.GET)
+    public String LeftCornerThree(HttpSession session){
+        session.setAttribute("Action","leftcornerthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/rightcornerthree", method = RequestMethod.GET)
+    public String RightCornerThree(HttpSession session){
+        session.setAttribute("Action","rightcornerthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/leftshortcorner", method = RequestMethod.GET)
+    public String LeftShortCorner(HttpSession session){
+        session.setAttribute("Action","leftshortcorner");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/rightshortcorner", method = RequestMethod.GET)
+    public String RightShortCorner(HttpSession session){
+        session.setAttribute("Action","rightshortcorner");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/lefttopkey", method = RequestMethod.GET)
+    public String LeftTopKey(HttpSession session){
+        session.setAttribute("Action","lefttopkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/righttopkey", method = RequestMethod.GET)
+    public String RightTopKey(HttpSession session){
+        session.setAttribute("Action","righttopkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/topkey", method = RequestMethod.GET)
+    public String TopKey(HttpSession session){
+        session.setAttribute("Action","topkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/layup", method = RequestMethod.GET)
+    public String LayUp(HttpSession session){
+        session.setAttribute("Action","layup");
+        return "redirect:/game";
+    }
+
+
+
+    /*@RequestMapping(value = "/alert", method = RequestMethod.GET)
     public void alert(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         String player1 = "'Alex'";
@@ -78,8 +165,8 @@ public class EventController {
         out.println("});");
         out.println("</script>");
 
-        RequestDispatcher rd = request.getRequestDispatcher("Game");
+        RequestDispatcher rd = request.getRequestDispatcher("game");
         rd.include(request, response);
 
-    }
+    }*/
 }

@@ -28,6 +28,9 @@ public class TeamController {
         this.playerService = playerService;
     }
 
+
+
+
     @RequestMapping(value = "/user/team", method = RequestMethod.GET)
 
     public String createTeamGet(HttpSession session, Model model){
@@ -46,6 +49,9 @@ public class TeamController {
         }
         return "redirect:/login";
     }
+
+
+
 
     @RequestMapping(value = "/user/team", method = RequestMethod.POST)
     public String createTeamPost(@ModelAttribute("createTeam") Team team,
@@ -72,6 +78,9 @@ public class TeamController {
 
 
     }
+
+
+
 
     @RequestMapping(value = "/user/team/{teamId}",  method = RequestMethod.GET)
     public String teamGetFromName(@PathVariable Long teamId,

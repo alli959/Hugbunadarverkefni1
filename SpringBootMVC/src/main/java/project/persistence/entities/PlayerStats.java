@@ -10,24 +10,27 @@ public class PlayerStats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer points;
-    private Integer rebounds;
-    private Integer assists;
-    private Integer turnovers;
-    private Integer blocks;
-    private Integer fouls;
-    private Integer twoPmades;
-    private Integer twoPmisses;
-    private Integer threePmades;
-    private Integer threePmisses;
-    private Integer ftMades;
-    private Integer ftMisses;
+    private Long playerId;
+    private Long points;
+    private Long rebounds;
+    private Long assists;
+    private Long turnovers;
+    private Long blocks;
+    private Long fouls;
+    private Long twoPmades;
+    private Long twoPmisses;
+    private Long threePmades;
+    private Long threePmisses;
+    private Long ftMades;
+    private Long ftMisses;
 
 
     public PlayerStats() {
     }
 
-    public PlayerStats(Integer points, Integer rebounds, Integer assists, Integer turnovers, Integer blocks, Integer fouls, Integer twoPmades, Integer twoPmisses, Integer threePmades, Integer threePmisses, Integer ftMades, Integer ftMisses) {
+    public PlayerStats(Long id, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long twoPmades, Long twoPmisses, Long threePmades, Long threePmisses, Long ftMades, Long ftMisses) {
+        this.id = id;
+        this.playerId = playerId;
         this.points = points;
         this.rebounds = rebounds;
         this.assists = assists;
@@ -42,99 +45,115 @@ public class PlayerStats {
         this.ftMisses = ftMisses;
     }
 
-    public Integer getPoints() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
+    }
+
+    public Long getPoints() {
         return points;
     }
 
-    public void setPoints(Integer points) {
+    public void setPoints(Long points) {
         this.points = points;
     }
 
-    public Integer getRebounds() {
+    public Long getRebounds() {
         return rebounds;
     }
 
-    public void setRebounds(Integer rebounds) {
+    public void setRebounds(Long rebounds) {
         this.rebounds = rebounds;
     }
 
-    public Integer getAssists() {
+    public Long getAssists() {
         return assists;
     }
 
-    public void setAssists(Integer assists) {
+    public void setAssists(Long assists) {
         this.assists = assists;
     }
 
-    public Integer getTurnovers() {
+    public Long getTurnovers() {
         return turnovers;
     }
 
-    public void setTurnovers(Integer turnovers) {
+    public void setTurnovers(Long turnovers) {
         this.turnovers = turnovers;
     }
 
-    public Integer getBlocks() {
+    public Long getBlocks() {
         return blocks;
     }
 
-    public void setBlocks(Integer blocks) {
+    public void setBlocks(Long blocks) {
         this.blocks = blocks;
     }
 
-    public Integer getFouls() {
+    public Long getFouls() {
         return fouls;
     }
 
-    public void setFouls(Integer fouls) {
+    public void setFouls(Long fouls) {
         this.fouls = fouls;
     }
 
-    public Integer getTwoPmades() {
+    public Long getTwoPmades() {
         return twoPmades;
     }
 
-    public void setTwoPmades(Integer twoPmades) {
+    public void setTwoPmades(Long twoPmades) {
         this.twoPmades = twoPmades;
     }
 
-    public Integer getTwoPmisses() {
+    public Long getTwoPmisses() {
         return twoPmisses;
     }
 
-    public void setTwoPmisses(Integer twoPmisses) {
+    public void setTwoPmisses(Long twoPmisses) {
         this.twoPmisses = twoPmisses;
     }
 
-    public Integer getThreePmades() {
+    public Long getThreePmades() {
         return threePmades;
     }
 
-    public void setThreePmades(Integer threePmades) {
+    public void setThreePmades(Long threePmades) {
         this.threePmades = threePmades;
     }
 
-    public Integer getThreePmisses() {
+    public Long getThreePmisses() {
         return threePmisses;
     }
 
-    public void setThreePmisses(Integer threePmisses) {
+    public void setThreePmisses(Long threePmisses) {
         this.threePmisses = threePmisses;
     }
 
-    public Integer getFtMades() {
+    public Long getFtMades() {
         return ftMades;
     }
 
-    public void setFtMades(Integer ftMades) {
+    public void setFtMades(Long ftMades) {
         this.ftMades = ftMades;
     }
 
-    public Integer getFtMisses() {
+    public Long getFtMisses() {
         return ftMisses;
     }
 
-    public void setFtMisses(Integer ftMisses) {
+    public void setFtMisses(Long ftMisses) {
         this.ftMisses = ftMisses;
     }
 
