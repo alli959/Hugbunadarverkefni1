@@ -89,7 +89,6 @@ public class TeamController {
                 return "Error";
             }
 
-            model.addAttribute("msg", loggedInUser.getName());
 
             model.addAttribute("players", playerService.findPlayersInTeamReverseOrder(teamId));
 
