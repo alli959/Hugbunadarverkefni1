@@ -37,10 +37,10 @@
     </header>
 
     <div class="main">
-        <button><a href="/Game">Start</a></button>
+        <a href="/Game"><button>Start</button></a>
     </div>
     <div style="display: flex;justify-content: center" class="image">
-        <img style="zoom: 1.2" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
+        <img style="zoom: 1.1" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
     </div>
 
     <map name="image-map">
