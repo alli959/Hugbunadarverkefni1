@@ -39,6 +39,7 @@ public class EventController {
         PrintWriter out = response.getWriter();
         String player1 = "'Alex'";
 
+
         out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
         out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
         out.println("<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>");
@@ -92,8 +93,11 @@ public class EventController {
         out.println("});");
         out.println("</script>");
 
+
+
         RequestDispatcher rd = request.getRequestDispatcher("Game");
         rd.include(request, response);
+        //response.sendRedirect("Game");
 
     }
 
