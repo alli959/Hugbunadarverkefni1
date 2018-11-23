@@ -11,6 +11,7 @@ public interface PlayerRepository extends JpaRepository<Player, Long > {
 
     void delete(Player player);
 
+
     List<Player> findAll();
 
     // If we need a custom query that maybe doesn't fit the naming convention used by the JPA repository,

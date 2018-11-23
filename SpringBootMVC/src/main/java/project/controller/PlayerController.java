@@ -80,8 +80,8 @@ public class PlayerController {
 
 
 
-    @RequestMapping(value = "/user/team/{teamId}/player/{name}", method = RequestMethod.GET)
-    public String playerGetFromName(@PathVariable String name,
+    @RequestMapping(value = "/user/team/{teamId}/player/{playerId}", method = RequestMethod.GET)
+    public String playerGetFromName(@PathVariable Long playerId,
                                              @PathVariable Long teamId,
                                              HttpSession session,
                                              Model model){
@@ -92,7 +92,7 @@ public class PlayerController {
             model.addAttribute("msg", loggedInUser.getName());
             model.addAttribute("teamId", teamId);
 
-            model.addAttribute("name", name);
+            model.addAttribute("playerId", playerId);
 
 
             return "player/playerView";

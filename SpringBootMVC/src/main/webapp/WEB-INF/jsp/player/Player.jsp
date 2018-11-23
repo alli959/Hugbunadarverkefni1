@@ -92,7 +92,7 @@
                 <c:forEach var="player" items="${players}">
                     <tr>
 
-                        <td><a href ="player/${player.name}">${player.name}</a></td>
+                        <td><a href ="player/${player.id}">${player.name}</a></td>
 
                         <td>${player.playerPos}</td>
 

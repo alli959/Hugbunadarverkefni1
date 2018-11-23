@@ -1,12 +1,23 @@
 package project.controller;
 
-import org.apache.catalina.connector.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import project.persistence.entities.Game;
+import project.persistence.entities.Player;
+import project.persistence.entities.Users;
+import project.service.PlayerService;
 import project.service.StringManipulationService;
+import project.service.TeamService;
+import project.service.UserService;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,26 +26,138 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 public class EventController {
+
     // Instance Variables
     StringManipulationService stringService;
+    private UserService userService;
+    private TeamService teamService;
+    private PlayerService playerService;
+
+
 
     // Dependency Injection
     @Autowired
-    public EventController(StringManipulationService stringService) {
+    public EventController(StringManipulationService stringService, UserService userService, TeamService teamService, PlayerService playerService ) {
         this.stringService = stringService;
+        this.userService = userService;
+        this.teamService = teamService;
+        this.playerService = playerService;
     }
 
     //
-    @RequestMapping(value = "/Game", method = RequestMethod.GET)
-    public String home(){
+    @RequestMapping(value = "/game", method = RequestMethod.GET)
+    public String home(HttpSession session, Model model){
 
-        return "Game";
+        String action = (String)session.getAttribute("Action");
+        Users loggedInUser = (Users)session.getAttribute("login");
+
+        List<Game> playing = (List<Game>) session.getAttribute("playing");
+        List<Game> bench = (List<Game>) session.getAttribute("bench");
+        Long teamId = (Long) session.getAttribute("teamId");
+
+
+
+
+
+        if(loggedInUser != null) {
+
+
+            if(playing.toArray().length < 5) {
+                session.setAttribute("error", "Starting lineup should be 5 \n not less not more, \n only 5");
+                return "redirect:/user/pregame/" + teamId;
+            }
+
+            return "Game";
+        }
+        return "redirect:/login";
     }
 
-    @RequestMapping(value = "/alert", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/leftwingthree", method = RequestMethod.GET)
+    public String LeftWingThree(HttpSession session){
+        session.setAttribute("Action","leftwingthree");
+        return "redirect:/game";
+    }
+
+
+
+    @RequestMapping(value = "/rightwingthree", method = RequestMethod.GET)
+    public String RightWingThree(HttpSession session){
+        session.setAttribute("Action","rightwingthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/topthree", method = RequestMethod.GET)
+    public String TopThree(HttpSession session){
+        session.setAttribute("Action","topthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/leftcornerthree", method = RequestMethod.GET)
+    public String LeftCornerThree(HttpSession session){
+        session.setAttribute("Action","leftcornerthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/rightcornerthree", method = RequestMethod.GET)
+    public String RightCornerThree(HttpSession session){
+        session.setAttribute("Action","rightcornerthree");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/leftshortcorner", method = RequestMethod.GET)
+    public String LeftShortCorner(HttpSession session){
+        session.setAttribute("Action","leftshortcorner");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/rightshortcorner", method = RequestMethod.GET)
+    public String RightShortCorner(HttpSession session){
+        session.setAttribute("Action","rightshortcorner");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/lefttopkey", method = RequestMethod.GET)
+    public String LeftTopKey(HttpSession session){
+        session.setAttribute("Action","lefttopkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/righttopkey", method = RequestMethod.GET)
+    public String RightTopKey(HttpSession session){
+        session.setAttribute("Action","righttopkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/topkey", method = RequestMethod.GET)
+    public String TopKey(HttpSession session){
+        session.setAttribute("Action","topkey");
+        return "redirect:/game";
+    }
+
+
+    @RequestMapping(value = "/layup", method = RequestMethod.GET)
+    public String LayUp(HttpSession session){
+        session.setAttribute("Action","layup");
+        return "redirect:/game";
+    }
+
+
+
+    /*@RequestMapping(value = "/alert", method = RequestMethod.GET)
     public void alert(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PrintWriter out = response.getWriter();
         String player1 = "'Alex'";
@@ -73,8 +196,8 @@ public class EventController {
         out.println("});");
         out.println("</script>");
 
-        RequestDispatcher rd = request.getRequestDispatcher("Game");
+        RequestDispatcher rd = request.getRequestDispatcher("game");
         rd.include(request, response);
 
-    }
+    }*/
 }

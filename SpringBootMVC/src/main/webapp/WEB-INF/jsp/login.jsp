@@ -13,7 +13,6 @@
 <sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
-        <div style="color: black">${infoMessage}</div>
         <div style="color: blue" >${msg}</div>
         <table>
             <tr>
@@ -27,8 +26,11 @@
             <tr>
 
             </tr>
+
         </table>
         <div style="color: red">${error}</div>
+        <p>don't have an account?</p>
+        <a href="/register">Click here to register</a>
 
 
     </div>

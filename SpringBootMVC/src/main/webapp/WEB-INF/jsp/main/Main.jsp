@@ -37,7 +37,7 @@
     </header>
 
     <div class="main">
-        <a href="/Game"><button>Start</button></a>
+        <a href="/user/pregame"><button>Start</button></a>
     </div>
     <div style="display: flex;justify-content: center" class="image">
         <img style="zoom: 1.1" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">

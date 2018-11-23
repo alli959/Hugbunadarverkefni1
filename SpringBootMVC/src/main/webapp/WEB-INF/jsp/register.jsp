@@ -52,7 +52,12 @@
         <tr></tr>
         <tr>
             <td></td>
-            <td><a href="Index.jsp">Home</a>
+            <td>
+                <a href="/">Home</a>
+            </td>
+            <td>
+                <a href="/login">Login</a>
+                
             </td>
         </tr>
     </table>
