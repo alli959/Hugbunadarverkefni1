@@ -52,11 +52,13 @@ public class EventController {
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String home(HttpSession session, Model model){
 
+
         String action = (String)session.getAttribute("Action");
         Users loggedInUser = (Users)session.getAttribute("login");
 
         List<Game> playing = (List<Game>) session.getAttribute("playing");
         List<Game> bench = (List<Game>) session.getAttribute("bench");
+
         Long teamId = (Long) session.getAttribute("teamId");
 
 
@@ -66,7 +68,7 @@ public class EventController {
         if(loggedInUser != null) {
 
 
-            if(playing.toArray().length < 5) {
+            if(playing.toArray().length < 5 || playing.toArray().length > 5) {
                 session.setAttribute("error", "Starting lineup should be 5 \n not less not more, \n only 5");
                 return "redirect:/user/pregame/" + teamId;
             }

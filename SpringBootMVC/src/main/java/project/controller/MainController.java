@@ -64,6 +64,13 @@ public class MainController {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
             model.addAttribute("teams",teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
+            List<Game> game = gameService.findAllReverseOrder();
+            if(game.toArray().length != 0){
+                for(int i = 0; i<game.size(); i++){
+                    Game aGame = game.get(i);
+                    gameService.delete(aGame);
+                }
+            }
             return "preGame/teamSelect";
         }
         return "redirect:/login";
