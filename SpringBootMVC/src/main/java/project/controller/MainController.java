@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.persistence.entities.Game;
 import project.persistence.entities.Users;
+import project.service.GameService;
 import project.service.UserService;
 import project.persistence.entities.Team;
 import project.service.TeamService;
 import project.persistence.entities.Player;
 import project.service.PlayerService;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -22,13 +25,15 @@ public class MainController {
     private UserService userService;
     private TeamService teamService;
     private PlayerService playerService;
+    private GameService gameService;
 
 
     @Autowired
-    public MainController(UserService userService, TeamService teamService, PlayerService playerService){
+    public MainController(UserService userService, TeamService teamService, PlayerService playerService, GameService gameService){
         this.userService = userService;
         this.teamService = teamService;
         this.playerService = playerService;
+        this.gameService = gameService;
     }
 
 
@@ -55,6 +60,7 @@ public class MainController {
 
     @RequestMapping(value = "/user/pregame", method = RequestMethod.GET)
     public String teamSelect(HttpSession session, Model model){
+
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
             model.addAttribute("teams",teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
@@ -71,48 +77,55 @@ public class MainController {
                                   HttpSession session,
                                   Model model){
 
+
+        List<Player> players = playerService.findPlayersInTeamReverseOrder(teamId);
         Users loggedInUser = (Users)session.getAttribute("login");
-        List<Player> starters = (List<Player>)session.getAttribute("starters");
-        if(loggedInUser != null) {
-            if((List<Player>)session.getAttribute("bench") == null){
+        if(loggedInUser != null){
 
-                List<Player> bench = playerService.findPlayersInTeamReverseOrder(teamId);
-                session.setAttribute("bench", bench);
-                Team team = teamService.findOne(teamId);
 
-                if(!team.getUserOwner().equals(loggedInUser.getUserName())){
-                    model.addAttribute("Message","Team not owned by User");
-                    return "Error";
+            if(gameService.findAllReverseOrder().toArray().length <= 0){
+                for(int i = 0; i<players.size(); i++) {
+                    Game player = new Game();
+                    player.setBench(true);
+                    player.setPlayerId(players.get(i).getId());
+                    gameService.save(player);
                 }
 
-
-                model.addAttribute("players", bench);
-                model.addAttribute("starters",starters);
-
-                return "preGame/startingLineup";
             }
 
 
-            List<Player> bench = (List<Player>)session.getAttribute("bench");
-            Team team = teamService.findOne(teamId);
 
-            if(!team.getUserOwner().equals(loggedInUser.getUserName())){
-                model.addAttribute("Message","Team not owned by User");
-                return "Error";
+
+            List<Game> bench = gameService.getBench();
+            List<Game> playing = gameService.getPlaying();
+
+            List<Player> initBench = new ArrayList<>();
+            List<Player> initPlaying = new ArrayList<>();
+
+
+            // Ugly for loops to add bench or playing
+
+            for(int i = 0; i<bench.size(); i++){
+                initBench.add(playerService.findOne(bench.get(i).getPlayerId()));
             }
 
+            for(int i = 0; i<playing.size(); i++){
+                initPlaying.add(playerService.findOne(playing.get(i).getPlayerId()));
+            }
 
-            model.addAttribute("players", bench);
-            model.addAttribute("starters",starters);
+            model.addAttribute("players",initBench);
+            model.addAttribute("starters",initPlaying);
+            model.addAttribute("error",session.getAttribute("error"));
+            session.removeAttribute("error");
+            session.setAttribute("playing",initPlaying);
+            session.setAttribute("bench",initBench);
+            session.setAttribute("teamId", teamId);
 
             return "preGame/startingLineup";
 
 
-
         }
-
         return "redirect:/login";
-
     }
 
 
@@ -122,35 +135,29 @@ public class MainController {
                                   HttpSession session,
                                   Model model){
 
+
         Users loggedInUser = (Users)session.getAttribute("login");
-        List<Player> bench = (List<Player>)session.getAttribute("bench");
+        Game player = gameService.findByPlayerId(playerId);
+
         if(loggedInUser != null) {
 
-
-            if((List<Player>)session.getAttribute("starters") == null){
-                List<Player> starters = new ArrayList<>();
-                Player starter = playerService.findOne(playerId);
-                starters.add(starter);
-                bench.remove(starter);
-                System.out.println(starter);
-                session.setAttribute("bench",bench);
-                session.setAttribute("starters",starters);
-                return "redirect:/user/pregame/{teamId}";
-            }
+            player.setBench(!player.isBench());
+            gameService.save(player);
 
 
-            List<Player> starters = (List<Player>)session.getAttribute("starters");
-            Player starter = playerService.findOne(playerId);
-            starters.add(starter);
-            bench.remove(starter);
-            session.setAttribute("bench",bench);
-            session.setAttribute("starters",starters);
+
             return "redirect:/user/pregame/{teamId}";
-
         }
+
+
         return "redirect:/login";
 
     }
+
+
+
+
+
 
 
 }

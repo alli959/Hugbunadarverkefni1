@@ -10,8 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import project.persistence.entities.Game;
+import project.persistence.entities.Player;
 import project.persistence.entities.Users;
+import project.service.PlayerService;
 import project.service.StringManipulationService;
+import project.service.TeamService;
+import project.service.UserService;
 
 
 import javax.servlet.RequestDispatcher;
@@ -21,30 +26,56 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 public class EventController {
 
     // Instance Variables
     StringManipulationService stringService;
+    private UserService userService;
+    private TeamService teamService;
+    private PlayerService playerService;
+
+
 
     // Dependency Injection
     @Autowired
-    public EventController(StringManipulationService stringService) {
+    public EventController(StringManipulationService stringService, UserService userService, TeamService teamService, PlayerService playerService ) {
         this.stringService = stringService;
+        this.userService = userService;
+        this.teamService = teamService;
+        this.playerService = playerService;
     }
 
     //
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String home(HttpSession session, Model model){
+
+        String action = (String)session.getAttribute("Action");
         Users loggedInUser = (Users)session.getAttribute("login");
-        String test = (String)session.getAttribute("Action");
+
+        List<Game> playing = (List<Game>) session.getAttribute("playing");
+        List<Game> bench = (List<Game>) session.getAttribute("bench");
+        Long teamId = (Long) session.getAttribute("teamId");
+
+
+
+
+
         if(loggedInUser != null) {
-            System.out.println(test);
+
+
+            if(playing.toArray().length < 5) {
+                session.setAttribute("error", "Starting lineup should be 5 \n not less not more, \n only 5");
+                return "redirect:/user/pregame/" + teamId;
+            }
+
             return "Game";
         }
         return "redirect:/login";
     }
+
 
 
     @RequestMapping(value = "/leftwingthree", method = RequestMethod.GET)

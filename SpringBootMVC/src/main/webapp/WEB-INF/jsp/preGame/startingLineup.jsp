@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
 
 <html lang="en">
 <head>
@@ -10,6 +12,7 @@
 </head>
 <body>
 <h1>Bench</h1>
+
 <c:choose>
     <c:when test="${not empty players}">
 
@@ -42,6 +45,7 @@
 
 <h1>Starters</h1>
 
+
 <c:choose>
     <c:when test="${not empty starters}">
 
@@ -56,7 +60,7 @@
             <c:forEach var="starter" items="${starters}">
                 <tr>
 
-                    <td><a href ="${starter.id}">${starter.name}</a></td>
+                    <td><a href ="${teamId}/${starter.id}">${starter.name}</a></td>
 
                     <td>${starter.playerPos}</td>
 
@@ -72,9 +76,11 @@
     </c:otherwise>
 </c:choose>
 
-<input type="submit" VALUE="Start Game"/>
 
 
+<input type="button" onclick="location.href = '/game'" VALUE="Start Game"/>
+
+<div style="color: red">${error}</div>
 
 </body>
 </html>
