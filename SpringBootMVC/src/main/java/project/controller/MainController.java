@@ -44,6 +44,8 @@ public class MainController {
             model.addAttribute("msg", loggedInUser.getName());
             return "main/Main";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
 
     }
@@ -53,6 +55,8 @@ public class MainController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session, Model model){
         session.removeAttribute("login");
+        session.setAttribute("error", "User logged out");
+
         return "redirect:/login";
     }
 
@@ -73,6 +77,8 @@ public class MainController {
             }
             return "preGame/teamSelect";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -132,6 +138,8 @@ public class MainController {
 
 
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -155,6 +163,8 @@ public class MainController {
 
             return "redirect:/user/pregame/{teamId}";
         }
+
+        session.setAttribute("error", "User must be logged in!");
 
 
         return "redirect:/login";

@@ -75,6 +75,7 @@ public class EventController {
 
             return "Game";
         }
+        session.setAttribute("error", "User must be logged in!");
         return "redirect:/login";
     }
 

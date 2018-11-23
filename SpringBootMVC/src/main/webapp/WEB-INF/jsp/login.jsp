@@ -10,6 +10,8 @@
     <title>Spring Login Form</title>
 </head>
 <body>
+
+<div style="color: red">${error}</div>
 <sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
@@ -28,7 +30,6 @@
             </tr>
 
         </table>
-        <div style="color: red">${error}</div>
         <p>don't have an account?</p>
         <a href="/register">Click here to register</a>
 

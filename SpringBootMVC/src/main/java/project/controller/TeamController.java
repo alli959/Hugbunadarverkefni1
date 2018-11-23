@@ -47,6 +47,8 @@ public class TeamController {
 
             return "team/Team";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -74,6 +76,8 @@ public class TeamController {
 
             return "team/Team";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
 
 
@@ -104,6 +108,8 @@ public class TeamController {
 
             return "team/teamView";
         }
+        session.setAttribute("error", "User must be logged in!");
+
 
         return "redirect:/login";
 
