@@ -153,7 +153,6 @@ public class MainController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         Game player = gameService.findByPlayerId(playerId);
-
         if(loggedInUser != null) {
 
             player.setBench(!player.isBench());

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,8 +57,8 @@ public class EventController {
         String action = (String)session.getAttribute("Action");
         Users loggedInUser = (Users)session.getAttribute("login");
 
-        List<Game> playing = (List<Game>) session.getAttribute("playing");
-        List<Game> bench = (List<Game>) session.getAttribute("bench");
+        List<Player> playing = (List<Player>) session.getAttribute("playing");
+        List<Player> bench = (List<Player>) session.getAttribute("bench");
 
         Long teamId = (Long) session.getAttribute("teamId");
 
@@ -72,7 +73,8 @@ public class EventController {
                 session.setAttribute("error", "Starting lineup should be 5 \n not less not more, \n only 5");
                 return "redirect:/user/pregame/" + teamId;
             }
-
+            model.addAttribute("starters", playing);
+            model.addAttribute("players", bench);
             return "Game";
         }
         session.setAttribute("error", "User must be logged in!");
