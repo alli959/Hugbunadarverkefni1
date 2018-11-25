@@ -6,10 +6,21 @@ html {
     margin: 0 auto;
 }
 
+.score {
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 110px;
+    background: black;
+    color: #FAAB00;
+    box-shadow: 0px 0px 0px 8px #A19B9A;
+    line-height: 100px;
+}
+
 .timer{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     width:400px;
     height:100px;
     text-align: center;
@@ -24,9 +35,9 @@ html {
 
 
 .container{
-    margin-left: auto;
-    margin-right: auto;
-    color: #FAAB00;
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
     text-shadow: 2px 1px 4px #FFF;
 }
 
@@ -34,6 +45,17 @@ html {
     display: flex;
     justify-content: center;
 }
+
+.container__home{
+    font-size: 36px;
+    margin-right: 150px;
+}
+
+.container__away{
+    font-size: 36px;
+    margin-left: 150px;
+}
+
 .setup {
     background-color: gray;
     color: black;
@@ -45,6 +67,8 @@ html {
 
 .game {
     display: inline-flex;
+    width: 100%;
+    justify-content: center;
     margin-bottom: 20px;
 }
 

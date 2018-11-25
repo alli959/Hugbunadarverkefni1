@@ -15,13 +15,15 @@
 <body>
 
 <div class="container">
-    <div class="score home"></div>
+    <div class="score home">0</div>
     <div class="timer"></div>
-    <div class="score away"></div>
+    <div class="score away">0</div>
 </div>
 <div class="container__buttons">
+    <div class="container__home">Home</div>
     <button class="button setup" onclick="setup()">Set time</button>
     <button class="button stop" onclick="startStop()">Start/Stop</button>
+    <div class="container__away">Away</div>
 </div>
 
 <div class="game">
