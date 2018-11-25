@@ -6,18 +6,58 @@
 
 <html lang="en">
 <head>
+    <script src="<c:url value="/css/timer.js"/>"></script>
     <meta charset="UTF-8">
     <title>The Game</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/game.css"/>"/>
 </head>
 <body>
 
-
-
-<div style="display: flex;justify-content: center" class="image">
-    <img style="zoom: 1.1" src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
+<div class="container">
+    <div class="score home">0</div>
+    <div class="timer"></div>
+    <div class="score away">0</div>
 </div>
+<div class="container__buttons">
+    <div class="container__home">Home</div>
+    <button class="button setup" onclick="setup()">Set time</button>
+    <button class="button stop" onclick="startStop()">Start/Stop</button>
+    <div class="container__away">Away</div>
+</div>
+
+<div class="game">
+    <div class="game__button">
+
+<c:choose>
+    <c:when test="${not empty starters}">
+
+            <c:forEach var="starter" items="${starters}">
+                <button class="button starter" type="button">${starter.name}<br>${starter.playerPos}<br>${starter.playerNr}</button>
+            </c:forEach>
+    </c:when>
+
+</c:choose>
+
+        <c:choose>
+            <c:when test="${not empty players}">
+
+                <c:forEach var="player" items="${players}">
+
+                    <button class="button bench" type="button">${player.name}</button>
+
+                </c:forEach>
+            </c:when>
+
+        </c:choose>
+
+    </div>
+<div>
+    <img src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
+</div>
+
+</div>
+
 
 <map name="image-map">
     <area target="" alt="LeftWingThree" title="LeftWingThree" onclick="location.href = 'leftwingthree'" coords="479,554,481,367,293,367,250,436,165,481,164,557,287,554,386,555" shape="poly">
