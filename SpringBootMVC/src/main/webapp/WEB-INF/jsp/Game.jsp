@@ -6,11 +6,16 @@
 
 <html lang="en">
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="<c:url value="/css/timer.js"/>"></script>
+    <script src="<c:url value="/css/game.js"/>"></script>
     <meta charset="UTF-8">
     <title>The Game</title>
 
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/game.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/radioButtons.css"/>"/>
 </head>
 <body>
 
@@ -29,15 +34,19 @@
 <div class="game">
     <div class="game__button">
 
-<c:choose>
+        <div class="funkyradio">
+        <c:choose>
     <c:when test="${not empty starters}">
 
             <c:forEach var="starter" items="${starters}">
-                <button class="button starter" type="button">${starter.name}<br>${starter.playerPos}<br>${starter.playerNr}</button>
+            <div class="funkyradio-info">
+                <input type="radio" name="radio" id="${starter.id}" value="${starter.id}" onclick="shot(value)">
+                <label for="${starter.id}">${starter.name}<br>${starter.playerPos}<br>${starter.playerNr}</label>
+            </div>
             </c:forEach>
     </c:when>
-
 </c:choose>
+        </div>
 
         <c:choose>
             <c:when test="${not empty players}">
