@@ -4,8 +4,10 @@ var assistButton;
 var reboundButton;
 var homeScoreDiv;
 
-var shotFrom;
-var playerId;
+var shotFrom; // Hvar leikmaður skaut
+var playerId; // Leikmaðurinn sem er valin sem skýtur
+var playerAssist; // Leikmaður sem gaf stoðsendingu
+var playerRebound; // Leikmaður sem tekur frákast
 var playerShoting;
 
 var scoreHome = 0;
@@ -26,12 +28,25 @@ function shot(val) {
        }
        assistButton.classList.remove('hidden');
        addScore(shotFrom);
+       submitData(val);
        console.log('Made basket by player ' + playerId);
    } else { // Missed
        shotButton.classList.add('hidden'); // Felur takkan
        reboundButton.classList.remove('hidden');
        console.log('Missed basket by player ' + playerId);
    }
+}
+
+function submitData(data) {
+    data.toString();
+    var http = new XMLHttpRequest();
+    http.open("POST", "/request", true);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    var params = "input=" + data;
+    http.send(params);
+    http.onload = function() {
+        http.responseText;
+    }
 }
 
 function addScore(pos) {
@@ -49,12 +64,14 @@ function addScore(pos) {
 }
 
 function assist(player) {
+    playerAssist = player;
     assistButton.classList.add('hidden'); // Felur takkan
     playerShoting.classList.remove('hidden');
     console.log('Assist by ' + player);
 }
 
 function rebound(player) {
+    playerRebound = player;
     reboundButton.classList.add('hidden'); // Felur takkan
     console.log('Rebound for ' + player);
 }

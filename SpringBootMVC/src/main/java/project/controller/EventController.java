@@ -49,6 +49,7 @@ public class EventController {
         this.playerService = playerService;
     }
 
+
     //
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String home(HttpSession session, Model model){
@@ -61,10 +62,6 @@ public class EventController {
         List<Player> bench = (List<Player>) session.getAttribute("bench");
 
         Long teamId = (Long) session.getAttribute("teamId");
-
-
-
-
 
         if(loggedInUser != null) {
 
