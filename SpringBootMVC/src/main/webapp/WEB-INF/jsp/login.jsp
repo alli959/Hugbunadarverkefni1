@@ -8,6 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Spring Login Form</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/login.css"/>"/>
 </head>
 <body>
 
@@ -26,14 +27,11 @@
                 <td><input type="password" name="password" /></td>
             </tr>
             <tr>
-
             </tr>
-
         </table>
-        <p>don't have an account?</p>
+        <div style="color: red">${error}</div>
+        <p>Don't have an account?</p>
         <a href="/register">Click here to register</a>
-
-
     </div>
     <input type="submit" value="Submit" />
 </sf:form>
