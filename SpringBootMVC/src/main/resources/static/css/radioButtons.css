@@ -3,6 +3,7 @@
 .funkyradio div {
   clear: both;
   overflow: hidden;
+  width: 100px;
 }
 
 .funkyradio label {
