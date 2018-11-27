@@ -46,6 +46,8 @@ public class PlayerController {
 
             return "player/Player";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -74,6 +76,8 @@ public class PlayerController {
 
             return "player/Player";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -97,6 +101,8 @@ public class PlayerController {
 
             return "player/playerView";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 }

@@ -44,6 +44,8 @@ public class MainController {
             model.addAttribute("msg", loggedInUser.getName());
             return "main/Main";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
 
     }
@@ -53,6 +55,8 @@ public class MainController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session, Model model){
         session.removeAttribute("login");
+        session.setAttribute("error", "User logged out");
+
         return "redirect:/login";
     }
 
@@ -64,8 +68,17 @@ public class MainController {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
             model.addAttribute("teams",teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
+            List<Game> game = gameService.findAllReverseOrder();
+            if(game.toArray().length != 0){
+                for(int i = 0; i<game.size(); i++){
+                    Game aGame = game.get(i);
+                    gameService.delete(aGame);
+                }
+            }
             return "preGame/teamSelect";
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -125,6 +138,8 @@ public class MainController {
 
 
         }
+        session.setAttribute("error", "User must be logged in!");
+
         return "redirect:/login";
     }
 
@@ -138,7 +153,6 @@ public class MainController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         Game player = gameService.findByPlayerId(playerId);
-
         if(loggedInUser != null) {
 
             player.setBench(!player.isBench());
@@ -148,6 +162,8 @@ public class MainController {
 
             return "redirect:/user/pregame/{teamId}";
         }
+
+        session.setAttribute("error", "User must be logged in!");
 
 
         return "redirect:/login";

@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/login.css"/>"/>
 </head>
 <body>
+
+<div style="color: red">${error}</div>
 <sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">
@@ -25,15 +27,11 @@
                 <td><input type="password" name="password" /></td>
             </tr>
             <tr>
-
             </tr>
-
         </table>
         <div style="color: red">${error}</div>
         <p>Don't have an account?</p>
         <a href="/register">Click here to register</a>
-
-
     </div>
     <input type="submit" value="Submit" />
 </sf:form>

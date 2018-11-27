@@ -31,6 +31,8 @@ public class LoginController {
 
 
         model.addAttribute("users",new Users());
+        model.addAttribute("error",session.getAttribute("error"));
+        session.removeAttribute("error");
         String userName = users.getUserName();
         String password = users.getPassword();
         String name = users.getName(); // Afh er þetta null?
