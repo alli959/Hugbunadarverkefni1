@@ -6,13 +6,15 @@
 <html lang="en">
 
     <head>
-        <title>Project Title</title>
+        <title>BBall StatTracker</title>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/index.css"/>"/>
     </head>
     <body>
 
 
     <ul>
-        <li><a href="/register">Click here to register</a></li>
+        <h1>BBall StatTracker</h1>
+        <li><a href="/register">Register</a></li>
         <p>Already have an account?</p>
         <li><a href="/login">Login</a></li>
         <li><a href="<c:url value="/Game"/>">Game</a></li>
