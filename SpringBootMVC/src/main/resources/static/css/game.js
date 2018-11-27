@@ -40,6 +40,8 @@ function shot(val) {
 function submitData(data) {
     data.toString();
     var http = new XMLHttpRequest();
+    http.responseType = 'json';
+
     http.open("POST", "/request", true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     var params = "input=" + data;
@@ -79,7 +81,28 @@ function rebound(player) {
 function shotPos(pos) {
     if(playerSelected) {
         shotButton.classList.remove('hidden'); // Birtir takkan
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/game",
+            data : JSON.stringify(pos),
+            dataType : 'json',
+            timeout : 100000,
+            success : function(pos) {
+                console.log("SUCCESS: ", pos);
+                display(pos);
+                alert(response);
+            },
+            error : function(e) {
+                console.log("ERROR: ", e);
+                display(e);
+            },
+            done : function(e) {
+                console.log("DONE");
+            }
+        });
     }
+
     shotFrom = pos;
 }
 

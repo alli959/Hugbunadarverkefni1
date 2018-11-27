@@ -8,6 +8,7 @@ import org.apache.catalina.connector.Response;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.Game;
@@ -76,6 +77,11 @@ public class EventController {
         }
         session.setAttribute("error", "User must be logged in!");
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/game", method = RequestMethod.POST)
+    public void action(@RequestBody String test){
+        System.out.println(test);
     }
 
 
