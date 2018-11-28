@@ -245,7 +245,9 @@ function turnover(val) {
 }
 
 function assist(player) {
-    playerAssist = player;
+    if (player != 0) { // TODO viljum ekki hafa assist ef það er valið 'none'
+        playerAssist = player;
+    }
     assistButton.classList.add('hidden'); // Felur takkan
     playerShoting.classList.remove('hidden');
     console.log('Assist by ' + player);

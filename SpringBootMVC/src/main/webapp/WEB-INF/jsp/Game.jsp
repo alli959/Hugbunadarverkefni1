@@ -89,7 +89,7 @@
                 <c:forEach var="starter" items="${starters}">
                         <button value="${starter.id}" class="button" type="button" onclick="assist(value)">${starter.name}</button>
                 </c:forEach>
-                <button value="0" class="button" type="button">None</button>
+                <button value="0" class="button" type="button" onclick="assist(value)">None</button>
             </c:when>
         </c:choose>
     </div>
