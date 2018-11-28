@@ -47,6 +47,8 @@ public class Game {
     private Long TopKeyMiss;
     private Long LayUpHit;
     private Long LayUpMiss;
+    private Long FreeThrowHit;
+    private Long FreeThrowMiss;
 
     public Game() {
 
@@ -56,7 +58,7 @@ public class Game {
                 Long RightWingThreeHit, Long RightWingThreeMiss, Long TopThreeHit, Long TopThreeMiss,
                 Long LeftCornerThreeHit, Long LeftCornerThreeMiss, Long RightCornerThreeHit, Long RightCornerThreeMiss,
                 Long LeftShortCornerHit, Long LeftShortCornerMiss, Long RightShortCornerHit, Long RightShortCornerMiss, Long LeftTopKeyHit,
-                Long LeftTopKeyMiss, Long RightTopKeyHit, Long RightTopKeyMiss, Long TopKeyHit, Long TopKeyMiss, Long LayUpHit, Long LayUpMiss) {
+                Long LeftTopKeyMiss, Long RightTopKeyHit, Long RightTopKeyMiss, Long TopKeyHit, Long TopKeyMiss, Long LayUpHit, Long LayUpMiss, Long freeThrowHit, Long freeThrowMiss) {
 
         this.id = id;
         this.turnover = turnover;
@@ -90,6 +92,8 @@ public class Game {
         this.LayUpHit = LayUpHit;
         this.LayUpMiss = LayUpMiss;
 
+        FreeThrowHit = freeThrowHit;
+        FreeThrowMiss = freeThrowMiss;
     }
 
     public Long getId() {
@@ -362,5 +366,22 @@ public class Game {
 
     public void setRebound(Long rebound) {
         this.rebound = rebound;
+    }
+
+    public Long getFreeThrowHit() {
+        return FreeThrowHit != null ? FreeThrowHit:0;
+    }
+
+    public void setFreeThrowHit(Long freeThrowHit) {
+        FreeThrowHit = freeThrowHit;
+    }
+
+    public Long getFreeThrowMiss() {
+        return FreeThrowMiss != null ? FreeThrowMiss:0;
+
+    }
+
+    public void setFreeThrowMiss(Long freeThrowMiss) {
+        FreeThrowMiss = freeThrowMiss;
     }
 }

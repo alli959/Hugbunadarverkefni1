@@ -17,18 +17,19 @@ public class PlayerStats {
     private Long turnovers;
     private Long blocks;
     private Long fouls;
-    private Long twoPmades;
-    private Long twoPmisses;
-    private Long threePmades;
-    private Long threePmisses;
-    private Long ftMades;
-    private Long ftMisses;
+    private Long threePointHit;
+    private Long threePointMiss;
+    private Long freeThrowHit;
+    private Long freeThrowMiss;
+    private String twoPointer;
+    private String threePointer;
+    private String freeThrow;
 
 
     public PlayerStats() {
     }
 
-    public PlayerStats(Long id, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long twoPmades, Long twoPmisses, Long threePmades, Long threePmisses, Long ftMades, Long ftMisses) {
+    public PlayerStats(Long id, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long threePointHit, Long threePointMiss, Long freeThrowHit, Long freeThrowMiss, String twoPointer, String threePointer, String freeThrow) {
         this.id = id;
         this.playerId = playerId;
         this.points = points;
@@ -37,12 +38,13 @@ public class PlayerStats {
         this.turnovers = turnovers;
         this.blocks = blocks;
         this.fouls = fouls;
-        this.twoPmades = twoPmades;
-        this.twoPmisses = twoPmisses;
-        this.threePmades = threePmades;
-        this.threePmisses = threePmisses;
-        this.ftMades = ftMades;
-        this.ftMisses = ftMisses;
+        this.threePointHit = threePointHit;
+        this.threePointMiss = threePointMiss;
+        this.freeThrowHit = freeThrowHit;
+        this.freeThrowMiss = freeThrowMiss;
+        this.twoPointer = twoPointer;
+        this.threePointer = threePointer;
+        this.freeThrow = freeThrow;
     }
 
     public Long getId() {
@@ -62,7 +64,7 @@ public class PlayerStats {
     }
 
     public Long getPoints() {
-        return points;
+        return points != null ? points:0;
     }
 
     public void setPoints(Long points) {
@@ -70,7 +72,8 @@ public class PlayerStats {
     }
 
     public Long getRebounds() {
-        return rebounds;
+        return rebounds != null ? rebounds:0;
+
     }
 
     public void setRebounds(Long rebounds) {
@@ -78,7 +81,8 @@ public class PlayerStats {
     }
 
     public Long getAssists() {
-        return assists;
+        return assists != null ? assists:0;
+
     }
 
     public void setAssists(Long assists) {
@@ -86,7 +90,8 @@ public class PlayerStats {
     }
 
     public Long getTurnovers() {
-        return turnovers;
+        return turnovers != null ? turnovers:0;
+
     }
 
     public void setTurnovers(Long turnovers) {
@@ -94,7 +99,8 @@ public class PlayerStats {
     }
 
     public Long getBlocks() {
-        return blocks;
+        return blocks != null ? blocks:0;
+
     }
 
     public void setBlocks(Long blocks) {
@@ -102,59 +108,72 @@ public class PlayerStats {
     }
 
     public Long getFouls() {
-        return fouls;
+        return fouls != null ? fouls:0;
+
     }
 
     public void setFouls(Long fouls) {
         this.fouls = fouls;
     }
 
-    public Long getTwoPmades() {
-        return twoPmades;
+
+    public String getTwoPointer() {
+        return twoPointer;
     }
 
-    public void setTwoPmades(Long twoPmades) {
-        this.twoPmades = twoPmades;
+    public void setTwoPointer(String twoPointer) {
+        this.twoPointer = twoPointer;
     }
 
-    public Long getTwoPmisses() {
-        return twoPmisses;
+    public String getThreePointer() {
+        return threePointer;
     }
 
-    public void setTwoPmisses(Long twoPmisses) {
-        this.twoPmisses = twoPmisses;
+    public void setThreePointer(String threePointer) {
+        this.threePointer = threePointer;
     }
 
-    public Long getThreePmades() {
-        return threePmades;
+    public String getFreeThrow() {
+        return freeThrow;
     }
 
-    public void setThreePmades(Long threePmades) {
-        this.threePmades = threePmades;
+    public void setFreeThrow(String freeThrow) {
+        this.freeThrow = freeThrow;
     }
 
-    public Long getThreePmisses() {
-        return threePmisses;
+    public Long getThreePointHit() {
+        return threePointHit != null ? threePointHit:0;
+
+
     }
 
-    public void setThreePmisses(Long threePmisses) {
-        this.threePmisses = threePmisses;
+    public void setThreePointHit(Long threePointHit) {
+        this.threePointHit = threePointHit;
     }
 
-    public Long getFtMades() {
-        return ftMades;
+    public Long getThreePointMiss() {
+
+        return threePointMiss != null ? threePointMiss:0;
     }
 
-    public void setFtMades(Long ftMades) {
-        this.ftMades = ftMades;
+
+    public void setThreePointMiss(Long threePointMiss) {
+        this.threePointMiss = threePointMiss;
     }
 
-    public Long getFtMisses() {
-        return ftMisses;
+    public Long getFreeThrowHit() {
+        return freeThrowHit != null ? freeThrowHit:0;
     }
 
-    public void setFtMisses(Long ftMisses) {
-        this.ftMisses = ftMisses;
+    public void setFreeThrowHit(Long freeThrowHit) {
+        this.freeThrowHit = freeThrowHit;
     }
 
+    public Long getFreeThrowMiss() {
+        return freeThrowMiss != null ? freeThrowMiss:0;
+    }
+
+    public void setFreeThrowMiss(Long freeThrowMiss) {
+        this.freeThrowMiss = freeThrowMiss;
+    }
 }

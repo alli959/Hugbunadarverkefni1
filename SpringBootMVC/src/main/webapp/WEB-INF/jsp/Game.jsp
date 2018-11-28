@@ -251,6 +251,10 @@
     <button class="button" value="turnover" onclick="showTurnoverButton()">Turnover</button>
 </div>
 
+<div class="ENDGAME">
+    <button  type="submit" onclick="location.href='/game/endgame'">End Game</button>
+</div>
+
 <!--onclick="location.href = 'leftwingthree'"-->
 <map name="image-map">
     <area target="" alt="LeftWingThree" title="LeftWingThree" onclick="shotPos(title)" coords="479,554,481,367,293,367,250,436,165,481,164,557,287,554,386,555" shape="poly">
@@ -266,9 +270,7 @@
     <area target="" alt="LayUp" title="LayUp" onclick="shotPos(title)" coords="46,218,178,359" shape="rect">
 </map>
 
-<c:if test="${clicked}">
-<p>hello</p>
-</c:if>
+
 
 </body>
 </html>

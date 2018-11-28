@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.Game;
 import project.persistence.entities.Player;
 import project.persistence.entities.Users;
+import project.persistence.entities.PlayerStats;
 import project.service.*;
 
 
@@ -31,6 +32,7 @@ public class EventController {
     private TeamService teamService;
     private PlayerService playerService;
     private GameService gameService;
+
 
 
     // Dependency Injection
@@ -78,15 +80,16 @@ public class EventController {
 
 
         //-------access the json object ---------//
+        ////playerId, from, isHit, assist, rebound, subIn, subOut, turnover, other////
         JSONObject myObject = new JSONObject(shotAction);
 
 
 
         //-----Add shots -------//
         String playerIdText = myObject.get("playerId").toString();
-        if(!playerIdText.equals("")) {
+        String from = myObject.get("from").toString();
+        if(!playerIdText.equals("") && !from.equals("")) {
             Long playerId = Long.parseLong(playerIdText);
-            String from = myObject.get("from").toString();
             boolean isHit = (boolean) myObject.get("isHit");
             Game shooter = gameService.findByPlayerId(playerId);
             if(isHit) {
@@ -105,6 +108,7 @@ public class EventController {
 
         //-------Add assist------//
         String assistIdText = myObject.get("assist").toString();
+        System.out.println(assistIdText);
         if(!assistIdText.equals("")) {
             Long assistId = Long.parseLong(assistIdText);
             Game assister = gameService.findByPlayerId(assistId);
@@ -124,7 +128,66 @@ public class EventController {
             gameService.save(rebounder);
         }
 
+        ////playerId, from, isHit, assist, rebound, subIn, subOut, turnover, other////
 
+        //-----------Add steal---------//
+        String stealText = myObject.get("other").toString();
+        String stealIdText = myObject.get("playerId").toString();
+        if(stealText.equals("Steal") && !stealIdText.equals("")){
+            Long stealId = Long.parseLong(stealIdText);
+            Game stealer = gameService.findByPlayerId(stealId);
+            Long steal = Long.parseLong(stealer.getClass().getMethod("getSteal").invoke(stealer).toString());
+            stealer.getClass().getMethod("setSteal", Long.class).invoke(stealer, steal += 1);
+            gameService.save(stealer);
+        }
+
+
+
+        //-----------Add block---------//
+        String blockText = myObject.get("other").toString();
+        String blockIdText = myObject.get("playerId").toString();
+        if(blockText.equals("Block") && !blockIdText.equals("")){
+            Long blockId = Long.parseLong(blockIdText);
+            Game blocker = gameService.findByPlayerId(blockId);
+            Long block = Long.parseLong(blocker.getClass().getMethod("getBlock").invoke(blocker).toString());
+            blocker.getClass().getMethod("setBlock", Long.class).invoke(blocker, block += 1);
+            gameService.save(blocker);
+        }
+
+
+        //----------Add turnover---------//
+        String trunoverText = myObject.get("turnover").toString();
+        String turnoverIdText = myObject.get("playerId").toString();
+        if(trunoverText.equals("Turnover") && !turnoverIdText.equals("")){
+            Long turnoverId = Long.parseLong(turnoverIdText);
+            Game turnoverer = gameService.findByPlayerId(turnoverId);
+            Long turnover = Long.parseLong(turnoverer.getClass().getMethod("getTurnover").invoke(turnoverer).toString());
+            turnoverer.getClass().getMethod("setTurnover", Long.class).invoke(turnoverer, turnover += 1);
+            gameService.save(turnoverer);
+        }
+
+
+        //-----------Add foul--------//
+        String foulText = myObject.get("other").toString();
+        String foulIdText = myObject.get("playerId").toString();
+        if(foulText.equals("Foul") && !turnoverIdText.equals("")){
+            Long foulId = Long.parseLong(foulIdText);
+            Game fouler = gameService.findByPlayerId(foulId);
+            Long foul = Long.parseLong(fouler.getClass().getMethod("getFoul").invoke(fouler).toString());
+            fouler.getClass().getMethod("setFoul", Long.class).invoke(fouler, foul += 1);
+            gameService.save(fouler);
+        }
+
+
+
+
+
+    }
+
+    @RequestMapping(value = "/game/endgame", method = RequestMethod.GET)
+    public String endgame(HttpSession session, Model model) {
+
+        return "redirect:/user";
     }
 
 }
