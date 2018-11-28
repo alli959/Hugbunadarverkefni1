@@ -2,6 +2,7 @@ package project.service;
 
 import project.persistence.entities.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface GameService {
@@ -90,6 +91,14 @@ public interface GameService {
      */
 
     List<Game> getPlaying();
+
+    List<Long> getThreeHit(Long playerId);
+
+    List<Long> getTwoHit(Long PlayerId);
+
+    List<Long> getThreeMiss(Long playerId);
+
+    List<Long> getTwoMiss(Long playerId);
 
 
 

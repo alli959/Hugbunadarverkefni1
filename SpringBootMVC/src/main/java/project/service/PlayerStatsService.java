@@ -8,13 +8,13 @@ public interface PlayerStatsService {
 
     /**
      * save a {@Link PlayerStats}
-     * @param player {@Link PlayerStats} to be saved
+     * @param playerStats {@Link PlayerStats} to be saved
      * @return {@Link PlayerStats} that was saved
      */
 
 
 
-    PlayerStats save(PlayerStats player);
+    PlayerStats save(PlayerStats playerStats);
 
     /**
      * Delete {@link PlayerStats}
@@ -81,6 +81,10 @@ public interface PlayerStatsService {
      */
 
     List<PlayerStats> findPlayersInTeamReverseOrder(Long teamId);
+
+    PlayerStats getByPlayerId(Long playerId);
+
+
 
 }
 
