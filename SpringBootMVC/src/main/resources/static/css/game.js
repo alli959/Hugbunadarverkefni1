@@ -1,46 +1,46 @@
-var selectedButton;
-var shotButton;
-var shotAwayButton;
-var assistButton;
-var reboundButton;
-var homeScoreDiv;
-var awayScoreDiv;
-var foulButton;
-var foulDefence;
-var freeThrowButt;
-var howManyFT;
-var freeThrowShot;
-var turnoverButt;
-var defensiveReb;
-var missedAway;
-var blockedShot;
-var foulAway;
-var foulAwayPlayer;
-var howManyFTAway;
-var freeThrowAway;
-var turnoverPlayer;
+let selectedButton;
+let shotButton;
+let shotAwayButton;
+let assistButton;
+let reboundButton;
+let homeScoreDiv;
+let awayScoreDiv;
+let foulButton;
+let foulDefence;
+let freeThrowButt;
+let howManyFT;
+let freeThrowShot;
+let turnoverButt;
+let defensiveReb;
+let missedAway;
+let blockedShot;
+let foulAway;
+let foulAwayPlayer;
+let howManyFTAway;
+let freeThrowAway;
+let turnoverPlayer;
 
-var shotFrom; // Hvar leikmaður skaut
-var playerId; // Leikmaðurinn sem er valin sem skýtur
-var playerAssist; // Leikmaður sem gaf stoðsendingu
-var playerRebound; // Leikmaður sem tekur frákast
-var playerShoting;
-var playerBlock;
-var playerSteal;
+let shotFrom; // Hvar leikmaður skaut
+let playerId; // Leikmaðurinn sem er valin sem skýtur
+let playerAssist; // Leikmaður sem gaf stoðsendingu
+let playerRebound; // Leikmaður sem tekur frákast
+let playerShoting;
+let playerBlock;
+let playerSteal;
 
-var scoreHome = 0;
-var scoreAway = 0;
+let scoreHome = 0;
+let scoreAway = 0;
 
-var FTshots;
+let FTshots;
 
-var playerSelected = false;
+let playerSelected = false;
 
 function shot(val) {
    if (val == 1) { // Made
        shotButton.classList.add('hidden'); // Felur takkan
-       var allButtons = assistButton.querySelectorAll('.button');
-       for (var i = 0; i < allButtons.length; i++) {
-           var buttVal = allButtons[i].value;
+       const allButtons = assistButton.querySelectorAll('.button');
+       for (let i = 0; i < allButtons.length; i++) {
+           const buttVal = allButtons[i].value;
            if (buttVal == playerId){
                playerShoting = allButtons[i];
                allButtons[i].classList.add('hidden'); // Getur ekki gefið stoðsendingu á sjálfan sig
@@ -82,6 +82,8 @@ function showBlockedShot() {
 function block(player) {
     playerBlock = player;
     blockedShot.classList.add('hidden'); // Felur takkan
+    actionPost(playerBlock, "", false, "", "", "", "", "", "Block");
+
 }
 
 function showFoulAway() {
@@ -154,9 +156,11 @@ function foul(val) { // val == 1 defensive foul, val = 0 offensive foul
     if (val == 1) { // Shooting foul og non shooting foul
         foulButton.classList.add('hidden');
         foulDefence.classList.remove('hidden');
+
     } else {
-        //Bæta við villu og turnover á playerID
+        actionPost(playerId, "", false, "", "", "", "", "Turnover", "Foul");
         foulButton.classList.add('hidden');
+
     }
 }
 
@@ -167,7 +171,7 @@ function defensiveFoul(val) { // val == 1 shooting foul, val == 0 non shooting f
     } else {
         foulDefence.classList.add('hidden');
     }
-    //Bæta við villu á playerID í database
+    actionPost(playerId, "", false, "", "", "", "", "", "Foul");
 }
 
 function freeThrowType(val, home) {
@@ -195,8 +199,11 @@ function freeThrow(val, home) {
             if (val == 1) { // Made FT
                 addScore('FT', true);
                 FTshots -= 1;
+                actionPost(playerId,"FreeThrow",true,"","","","","","");
+
             } else if (val == 0) { // TODO bæta við i database fyrir home liðið playerID
                 FTshots -= 1;
+                actionPost(playerId,"FreeThrow",false,"","","","","","");
             }
         }
         if (FTshots == 0) {
@@ -223,6 +230,8 @@ function showTurnoverPlayer() {
     turnoverPlayer.classList.remove('hidden');
 }
 
+
+
 function showTurnoverButton() {
     if(playerSelected) { //
         turnoverButt.classList.remove('hidden');
@@ -233,15 +242,20 @@ function steal(player) {
     turnoverPlayer.classList.add('hidden');
     if (player) {
         playerSteal = player;
+        console.log(playerSteal);
+        actionPost(playerSteal, "", false, "", "", "", "", "", "Steal");
     } else { //TODO finna út hvernig er hægt að sjá hvaða player er selected
        // playerSteal = playerSelected;
+
     }
-    // Bæta við steal á playerID;
+
+
+
 }
 
 function turnover(val) {
     turnoverButt.classList.add('hidden');
-    //Bæta við turnover á playerID
+    actionPost(playerId, "", false, "", "", "", "", "Turnover", "");
 }
 
 function assist(player) {
@@ -249,7 +263,8 @@ function assist(player) {
     assistButton.classList.add('hidden'); // Felur takkan
     playerShoting.classList.remove('hidden');
     console.log('Assist by ' + player);
-    actionPost(playerId, shotFrom, true, playerAssist, "", "");
+    //playerId, from, isHit, assist, rebound, subIn, subOut, turnover, other
+    actionPost(playerId, shotFrom, true, playerAssist, "", "", "", "", "");
 }
 
 function rebound(player) {
@@ -259,7 +274,7 @@ function rebound(player) {
     reboundButton.classList.add('hidden'); // Felur takkan
     defensiveReb.classList.add('hidden');
     console.log('Rebound for ' + player);
-    actionPost(playerId, shotFrom, false, "", playerRebound, "");
+    actionPost(playerId, shotFrom, false, "", playerRebound, "", "", "", "");
 }
 
 function shotPos(pos) {
@@ -276,7 +291,7 @@ function selectedPlayer(val){
     playerId = val;
 }
 
- async function actionPost(playerId, from, isHit, assist, rebound, other){
+ async function actionPost(playerId, from, isHit, assist, rebound, subIn, subOut, turnover, other){
 
     const action = {
         "playerId": playerId,
@@ -284,6 +299,9 @@ function selectedPlayer(val){
         "isHit": isHit,
         "assist": assist,
         "rebound": rebound,
+        "subIn": subIn,
+        "subOut": subOut,
+        "turnover": turnover,
         "other": other,
 
     };
