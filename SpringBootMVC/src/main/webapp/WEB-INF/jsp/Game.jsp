@@ -32,13 +32,55 @@
 </div>
 
 <div class="game">
-    <div class="game__shot hidden">
+    <div class="game__twoButton shot hidden">
         <button type="button" value="1" onclick="shot(value)" class="button">Made shot</button>
         <button type="button" value="0" onclick="shot(value)" class="button">Missed shot</button>
-
     </div>
 
-    <div class="game__assist hidden">
+    <div class="game__twoButton turnover hidden">
+        <div>
+            <h3>Turnover:</h3>
+        </div>
+        <button type="button" value="1" onclick="turnover(value)" class="button">Steal for away team</button>
+        <button type="button" value="0" onclick="turnover(value)" class="button">Thrown out of bounds</button>
+        <button type="button" value="0" onclick="turnover(value)" class="button">Travel</button>
+    </div>
+
+    <div class="game__twoButton foul hidden">
+        <div>
+            <h3>Type of foul:</h3>
+        </div>
+        <button type="button" value="1" onclick="foul(value)" class="button">Defensive foul</button>
+        <button type="button" value="0" onclick="foul(value)" class="button">Offensive foul (turnover)</button>
+    </div>
+
+    <div class="game__twoButton foulDefence hidden">
+        <div>
+            <h3>Committed foul:</h3>
+        </div>
+        <button type="button" value="1" onclick="defensiveFoul(value)" class="button">Shooting foul</button>
+        <button type="button" value="0" onclick="defensiveFoul(value)" class="button">Non shooting foul</button>
+    </div>
+
+    <div class="game__twoButton howManyFT hidden">
+        <div>
+            <h3>Shooting foul:</h3>
+        </div>
+        <button type="button" value="1" onclick="freeThrowType(value, false)" class="button">1 Shot</button>
+        <button type="button" value="2" onclick="freeThrowType(value, false)" class="button">2 Shots</button>
+        <button type="button" value="3" onclick="freeThrowType(value, false)" class="button">3 Shots</button>
+        <button type="button" value="4" onclick="freeThrowType(value, false)" class="button">Basket made and 1 shot</button>
+    </div>
+
+    <div class="game__twoButton freeThrow hidden">
+        <div>
+            <h3>Free throw:</h3>
+        </div>
+        <button type="button" value="1" onclick="freeThrow(value, false)" class="button">Made</button>
+        <button type="button" value="0" onclick="freeThrow(value, false)" class="button">Missed</button>
+    </div>
+
+    <div class="game__players assist hidden">
         <div>
         <h3>Assist by:</h3>
         </div>
@@ -52,7 +94,7 @@
         </c:choose>
     </div>
 
-    <div class="game__rebound hidden">
+    <div class="game__players rebound hidden">
         <div>
             <h3>Rebound for:</h3>
         </div>
@@ -61,7 +103,7 @@
                 <c:forEach var="starter" items="${starters}">
                     <button value="${starter.id}" class="button" type="button" onclick="rebound(value)">${starter.name}</button>
                 </c:forEach>
-                <button value="0" class="button" type="button">None</button>
+                <button value="0" class="button" type="button" onclick="rebound(value)">None</button>
             </c:when>
         </c:choose>
     </div>
@@ -71,6 +113,9 @@
         <div class="funkyradio">
         <c:choose>
     <c:when test="${not empty starters}">
+        <div>
+            <h3>Home team</h3>
+        </div>
 
             <c:forEach var="starter" items="${starters}">
             <div class="funkyradio-info">
@@ -99,12 +144,111 @@
     <img src="<c:url value="/image/bballcourt.png"/>" usemap="#image-map">
 </div>
 
+    <div class="game__button">
+        <div>
+            <h3>Away team</h3>
+        </div>
+        <button class="button" onclick="showShotAway()">Made shot</button>
+        <button class="button" onclick="showMissedAway()">Missed shot</button>
+        <button class="button" onclick="showFoulAway()">Committed a foul</button>
+        <button class="button" onclick="showTurnoverPlayer()">Turnover</button>
+    </div>
+
+    <div class="game__players turnoverPlayer awayButton hidden">
+        <div>
+            <h3>Steal by:</h3>
+        </div>
+        <c:choose>
+            <c:when test="${not empty starters}">
+                <c:forEach var="starter" items="${starters}">
+                    <button value="${starter.id}" class="button" type="button" onclick="steal(value)">${starter.name}</button>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </div>
+
+    <div class="game__twoButton foulAway awayButton hidden">
+        <div>
+            <h3>Committed foul:</h3>
+        </div>
+        <button type="button" value="1" onclick="awayFoul(value)" class="button">Shooting foul</button>
+        <button type="button" value="0" onclick="awayFoul(value)" class="button">Non shooting foul</button>
+    </div>
+
+    <div class="game__players foulAwayPlayer awayButton hidden">
+        <div>
+            <h3>Shooting player:</h3>
+        </div>
+        <c:choose>
+            <c:when test="${not empty starters}">
+                <c:forEach var="starter" items="${starters}">
+                    <button value="${starter.id}" class="button" type="button" onclick="FTShotAway(value)">${starter.name}</button>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </div>
+
+    <div class="game__twoButton howManyFTAway awayButton hidden">
+        <div>
+            <h3>Shooting foul:</h3>
+        </div>
+        <button type="button" value="1" onclick="freeThrowType(value, true)" class="button">1 Shot</button>
+        <button type="button" value="2" onclick="freeThrowType(value, true)" class="button">2 Shots</button>
+        <button type="button" value="3" onclick="freeThrowType(value, true)" class="button">3 Shots</button>
+        <button type="button" value="4" onclick="freeThrowType(value, true)" class="button">Basket made and 1 shot</button>
+    </div>
+
+    <div class="game__twoButton freeThrowAway awayButton hidden">
+        <div>
+            <h3>Free throw:</h3>
+        </div>
+        <button type="button" value="1" onclick="freeThrow(value, true)" class="button">Made</button>
+        <button type="button" value="0" onclick="freeThrow(value, true)" class="button">Missed</button>
+    </div>
+
+    <div class="game__twoButton shotAway awayButton hidden">
+        <button type="button" value="Two" onclick="addScore(value, true)" class="button">Two point shot</button>
+        <button type="button" value="Three" onclick="addScore(value, true)" class="button">Three point shot</button>
+    </div>
+
+    <div class="game__twoButton missedAway awayButton hidden">
+        <button type="button" value="missed" onclick="defensiveRebound()" class="button">Missed shot</button>
+        <button type="button" value="blocked" onclick="showBlockedShot()" class="button">Shot blocked</button>
+    </div>
+
+    <div class="game__players defensiveRebound awayButton hidden">
+        <div>
+            <h3>Rebound for:</h3>
+        </div>
+        <c:choose>
+            <c:when test="${not empty starters}">
+                <c:forEach var="starter" items="${starters}">
+                    <button value="${starter.id}" class="button" type="button" onclick="rebound(value)">${starter.name}</button>
+                </c:forEach>
+                <button value="0" class="button" type="button" onclick="rebound(value)">Away team</button>
+            </c:when>
+        </c:choose>
+    </div>
+
+    <div class="game__players blockedShot awayButton hidden">
+        <div>
+            <h3>Blocked shot by:</h3>
+        </div>
+        <c:choose>
+            <c:when test="${not empty starters}">
+                <c:forEach var="starter" items="${starters}">
+                    <button value="${starter.id}" class="button" type="button" onclick="block(value)">${starter.name}</button>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </div>
+
 </div>
 
 <div class="other">
-    <button class="button">Foul</button>
-    <button class="button">Steal</button>
-    <button class="button">Turnover</button>
+    <button class="button" onclick="showFoulButton()">Foul</button>
+    <button class="button" value="steal" onclick="steal()">Steal</button>
+    <button class="button" value="turnover" onclick="showTurnoverButton()">Turnover</button>
 </div>
 
 <!--onclick="location.href = 'leftwingthree'"-->
