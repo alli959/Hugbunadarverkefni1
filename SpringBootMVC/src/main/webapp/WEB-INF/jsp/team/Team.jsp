@@ -15,7 +15,7 @@
 
     <header class="header">
         <div class="header__contents">
-            <input type="button" onclick="location.href = '/user'" value="<== Back To User"/>
+            <input type="button" onclick="location.href = '/user'" value="<== Back To Main Menu"/>
             <div class="header__menu">
                 <div class="header__menu__user">
                     <a class="header__menu__item">${msg}</a>

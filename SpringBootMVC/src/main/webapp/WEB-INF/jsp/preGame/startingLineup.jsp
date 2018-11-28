@@ -9,8 +9,19 @@
 <html lang="en">
 <head>
     <title>Line-up</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/startingLineup.css"/>"/>
 </head>
 <body>
+
+<header class="header">
+    <div class="header__contents">
+        <input type="button" onclick="location.href = '/user'" value="<== Back To Main Menu"/>
+        <div>
+            <input type="button" onclick="location.href = '/logout'" value="Logout" />
+        </div>
+    </div>
+</header>
+
 <h1>Bench</h1>
 
 <c:choose>
