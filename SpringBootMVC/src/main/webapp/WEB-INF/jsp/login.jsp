@@ -12,7 +12,6 @@
 </head>
 <body>
 
-<div style="color: red">${error}</div>
 <sf:form method="POST" modelAttribute="users" action="/login">
 
     <div align="center">

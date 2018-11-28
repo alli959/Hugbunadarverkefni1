@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+<input type="button" onclick="location.href = '/logout'" value="Logout" />
     <header class="header">
         <div class="header__contents">
             <h1 class="header__title">BBall StatTracker</h1>
@@ -30,7 +30,6 @@
                 </ul>
                 <div class="header__menu__user">
                     <a class="header__menu__item">${msg}</a>
-                    <input type="button" onclick="location.href = '/logout'" value="Logout" />
             </div>
         </div>
         </div>

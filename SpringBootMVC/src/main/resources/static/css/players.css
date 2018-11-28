@@ -9,10 +9,15 @@ html {
     font-size: 1.2em;
 }
 
+.header{
+    text-align: end;
+}
+
 .navBar{
     display: inline-flex;
     border: 2px solid;
-    background-color: #ff4000
+    background-color: #ff4000;
+    padding: 0;
 }
 
 .navBar li{
