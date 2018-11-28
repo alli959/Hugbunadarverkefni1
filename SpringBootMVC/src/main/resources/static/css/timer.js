@@ -42,14 +42,6 @@ function formatTime(time){
 var time = 0,
     elapsed = '0.0';
 
-if (sessionStorage.getItem('autosaveStop')){
-    this.stop = sessionStorage.getItem('autosaveStop');
-}
-
-if (sessionStorage.getItem('autosaveTime')){
-    countdownTimer = sessionStorage.getItem('autosaveTime');
-}
-
 document.addEventListener("DOMContentLoaded", function() {
     var timer = document.querySelector('.timer');
 
@@ -64,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function() {
         empty(timer);
         timer.appendChild(document.createTextNode(formatTime(countdownTimer)));
         countdownTimer--;
-        sessionStorage.setItem('autosaveTime', countdownTimer);
     }
 
 }, 1000);
