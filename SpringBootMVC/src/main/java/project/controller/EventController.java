@@ -248,6 +248,13 @@ public class EventController {
             player.setAssists(assist);
             player.setRebounds(rebound);
 
+            //check if player already exists
+
+            PlayerStats playerTest = playerStatsService.getByPlayerId(playerId);
+            if(playerTest != null){
+                player.setId(playerTest.getId());
+            }
+
             playerStatsService.save(player);
 
 
