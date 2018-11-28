@@ -54,6 +54,8 @@ public class MainController {
     public String stats(HttpSession session, Model model) {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null){
+            model.addAttribute("msg", loggedInUser.getName());
+
             model.addAttribute("players",playerStatsService.findAllReverseOrder());
             return "main/StatView";
         }

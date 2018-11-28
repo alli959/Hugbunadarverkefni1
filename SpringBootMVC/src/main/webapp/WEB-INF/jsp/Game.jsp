@@ -247,12 +247,11 @@
 
 <div class="other">
     <button class="button" onclick="showFoulButton()">Foul</button>
-    <button class="button" value="steal" onclick="steal()">Steal</button>
     <button class="button" value="turnover" onclick="showTurnoverButton()">Turnover</button>
 </div>
 
-<div class="ENDGAME">
-    <button  type="submit" onclick="location.href='/game/endgame'">End Game</button>
+<div class="other">
+    <button class="button end" type="submit" onclick="location.href='/game/endgame'">End Game</button>
 </div>
 
 <!--onclick="location.href = 'leftwingthree'"-->
