@@ -107,19 +107,16 @@ function addScore(pos, home) { // pos == Three, pos == FT
             scoreHome += 3;
             empty(homeScoreDiv);
             homeScoreDiv.appendChild(document.createTextNode(scoreHome));
-            shotAwayButton.classList.add('hidden');
             //Bæta við 3 stigum
         } else if (pos != 'FT') {
             scoreHome += 2;
             empty(homeScoreDiv);
             homeScoreDiv.appendChild(document.createTextNode(scoreHome));
-            shotAwayButton.classList.add('hidden');
             //Bæta við 2 stigum
         } else {
             scoreHome += 1;
             empty(homeScoreDiv);
             homeScoreDiv.appendChild(document.createTextNode(scoreHome));
-            shotAwayButton.classList.add('hidden');
             //Bæta við 1 stigi
         }
     } else {
@@ -127,16 +124,19 @@ function addScore(pos, home) { // pos == Three, pos == FT
             scoreAway += 3;
             empty(awayScoreDiv);
             awayScoreDiv.appendChild(document.createTextNode(scoreAway));
+            shotAwayButton.classList.add('hidden');
             //Bæta við 3 stigum
         } else if (pos != 'FT') {
             scoreAway += 2;
             empty(awayScoreDiv);
             awayScoreDiv.appendChild(document.createTextNode(scoreAway));
+            shotAwayButton.classList.add('hidden');
             //Bæta við 2 stigum
         } else {
             scoreAway += 1;
             empty(awayScoreDiv);
             awayScoreDiv.appendChild(document.createTextNode(scoreAway));
+            shotAwayButton.classList.add('hidden');
             //Bæta við 1 stigi
         }
     }

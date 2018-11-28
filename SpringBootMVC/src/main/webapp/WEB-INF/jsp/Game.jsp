@@ -207,8 +207,8 @@
     </div>
 
     <div class="game__twoButton shotAway awayButton hidden">
-        <button type="button" value="Two" onclick="addScore(value, true)" class="button">Two point shot</button>
-        <button type="button" value="Three" onclick="addScore(value, true)" class="button">Three point shot</button>
+        <button type="button" value="Two" onclick="addScore(value, false)" class="button">Two point shot</button>
+        <button type="button" value="Three" onclick="addScore(value, false)" class="button">Three point shot</button>
     </div>
 
     <div class="game__twoButton missedAway awayButton hidden">
