@@ -50,7 +50,7 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/user/stats/", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/stats", method = RequestMethod.GET)
     public String stats(HttpSession session, Model model) {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null){
@@ -105,7 +105,7 @@ public class MainController {
 
 
     @RequestMapping(value = "/user/pregame/{teamId}",  method = RequestMethod.GET)
-    public String teamGetFromName(@PathVariable Long teamId,
+    public String teamGetFromId(@PathVariable Long teamId,
                                   HttpSession session,
                                   Model model){
 
@@ -165,7 +165,7 @@ public class MainController {
 
 
     @RequestMapping(value = "/user/pregame/{teamId}/{playerId}",  method = RequestMethod.GET)
-    public String teamGetFromName(@PathVariable Long teamId,
+    public String playerGetFromId(@PathVariable Long teamId,
                                   @PathVariable Long playerId,
                                   HttpSession session,
                                   Model model){

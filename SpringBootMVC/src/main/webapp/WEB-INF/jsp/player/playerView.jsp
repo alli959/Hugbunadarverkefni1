@@ -28,8 +28,8 @@
     <ul class = "navBar">
         <li><h2><a href="/user/team">Create Team</a></h2></li>
         <li><h2><a href="/user/team/${teamId}">Team</a></h2></li>
-        <li><h2><a href="/user/team/${teamId}/dude">Add Players</a></h2></li>
-        <li><h2><a href="/user/team/${teamId}/dude/${name}">Players</a></h2></li>
+        <li><h2><a href="/user/team/${teamId}/player">Add Players</a></h2></li>
+        <li><h2><a href="/user/team/${teamId}/player/${name}">Players</a></h2></li>
     </ul>
 
     <h1> ${name} </h1>
