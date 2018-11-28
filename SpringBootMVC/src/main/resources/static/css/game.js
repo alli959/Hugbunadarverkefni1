@@ -28,30 +28,23 @@ function shot(val) {
        }
        assistButton.classList.remove('hidden');
        addScore(shotFrom);
-       submitData(val);
        console.log('Made basket by player ' + playerId);
+
    } else { // Missed
        shotButton.classList.add('hidden'); // Felur takkan
        reboundButton.classList.remove('hidden');
        console.log('Missed basket by player ' + playerId);
+
    }
 }
 
-function submitData(data) {
-    data.toString();
-    var http = new XMLHttpRequest();
-    http.responseType = 'json';
 
-    http.open("POST", "/request", true);
-    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    var params = "input=" + data;
-    http.send(params);
-    http.onload = function() {
-        http.responseText;
-    }
-}
 
 function addScore(pos) {
+
+
+
+
     if (pos.includes('Three')) {
         scoreHome += 3;
         empty(homeScoreDiv);
@@ -63,6 +56,8 @@ function addScore(pos) {
         homeScoreDiv.appendChild(document.createTextNode(scoreHome));
         //Bæta við 2 stigum
     }
+
+
 }
 
 function assist(player) {
@@ -70,37 +65,20 @@ function assist(player) {
     assistButton.classList.add('hidden'); // Felur takkan
     playerShoting.classList.remove('hidden');
     console.log('Assist by ' + player);
+    actionPost(playerId, shotFrom, true, playerAssist, "", "");
 }
 
 function rebound(player) {
     playerRebound = player;
     reboundButton.classList.add('hidden'); // Felur takkan
     console.log('Rebound for ' + player);
+    actionPost(playerId, shotFrom, false, "", playerRebound, "");
 }
 
 function shotPos(pos) {
     if(playerSelected) {
         shotButton.classList.remove('hidden'); // Birtir takkan
-        $.ajax({
-            type : "POST",
-            contentType : "application/json",
-            url : "/game",
-            data : JSON.stringify(pos),
-            dataType : 'json',
-            timeout : 100000,
-            success : function(pos) {
-                console.log("SUCCESS: ", pos);
-                display(pos);
-                alert(response);
-            },
-            error : function(e) {
-                console.log("ERROR: ", e);
-                display(e);
-            },
-            done : function(e) {
-                console.log("DONE");
-            }
-        });
+
     }
 
     shotFrom = pos;
@@ -110,6 +88,43 @@ function selectedPlayer(val){
     playerSelected = true;
     playerId = val;
 }
+
+ async function actionPost(playerId, from, isHit, assist, rebound, other){
+
+    const action = {
+        "playerId": playerId,
+        "from": from,
+        "isHit": isHit,
+        "assist": assist,
+        "rebound": rebound,
+        "other": other,
+
+    };
+
+
+
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : "/game",
+        data : JSON.stringify(action),
+        dataType : 'json',
+        timeout : 100000,
+        success : function(action) {
+            console.log("SUCCESS: ", action);
+            display(action);
+            alert(response);
+        },
+        error : function(e) {
+            console.log("ERROR: ", e);
+        },
+        done : function(e) {
+            console.log("DONE");
+        }
+    });
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     selectedButton = document.getElementsByClassName('funktradio-info');

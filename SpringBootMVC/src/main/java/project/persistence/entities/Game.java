@@ -1,17 +1,7 @@
 package project.persistence.entities;
 
 
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.SortDefault;
-
 import javax.persistence.*;
-import javax.validation.Validator;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-
-import java.util.List;
 
 
 import static javax.persistence.GenerationType.*;
@@ -27,8 +17,14 @@ public class Game {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private Long playerId;
     private boolean isBench;
+    private Long turnover;
+    private Long block;
+    private Long steal;
+    private Long foul;
+    private Long assist;
+    private Long rebound;
+    private Long playerId;
     private Long LeftWingThreeHit;
     private Long LeftWingThreeMiss;
     private Long RightWingThreeHit;
@@ -56,15 +52,21 @@ public class Game {
 
     }
 
-    public Game(Long id, Long playerId, boolean isBench, Long  LeftWingThreeHit, Long LeftWingThreeMiss,
-                Long RightWingThreeHit, Long RightWingThreeMiss, Long TopThreeHit , Long TopThreeMiss ,
+    public Game(Long id, Long turnover, Long playerId, boolean isBench, Long block, Long steal, Long foul, Long assist, Long rebound, Long LeftWingThreeHit, Long LeftWingThreeMiss,
+                Long RightWingThreeHit, Long RightWingThreeMiss, Long TopThreeHit, Long TopThreeMiss,
                 Long LeftCornerThreeHit, Long LeftCornerThreeMiss, Long RightCornerThreeHit, Long RightCornerThreeMiss,
                 Long LeftShortCornerHit, Long LeftShortCornerMiss, Long RightShortCornerHit, Long RightShortCornerMiss, Long LeftTopKeyHit,
                 Long LeftTopKeyMiss, Long RightTopKeyHit, Long RightTopKeyMiss, Long TopKeyHit, Long TopKeyMiss, Long LayUpHit, Long LayUpMiss) {
 
         this.id = id;
+        this.turnover = turnover;
         this.playerId = playerId;
         this.isBench = isBench;
+        this.block = block;
+        this.steal = steal;
+        this.foul = foul;
+        this.assist = assist;
+        this.rebound = rebound;
         this.LeftWingThreeHit = LeftWingThreeHit;
         this.LeftWingThreeMiss = LeftWingThreeMiss;
         this.RightWingThreeHit = RightWingThreeHit;
@@ -103,91 +105,111 @@ public class Game {
     }
 
     public Long getLeftWingThreeHit() {
-        return LeftWingThreeHit;
+        return LeftWingThreeHit != null ? LeftWingThreeHit:0;
     }
 
     public Long getLeftWingThreeMiss() {
-        return LeftWingThreeMiss;
+        return LeftWingThreeMiss != null ? LeftWingThreeMiss:0;
     }
 
     public Long getRightWingThreeHit() {
-        return RightWingThreeHit;
+       return RightWingThreeHit != null ? RightWingThreeHit:0;
+
     }
 
     public Long getRightWingThreeMiss() {
-        return RightWingThreeMiss;
+        return RightWingThreeMiss != null ? RightWingThreeMiss:0;
+
     }
 
     public Long getTopThreeHit() {
-        return TopThreeHit;
+       return TopThreeHit != null ? TopThreeHit:0;
+
     }
 
     public Long getTopThreeMiss() {
-        return TopThreeMiss;
+      return TopThreeMiss != null ? TopThreeMiss:0;
+
     }
 
     public Long getLeftCornerThreeHit() {
-        return LeftCornerThreeHit;
+        return LeftCornerThreeHit != null ? LeftCornerThreeHit:0;
+
     }
 
     public Long getLeftCornerThreeMiss() {
-        return LeftCornerThreeMiss;
+        return LeftCornerThreeMiss != null ? LeftCornerThreeMiss:0;
+
     }
 
     public Long getRightCornerThreeHit() {
-        return RightCornerThreeHit;
+        return RightCornerThreeHit != null ? RightCornerThreeHit:0;
+
     }
 
     public Long getRightCornerThreeMiss() {
-        return RightCornerThreeMiss;
+        return RightCornerThreeMiss != null ? RightCornerThreeMiss:0;
+
     }
 
     public Long getLeftShortCornerHit() {
-        return LeftShortCornerHit;
+        return LeftShortCornerHit != null ? LeftShortCornerHit:0;
+
     }
 
     public Long getLeftShortCornerMiss() {
-        return LeftShortCornerMiss;
+        return LeftShortCornerMiss != null ? LeftShortCornerMiss:0;
+
     }
 
     public Long getRightShortCornerHit() {
-        return RightShortCornerHit;
+        return RightShortCornerHit != null ? RightShortCornerHit:0;
+
     }
 
     public Long getRightShortCornerMiss() {
-        return RightShortCornerMiss;
+        return RightShortCornerMiss != null ? RightShortCornerMiss:0;
+
     }
 
     public Long getLeftTopKeyHit() {
-        return LeftTopKeyHit;
+        return LeftTopKeyHit != null ? LeftTopKeyHit:0;
+
     }
 
     public Long getLeftTopKeyMiss() {
-        return LeftTopKeyMiss;
+        return LeftTopKeyMiss != null ? LeftTopKeyMiss:0;
+
     }
 
     public Long getRightTopKeyHit() {
-        return RightTopKeyHit;
+        return RightTopKeyHit != null ? RightTopKeyHit:0;
+
     }
 
     public Long getRightTopKeyMiss() {
-        return RightTopKeyMiss;
+        return RightTopKeyMiss != null ? RightTopKeyMiss:0;
+
     }
 
     public Long getTopKeyHit() {
-        return TopKeyHit;
+        return TopKeyHit != null ? TopKeyHit:0;
+
     }
 
     public Long getTopKeyMiss() {
-        return TopKeyMiss;
+        return TopKeyMiss != null ? TopKeyMiss:0;
+
     }
 
     public Long getLayUpHit() {
-        return LayUpHit;
+        return LayUpHit != null ? LayUpHit:0;
+
     }
 
     public Long getLayUpMiss() {
-        return LayUpMiss;
+        return LayUpMiss != null ? LayUpMiss:0;
+
     }
 
     public void setId(Long id) {
@@ -288,5 +310,57 @@ public class Game {
 
     public void setLayUpMiss(Long layUpMiss) {
         LayUpMiss = layUpMiss;
+    }
+
+    public Long getTurnover() {
+        return turnover != null ? turnover:0;
+    }
+
+    public void setTurnover(Long turnover) {
+        this.turnover = turnover;
+    }
+
+    public Long getBlock() {
+        return block != null ? block:0;
+
+    }
+
+    public void setBlock(Long block) {
+        this.block = block;
+    }
+
+    public Long getSteal() {
+        return steal != null ? steal:0;
+
+    }
+
+    public void setSteal(Long steal) {
+        this.steal = steal;
+    }
+
+    public Long getFoul() {
+        return foul != null ? foul:0;
+
+    }
+
+    public void setFoul(Long foul) {
+        this.foul = foul;
+    }
+
+    public Long getAssist() {
+        return assist != null ? assist:0;
+
+    }
+
+    public void setAssist(Long assist) {
+        this.assist = assist;
+    }
+
+    public Long getRebound() {
+        return rebound != null ? rebound:0;
+    }
+
+    public void setRebound(Long rebound) {
+        this.rebound = rebound;
     }
 }
