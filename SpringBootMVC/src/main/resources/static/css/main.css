@@ -51,6 +51,12 @@ html {
     margin-bottom: 10px;
 }
 
+.header__menu__top {
+    color: #000;
+    text-decoration: none;
+    transition: 300ms ease-in-out;
+}
+
 .header__menu__item {
     margin: 20px;
     color: #000;
