@@ -7,6 +7,7 @@ import project.persistence.entities.PlayerStats;
 import project.persistence.repositories.PlayerStatsRepository;
 import project.service.PlayerStatsService;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,5 +73,12 @@ public class PlayerStatsServiceImplementation implements PlayerStatsService {
     @Override
     public PlayerStats getByPlayerId(Long playerId) {
         return repository.getByPlayerId(playerId);
+    }
+
+    @Override
+    public List<PlayerStats> getByTeamId(Long teamId) {
+        List<PlayerStats> players = repository.getByTeamId(teamId);
+        Collections.reverse(players);
+        return players;
     }
 }

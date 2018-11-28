@@ -84,6 +84,8 @@ public interface PlayerStatsService {
 
     PlayerStats getByPlayerId(Long playerId);
 
+    List<PlayerStats> getByTeamId(Long teamId);
+
 
 
 }

@@ -9,7 +9,7 @@ public class PlayerStats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Long teamId;
     private Long playerId;
     private Long points;
     private Long rebounds;
@@ -19,6 +19,8 @@ public class PlayerStats {
     private Long fouls;
     private Long threePointHit;
     private Long threePointMiss;
+    private Long twoPointHit;
+    private Long twoPointMiss;
     private Long freeThrowHit;
     private Long freeThrowMiss;
     private String twoPointer;
@@ -29,8 +31,9 @@ public class PlayerStats {
     public PlayerStats() {
     }
 
-    public PlayerStats(Long id, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long threePointHit, Long threePointMiss, Long freeThrowHit, Long freeThrowMiss, String twoPointer, String threePointer, String freeThrow) {
+    public PlayerStats(Long id, Long teamId, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long threePointHit, Long threePointMiss, Long twoPointHit, Long twoPointMiss, Long freeThrowHit, Long freeThrowMiss, String twoPointer, String threePointer, String freeThrow) {
         this.id = id;
+        this.teamId = teamId;
         this.playerId = playerId;
         this.points = points;
         this.rebounds = rebounds;
@@ -40,6 +43,8 @@ public class PlayerStats {
         this.fouls = fouls;
         this.threePointHit = threePointHit;
         this.threePointMiss = threePointMiss;
+        this.twoPointHit = twoPointHit;
+        this.twoPointMiss = twoPointMiss;
         this.freeThrowHit = freeThrowHit;
         this.freeThrowMiss = freeThrowMiss;
         this.twoPointer = twoPointer;
@@ -175,5 +180,30 @@ public class PlayerStats {
 
     public void setFreeThrowMiss(Long freeThrowMiss) {
         this.freeThrowMiss = freeThrowMiss;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public Long getTwoPointHit() {
+        return twoPointHit != null ? twoPointHit:0;
+    }
+
+    public void setTwoPointHit(Long twoPointHit) {
+        this.twoPointHit = twoPointHit;
+    }
+
+    public Long getTwoPointMiss() {
+        return twoPointMiss != null ? twoPointMiss:0;
+
+    }
+
+    public void setTwoPointMiss(Long twoPointMiss) {
+        this.twoPointMiss = twoPointMiss;
     }
 }

@@ -51,10 +51,24 @@ public class MainController {
     }
 
     @RequestMapping(value = "/user/stats", method = RequestMethod.GET)
-    public String stats(HttpSession session, Model model) {
+    public String teamstats(HttpSession session, Model model) {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null){
-            model.addAttribute("players",playerStatsService.findAllReverseOrder());
+            System.out.println(teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
+            model.addAttribute("teams",teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
+            return "main/TeamStatView";
+        }
+        session.setAttribute("error", "User must be logged in!");
+
+        return "redirect:/login";
+
+    }
+
+    @RequestMapping(value = "/user/stats/{teamId}", method = RequestMethod.GET)
+    public String stats(HttpSession session, Model model, @PathVariable Long teamId) {
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null){
+            model.addAttribute("players",playerStatsService.getByTeamId(teamId));
             return "main/StatView";
         }
         session.setAttribute("error", "User must be logged in!");

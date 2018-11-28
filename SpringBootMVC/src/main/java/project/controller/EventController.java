@@ -226,7 +226,7 @@ public class EventController {
             String threeHitPercent = Long.toString(threeHitPercentF) + '%';
             String twoHitPercent = Long.toString(twoHitPercentF) + '%';
 
-
+            Long teamId = (Long) session.getAttribute("teamId");
             Long playerId = players.get(i).getPlayerId();
             Long turnover = players.get(i).getTurnover();
             Long block = players.get(i).getBlock();
@@ -236,6 +236,7 @@ public class EventController {
             Long rebound = players.get(i).getRebound();
 
             PlayerStats player = new PlayerStats();
+            player.setTeamId(teamId);
             player.setThreePointHit(threeHit);
             player.setThreePointMiss(threeMiss);
             player.setThreePointer(threeHitPercent);
