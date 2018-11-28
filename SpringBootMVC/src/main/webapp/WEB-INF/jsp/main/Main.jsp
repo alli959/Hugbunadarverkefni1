@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<a class="header__menu__top">${msg}</a>
 <input type="button" onclick="location.href = '/logout'" value="Logout" />
     <header class="header">
         <div class="header__contents">
@@ -28,9 +29,6 @@
                         <a class="header__menu__item" href="">Stats</a>
                     </li>
                 </ul>
-                <div class="header__menu__user">
-                    <a class="header__menu__item">${msg}</a>
-            </div>
         </div>
         </div>
     </header>

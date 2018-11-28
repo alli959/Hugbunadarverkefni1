@@ -64,7 +64,6 @@
                         <tr>
 
                             <td><a href="/user/team/${team.id}">${team.name}</a></td>
-                            <td><a href="/user/team/${team.id}/delete">x</a></td>
 
                         </tr>
                     </c:forEach>
