@@ -77,33 +77,26 @@ html {
     justify-content: center;
 }
 .button {
-    border: 2px solid black;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
-.game__shot {
-     display: flex;
-    flex-direction: column;
-     justify-content: center;
-     margin-right: 20px;
-}
-
-.game__assist {
+.game__twoButton {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 20px;
 }
 
-.game__rebound {
+.game__players {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 20px;
-
 }
 
 .hidden {
@@ -124,11 +117,15 @@ html {
 img {
     zoom: 0.8;
     margin-left: 50px;
+    margin-right: 50px;
 }
 
 .other {
     display: inline-flex;
     width: 100%;
     justify-content: center;
-    margin-bottom: 20px;
+}
+
+.awayButton {
+    margin-left: 20px;
 }
