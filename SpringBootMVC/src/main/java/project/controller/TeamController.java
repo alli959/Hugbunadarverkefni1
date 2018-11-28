@@ -94,6 +94,7 @@ public class TeamController {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
 
+            model.addAttribute("msg", loggedInUser.getName());
 
             Team team = teamService.findOne(teamId);
 

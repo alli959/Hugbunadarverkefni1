@@ -15,6 +15,7 @@
     <div class="header__contents">
         <input type="button" onclick="location.href = '/user'" value="<== Back To Main Menu"/>
             <div>
+                <a class="header__menu__item">${msg}</a>
                 <input type="button" onclick="location.href = '/logout'" value="Logout" />
             </div>
     </div>
