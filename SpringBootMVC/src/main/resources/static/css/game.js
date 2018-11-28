@@ -47,14 +47,19 @@ function shot(val) {
            }
        }
        assistButton.classList.remove('hidden');
+
        addScore(shotFrom, true);
+
        console.log('Made basket by player ' + playerId);
+
    } else { // Missed
        shotButton.classList.add('hidden'); // Felur takkan
        reboundButton.classList.remove('hidden');
        console.log('Missed basket by player ' + playerId);
+
    }
 }
+
 
 function showShotAway() {
     shotAwayButton.classList.remove('hidden');
@@ -141,6 +146,8 @@ function showFoulButton() {
     if(playerSelected) { //
         foulButton.classList.remove('hidden');
     }
+
+
 }
 
 function foul(val) { // val == 1 defensive foul, val = 0 offensive foul
@@ -242,6 +249,7 @@ function assist(player) {
     assistButton.classList.add('hidden'); // Felur takkan
     playerShoting.classList.remove('hidden');
     console.log('Assist by ' + player);
+    actionPost(playerId, shotFrom, true, playerAssist, "", "");
 }
 
 function rebound(player) {
@@ -251,12 +259,15 @@ function rebound(player) {
     reboundButton.classList.add('hidden'); // Felur takkan
     defensiveReb.classList.add('hidden');
     console.log('Rebound for ' + player);
+    actionPost(playerId, shotFrom, false, "", playerRebound, "");
 }
 
 function shotPos(pos) {
     if(playerSelected) {
         shotButton.classList.remove('hidden'); // Birtir takkan
+
     }
+
     shotFrom = pos;
 }
 
@@ -264,6 +275,43 @@ function selectedPlayer(val){
     playerSelected = true;
     playerId = val;
 }
+
+ async function actionPost(playerId, from, isHit, assist, rebound, other){
+
+    const action = {
+        "playerId": playerId,
+        "from": from,
+        "isHit": isHit,
+        "assist": assist,
+        "rebound": rebound,
+        "other": other,
+
+    };
+
+
+
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : "/game",
+        data : JSON.stringify(action),
+        dataType : 'json',
+        timeout : 100000,
+        success : function(action) {
+            console.log("SUCCESS: ", action);
+            display(action);
+            alert(response);
+        },
+        error : function(e) {
+            console.log("ERROR: ", e);
+        },
+        done : function(e) {
+            console.log("DONE");
+        }
+    });
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     selectedButton = document.getElementsByClassName('funktradio-info');
