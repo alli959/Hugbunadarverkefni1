@@ -7,6 +7,7 @@ import project.persistence.repositories.GameRepository;
 import project.persistence.repositories.PlayerRepository;
 import project.service.GameService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -72,6 +73,26 @@ public class GameServiceImplementation implements  GameService {
     @Override
     public List<Game> getPlaying() {
         return repository.getPlaying();
+    }
+
+    @Override
+    public List<Long> getThreeHit(Long playerId) {
+        return repository.getThreeHit(playerId);
+    }
+
+    @Override
+    public List<Long> getThreeMiss(Long playerId) {
+        return repository.getThreeMiss(playerId);
+    }
+
+    @Override
+    public List<Long> getTwoHit(Long playerId) {
+        return repository.getTwoHit(playerId);
+    }
+
+    @Override
+    public List<Long> getTwoMiss(Long playerId) {
+        return repository.getTwoMiss(playerId);
     }
 
 

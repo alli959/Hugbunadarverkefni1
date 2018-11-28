@@ -5,13 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.Player;
-import project.persistence.entities.Team;
 import project.persistence.entities.Users;
-import project.service.TeamService;
+import project.persistence.entities.PlayerStats;
+import project.service.PlayerStatsService;
 import project.service.PlayerService;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 @Controller
@@ -19,9 +18,12 @@ public class PlayerController {
 
     private PlayerService playerService;
 
+    private PlayerStatsService playerStatsService;
+
     @Autowired
-    public PlayerController(PlayerService playerService){
+    public PlayerController(PlayerService playerService, PlayerStatsService playerStatsService){
         this.playerService = playerService;
+        this.playerStatsService = playerStatsService;
     };
 
 
@@ -93,10 +95,13 @@ public class PlayerController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
+            PlayerStats player = playerStatsService.getByPlayerId(playerId);
             model.addAttribute("msg", loggedInUser.getName());
             model.addAttribute("teamId", teamId);
 
             model.addAttribute("playerId", playerId);
+
+            model.addAttribute("players", playerStatsService.findAllReverseOrder());
 
 
             return "player/playerView";
@@ -105,6 +110,9 @@ public class PlayerController {
 
         return "redirect:/login";
     }
+
+
+
 }
 
 

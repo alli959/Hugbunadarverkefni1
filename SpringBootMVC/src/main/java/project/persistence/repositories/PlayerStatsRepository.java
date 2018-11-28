@@ -7,6 +7,15 @@ import project.persistence.entities.PlayerStats;
 
 import java.util.List;
 
-public interface PlayerStatsRepository {
+public interface PlayerStatsRepository extends JpaRepository<PlayerStats, Long> {
+
+    PlayerStats save(PlayerStats playerstats);
+
+    List<PlayerStats> findAll();
+
+
+    @Query(value = "SELECT p FROM PlayerStats p WHERE playerId = ?1 ")
+    PlayerStats getByPlayerId(Long playerId);
+
     
 }

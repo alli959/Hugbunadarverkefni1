@@ -8,14 +8,12 @@ import project.persistence.entities.Game;
 import project.persistence.entities.Users;
 import project.service.GameService;
 import project.service.UserService;
-import project.persistence.entities.Team;
+import project.service.PlayerStatsService;
 import project.service.TeamService;
 import project.persistence.entities.Player;
 import project.service.PlayerService;
 
-import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +24,16 @@ public class MainController {
     private TeamService teamService;
     private PlayerService playerService;
     private GameService gameService;
+    private PlayerStatsService playerStatsService;
 
 
     @Autowired
-    public MainController(UserService userService, TeamService teamService, PlayerService playerService, GameService gameService){
+    public MainController(UserService userService, TeamService teamService, PlayerService playerService, GameService gameService, PlayerStatsService playerStatsService){
         this.userService = userService;
         this.teamService = teamService;
         this.playerService = playerService;
         this.gameService = gameService;
+        this.playerStatsService = playerStatsService;
     }
 
 
@@ -49,6 +49,21 @@ public class MainController {
         return "redirect:/login";
 
     }
+
+    @RequestMapping(value = "/user/stats/", method = RequestMethod.GET)
+    public String stats(HttpSession session, Model model) {
+        Users loggedInUser = (Users)session.getAttribute("login");
+        if(loggedInUser != null){
+            model.addAttribute("players",playerStatsService.findAllReverseOrder());
+            return "main/StatView";
+        }
+        session.setAttribute("error", "User must be logged in!");
+
+        return "redirect:/login";
+
+    }
+
+
 
 
 

@@ -26,7 +26,7 @@
                         <a class="header__menu__item" href="<c:url value="/user/team"/>">Team</a>
                     </li>
                     <li>
-                        <a class="header__menu__item" href="">Stats</a>
+                        <a class="header__menu__item" href="<c:url value="/user/stats"/>">Stats</a>
                     </li>
                 </ul>
         </div>

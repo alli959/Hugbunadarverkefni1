@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.Game;
 import project.persistence.entities.Player;
-import project.persistence.entities.Users;
 import project.persistence.entities.PlayerStats;
+import project.persistence.entities.Users;
 import project.service.*;
 
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class EventController {
@@ -32,17 +31,19 @@ public class EventController {
     private TeamService teamService;
     private PlayerService playerService;
     private GameService gameService;
+    private PlayerStatsService playerStatsService;
 
 
 
     // Dependency Injection
     @Autowired
-    public EventController(StringManipulationService stringService, UserService userService, TeamService teamService, PlayerService playerService, GameService gameService) {
+    public EventController(StringManipulationService stringService, UserService userService, TeamService teamService, PlayerService playerService, GameService gameService, PlayerStatsService playerStatsService) {
         this.stringService = stringService;
         this.userService = userService;
         this.teamService = teamService;
         this.playerService = playerService;
         this.gameService = gameService;
+        this.playerStatsService = playerStatsService;
     }
 
 
@@ -187,8 +188,130 @@ public class EventController {
     @RequestMapping(value = "/game/endgame", method = RequestMethod.GET)
     public String endgame(HttpSession session, Model model) {
 
-        return "redirect:/user";
+        List<Game> players = gameService.findAllReverseOrder();
+        Game test = players.get(0);
+
+
+
+        for(int i = 0; i<players.size(); i++){
+            Long threeHit = getThreeHit(players.get(i).getPlayerId());
+            Long threeMiss = getThreeMiss(players.get(i).getPlayerId());
+            Long totalThreeAttemts = threeHit + threeMiss;
+            Long twoHit = getTwoHit(players.get(i).getPlayerId());
+            Long twoMiss = getTwoMiss(players.get(i).getPlayerId());
+            Long totalTwoAttemts = twoHit + twoMiss;
+
+
+            Long threeHitPercentF = Long.parseLong(String.valueOf(0));
+            Long twoHitPercentF = Long.parseLong(String.valueOf(0));
+
+            if(threeHit != 0){
+                threeHitPercentF = (Long) (threeHit/totalThreeAttemts)*100;
+            }
+            if(twoHit != 0){
+                twoHitPercentF = (Long) (twoHit/totalTwoAttemts)*100;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            String threeHitPercent = Long.toString(threeHitPercentF) + '%';
+            String twoHitPercent = Long.toString(twoHitPercentF) + '%';
+
+
+            Long playerId = players.get(i).getPlayerId();
+            Long turnover = players.get(i).getTurnover();
+            Long block = players.get(i).getBlock();
+            Long steal = players.get(i).getSteal();
+            Long foul = players.get(i).getFoul();
+            Long assist = players.get(i).getAssist();
+            Long rebound = players.get(i).getRebound();
+
+            PlayerStats player = new PlayerStats();
+            player.setThreePointHit(threeHit);
+            player.setThreePointMiss(threeMiss);
+            player.setThreePointer(threeHitPercent);
+            player.setTwoPointer(twoHitPercent);
+            player.setPlayerId(playerId);
+            player.setTurnovers(turnover);
+            player.setBlocks(block);
+            player.setFouls(foul);
+            player.setAssists(assist);
+            player.setRebounds(rebound);
+
+            playerStatsService.save(player);
+
+
+        }
+        return "redirect:/user/stats";
     }
+
+
+
+
+
+    /*-------HELPER FUNCTIONS DON'T LOOK --------- */
+
+    public Long getThreeHit(Long playerId){
+        Game game = gameService.findByPlayerId(playerId);
+        long value = 0;
+        value += game.getLeftWingThreeHit();
+        value += game.getRightWingThreeHit();
+        value += game.getTopThreeHit();
+        value += game.getLeftCornerThreeHit();
+        value += game.getRightCornerThreeHit();
+        return value;
+
+    }
+
+
+
+    public Long getThreeMiss(Long playerId){
+        Game game = gameService.findByPlayerId(playerId);
+        long value = 0;
+        value += game.getLeftWingThreeMiss();
+        value += game.getRightWingThreeMiss();
+        value += game.getTopThreeMiss();
+        value += game.getLeftCornerThreeMiss();
+        value += game.getRightCornerThreeMiss();
+        return value;
+
+    }
+
+    public Long getTwoHit(Long playerId){
+        Game game = gameService.findByPlayerId(playerId);
+        long value = 0;
+        value += game.getLeftShortCornerHit();
+        value += game.getRightShortCornerHit();
+        value += game.getLeftTopKeyHit();
+        value += game.getRightTopKeyHit();
+        value += game.getTopKeyHit();
+        value += game.getLayUpHit();
+
+        return value;
+    }
+
+    public Long getTwoMiss(Long playerId){
+        Game game = gameService.findByPlayerId(playerId);
+        long value = 0;
+        value += game.getLeftShortCornerMiss();
+        value += game.getRightShortCornerMiss();
+        value += game.getLeftTopKeyMiss();
+        value += game.getRightTopKeyMiss();
+        value += game.getTopKeyMiss();
+        value += game.getLayUpMiss();
+
+        return value;
+    }
+
 
 }
 

@@ -10,10 +10,17 @@ import project.service.PlayerStatsService;
 import java.util.Collections;
 import java.util.List;
 
+@Service
 public class PlayerStatsServiceImplementation implements PlayerStatsService {
+
+    PlayerStatsRepository repository;
+
+    @Autowired
+    public PlayerStatsServiceImplementation(PlayerStatsRepository repository){ this.repository = repository;}
+
     @Override
-    public PlayerStats save(PlayerStats player) {
-        return null;
+    public PlayerStats save(PlayerStats playerStats) {
+        return repository.save(playerStats);
     }
 
     @Override
@@ -23,12 +30,18 @@ public class PlayerStatsServiceImplementation implements PlayerStatsService {
 
     @Override
     public List<PlayerStats> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public List<PlayerStats> findAllReverseOrder() {
-        return null;
+        // Get all the Postit notes
+        List<PlayerStats> player = repository.findAll();
+
+        // Reverse the list
+        Collections.reverse(player);
+
+        return player;
     }
 
     @Override
@@ -54,5 +67,10 @@ public class PlayerStatsServiceImplementation implements PlayerStatsService {
     @Override
     public List<PlayerStats> findPlayersInTeamReverseOrder(Long teamId) {
         return null;
+    }
+
+    @Override
+    public PlayerStats getByPlayerId(Long playerId) {
+        return repository.getByPlayerId(playerId);
     }
 }
