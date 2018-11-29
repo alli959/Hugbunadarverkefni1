@@ -86,6 +86,7 @@ body{
     justify-content: center;
 }
 .button {
+    cursor: pointer;
     border-radius: 3px;
     border: 1px solid #D1D3D4;
     padding: 16px 32px;
@@ -137,4 +138,8 @@ img {
 
 .awayButton {
     margin-left: 20px;
+}
+
+.end {
+    background-color: red;
 }
