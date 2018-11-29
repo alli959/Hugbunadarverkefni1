@@ -21,6 +21,12 @@ h1{
     margin-bottom: 1em;
 }
 
+.allPlayers{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 .header{
     text-align: end;
 }
