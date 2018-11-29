@@ -6,9 +6,22 @@
 <html lang="en">
 <head>
     <title>TeamSelect</title>
-
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/teamStatView.css"/>"/>
 </head>
 <body>
+
+<header class="header">
+    <div class="header__contents">
+        <input type="button" onclick="location.href = '/user'" value="<== Back To Main Menu"/>
+        <div class="header__menu">
+            <div class="header__menu__user">
+                <a class="header__menu__item">${msg}</a>
+                <input type="button" onclick="location.href = '/logout'" value="Logout" />
+            </div>
+        </div>
+    </div>
+</header>
+
 <c:choose>
     <c:when test="${not empty teams}">
 
