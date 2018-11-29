@@ -236,8 +236,8 @@ public class EventController {
             Long foul = players.get(i).getFoul();
             Long assist = players.get(i).getAssist();
             Long rebound = players.get(i).getRebound();
-            Long playerPoints = freeThrowHit + threeHit + twoHit;
-
+            Long playerPoints = freeThrowHit + (threeHit*(Long.parseLong(String.valueOf(3)))) + (twoHit*(Long.parseLong(String.valueOf(2))));
+            System.out.println("this is 3 pointer " + threeHit + " this is 2 pointer " + twoHit + " this is free throw hit " + freeThrowHit + " total " + playerPoints );
             PlayerStats player = new PlayerStats();
             player.setPlayerName(playerService.findOne(playerId).getName());
             player.setSteals(player.getSteals() + steal);
