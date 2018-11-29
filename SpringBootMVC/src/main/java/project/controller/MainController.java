@@ -54,6 +54,9 @@ public class MainController {
     public String teamstats(HttpSession session, Model model) {
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null){
+
+            model.addAttribute("msg", loggedInUser.getName());
+
             System.out.println(teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
             model.addAttribute("teams",teamService.findAllReverseOrderOwnedByUser(loggedInUser.getUserName()));
             return "main/TeamStatView";
