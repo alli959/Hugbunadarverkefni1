@@ -89,8 +89,9 @@
 </c:choose>
 
 
-
-<input type="button" onclick="location.href = '/game'" VALUE="Start Game"/>
+<div class="main">
+<button type="button" onclick="location.href = '/game'">Start game</button>
+</div>
 
 <div style="color: red">${error}</div>
 
