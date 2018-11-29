@@ -227,6 +227,8 @@ public class EventController {
             String twoHitPercent = Long.toString(twoHitPercentF) + '%';
 
             Long teamId = (Long) session.getAttribute("teamId");
+            Long freeThrowHit = players.get(i).getFreeThrowHit();
+            Long freeThrowMiss = players.get(i).getFreeThrowMiss();
             Long playerId = players.get(i).getPlayerId();
             Long turnover = players.get(i).getTurnover();
             Long block = players.get(i).getBlock();
@@ -236,17 +238,24 @@ public class EventController {
             Long rebound = players.get(i).getRebound();
 
             PlayerStats player = new PlayerStats();
+            player.setPlayerName(playerService.findOne(playerId).getName());
+            player.setSteals(player.getSteals() + steal);
             player.setTeamId(teamId);
-            player.setThreePointHit(threeHit);
-            player.setThreePointMiss(threeMiss);
+            player.setThreePointHit(player.getThreePointHit() + threeHit);
+            player.setThreePointMiss(player.getThreePointMiss() + threeMiss);
+            player.setTwoPointHit(player.getTwoPointHit() + twoHit);
+            player.setTwoPointMiss(player.getTwoPointMiss() + twoMiss);
             player.setThreePointer(threeHitPercent);
             player.setTwoPointer(twoHitPercent);
+            player.setFreeThrowHit(player.getFreeThrowHit() + freeThrowHit);
+            player.setFreeThrowMiss(player.getThreePointMiss() + freeThrowMiss);
+            player.setFreeThrow("any%");
             player.setPlayerId(playerId);
-            player.setTurnovers(turnover);
-            player.setBlocks(block);
-            player.setFouls(foul);
-            player.setAssists(assist);
-            player.setRebounds(rebound);
+            player.setTurnovers(player.getTurnovers() + turnover);
+            player.setBlocks(player.getBlocks() + block);
+            player.setFouls(player.getFouls() + foul);
+            player.setAssists(player.getAssists() + assist);
+            player.setRebounds(player.getRebounds() + rebound);
 
             //check if player already exists
 

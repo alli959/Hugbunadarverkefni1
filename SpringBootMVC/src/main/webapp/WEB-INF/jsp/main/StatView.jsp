@@ -30,6 +30,7 @@
 
         <table class="allPlayers">
             <tr>
+                <th>Player Name</th>
                 <th>Score</th>
                 <th>3 Points</th>
                 <th>3 Point perc</th>
@@ -49,13 +50,14 @@
 
             <c:forEach var="player" items="${players}">
                 <tr>
+                    <td>${player.playerName}</td>
                     <td>${player.points}</td>
 
                     <td>${player.threePointHit}</td>
 
                     <td>${player.threePointer}</td>
 
-                    <td>0</td>
+                    <td>${player.twoPointHit}</td>
 
                     <td>${player.twoPointer}</td>
 
@@ -69,7 +71,7 @@
 
                     <td>${player.blocks}</td>
 
-                    <td>0</td>
+                    <td>${player.steals}</td>
 
                     <td>${player.turnovers}</td>
 

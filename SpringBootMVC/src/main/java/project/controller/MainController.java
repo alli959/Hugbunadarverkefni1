@@ -72,7 +72,7 @@ public class MainController {
 
             model.addAttribute("msg", loggedInUser.getName());
 
-            model.addAttribute("players",playerStatsService.findAllReverseOrder());
+            model.addAttribute("players",playerStatsService.getByTeamId(teamId));
 
             return "main/StatView";
         }

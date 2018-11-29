@@ -9,6 +9,7 @@ public class PlayerStats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String playerName;
     private Long teamId;
     private Long playerId;
     private Long points;
@@ -16,6 +17,7 @@ public class PlayerStats {
     private Long assists;
     private Long turnovers;
     private Long blocks;
+    private Long steals;
     private Long fouls;
     private Long threePointHit;
     private Long threePointMiss;
@@ -31,8 +33,9 @@ public class PlayerStats {
     public PlayerStats() {
     }
 
-    public PlayerStats(Long id, Long teamId, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long fouls, Long threePointHit, Long threePointMiss, Long twoPointHit, Long twoPointMiss, Long freeThrowHit, Long freeThrowMiss, String twoPointer, String threePointer, String freeThrow) {
+    public PlayerStats(Long id, String playerName, Long teamId, Long playerId, Long points, Long rebounds, Long assists, Long turnovers, Long blocks, Long steals, Long fouls, Long threePointHit, Long threePointMiss, Long twoPointHit, Long twoPointMiss, Long freeThrowHit, Long freeThrowMiss, String twoPointer, String threePointer, String freeThrow) {
         this.id = id;
+        this.playerName = playerName;
         this.teamId = teamId;
         this.playerId = playerId;
         this.points = points;
@@ -40,6 +43,7 @@ public class PlayerStats {
         this.assists = assists;
         this.turnovers = turnovers;
         this.blocks = blocks;
+        this.steals = steals;
         this.fouls = fouls;
         this.threePointHit = threePointHit;
         this.threePointMiss = threePointMiss;
@@ -205,5 +209,21 @@ public class PlayerStats {
 
     public void setTwoPointMiss(Long twoPointMiss) {
         this.twoPointMiss = twoPointMiss;
+    }
+
+    public Long getSteals() {
+        return steals != null ? steals:0;
+    }
+
+    public void setSteals(Long steals) {
+        this.steals = steals;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 }
