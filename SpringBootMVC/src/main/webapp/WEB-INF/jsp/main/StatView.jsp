@@ -51,6 +51,7 @@
             <c:forEach var="player" items="${players}">
                 <tr>
                     <td>${player.playerName}</td>
+
                     <td>${player.points}</td>
 
                     <td>${player.threePointHit}</td>

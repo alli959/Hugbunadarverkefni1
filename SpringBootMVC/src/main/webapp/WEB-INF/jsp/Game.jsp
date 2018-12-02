@@ -132,7 +132,8 @@
 
                 <c:forEach var="player" items="${players}">
 
-                    <button class="button bench" type="button">${player.name}</button>
+
+                    <button class="button bench" type="button" onclick="substitute(${player.id})"> ${player.name}</button>
 
                 </c:forEach>
             </c:when>

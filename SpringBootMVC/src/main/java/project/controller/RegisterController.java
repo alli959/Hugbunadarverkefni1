@@ -2,6 +2,7 @@ package project.controller;
 
 
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,8 @@ public class RegisterController {
             model.addAttribute("error","Users already exists");
             return "/register";
         }
+        users.setPassword(BCrypt.hashpw(users.getPassword(), BCrypt.gensalt()));
+
         userService.save(users);
 
         model.addAttribute("createUser", new Users());

@@ -1,5 +1,6 @@
 package project.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,13 +46,14 @@ public class LoginController {
         if (exists != null && userName != null
                 && password != null) {
 
-            session.setAttribute("login", exists);
-            return "redirect:/user";
+            if(BCrypt.checkpw(password, exists.getPassword())) {
+                session.setAttribute("login", exists);
+                return "redirect:/user";
+            }
         }
-                 else {
+
                 model.addAttribute("error", "Invalid Details");
                 return "login";
-            }
 
 
 

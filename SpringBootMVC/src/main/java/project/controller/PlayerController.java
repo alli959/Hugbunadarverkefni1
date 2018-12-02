@@ -11,6 +11,8 @@ import project.service.PlayerStatsService;
 import project.service.PlayerService;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -95,13 +97,14 @@ public class PlayerController {
 
         Users loggedInUser = (Users)session.getAttribute("login");
         if(loggedInUser != null) {
-            PlayerStats player = playerStatsService.getByPlayerId(playerId);
+            List<PlayerStats> player = playerStatsService.getByPlayerId(playerId);
+
             model.addAttribute("msg", loggedInUser.getName());
             model.addAttribute("teamId", teamId);
 
             model.addAttribute("playerId", playerId);
 
-            model.addAttribute("players", playerStatsService.findAllReverseOrder());
+            model.addAttribute("players", player);
 
 
             return "player/playerView";

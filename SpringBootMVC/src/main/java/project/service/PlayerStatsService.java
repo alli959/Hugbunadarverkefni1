@@ -82,7 +82,7 @@ public interface PlayerStatsService {
 
     List<PlayerStats> findPlayersInTeamReverseOrder(Long teamId);
 
-    PlayerStats getByPlayerId(Long playerId);
+    List<PlayerStats> getByPlayerId(Long playerId);
 
     List<PlayerStats> getByTeamId(Long teamId);
 
