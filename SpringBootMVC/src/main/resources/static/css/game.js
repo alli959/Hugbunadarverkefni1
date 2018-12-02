@@ -28,12 +28,25 @@ let playerShoting;
 let playerBlock;
 let playerSteal;
 
+let subId;
+
+
 let scoreHome = 0;
 let scoreAway = 0;
 
 let FTshots;
 
 let playerSelected = false;
+let subSelected = false;
+
+
+function substitute(id){
+    subId = id;
+        actionPost("", "", false, "", "", subId, playerId, "", "")
+}
+
+
+
 
 function shot(val) {
    if (val == 1) { // Made
@@ -288,9 +301,9 @@ function shotPos(pos) {
     shotFrom = pos;
 }
 
-function selectedPlayer(val){
-    playerSelected = true;
-    playerId = val;
+async function selectedPlayer(val){
+        playerSelected = true;
+        playerId = val;
 }
 
  async function actionPost(playerId, from, isHit, assist, rebound, subIn, subOut, turnover, other){

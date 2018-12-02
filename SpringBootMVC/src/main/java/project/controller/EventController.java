@@ -179,6 +179,29 @@ public class EventController {
             gameService.save(fouler);
         }
 
+        //----------Add substitutions --------//
+
+        String subInText = myObject.get("subIn").toString();
+        String subOutText = myObject.get("subOut").toString();
+        if(!subInText.equals("") && !subOutText.equals("")){
+            System.out.println("subOutText " +subOutText);
+            System.out.println("subInText " +subInText);
+
+
+            Long subInId = Long.parseLong(subInText);
+            Long subOutId = Long.parseLong(subOutText);
+
+
+
+            Game subIner = gameService.findByPlayerId(subInId);
+            Game subOuter = gameService.findByPlayerId(subOutId);
+            subIner.setBench(false);
+            subOuter.setBench(true);
+            gameService.save(subOuter);
+            gameService.save(subIner);
+        }
+
+
 
 
 
