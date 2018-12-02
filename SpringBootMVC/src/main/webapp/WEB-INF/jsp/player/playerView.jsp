@@ -34,7 +34,73 @@
 
     <h1> ${name} </h1>
 
-    <h1>TODO</h1>
+
+<h1>Statistics</h1>
+
+<c:choose>
+    <c:when test="${not empty players}">
+
+
+        <table class="allPlayers">
+            <tr>
+                <th>Player Name</th>
+                <th>Score</th>
+                <th>3 Points</th>
+                <th>3 Point perc</th>
+                <th>2 Points</th>
+                <th>2 point perc</th>
+                <th>Free Throws</th>
+                <th>Free Throw perc</th>
+                <th>Assists</th>
+                <th>Rebounds</th>
+                <th>Blocks</th>
+                <th>Steals</th>
+                <th>Turnovers</th>
+                <th>Fouls</th>
+
+            </tr>
+
+
+            <c:forEach var="player" items="${players}">
+                <tr>
+                    <td>${player.playerName}</td>
+
+                    <td>${player.points}</td>
+
+                    <td>${player.threePointHit}</td>
+
+                    <td>${player.threePointer}</td>
+
+                    <td>${player.twoPointHit}</td>
+
+                    <td>${player.twoPointer}</td>
+
+                    <td>${player.freeThrowHit}</td>
+
+                    <td>${player.freeThrow}</td>
+
+                    <td>${player.assists}</td>
+
+                    <td>${player.rebounds}</td>
+
+                    <td>${player.blocks}</td>
+
+                    <td>${player.steals}</td>
+
+                    <td>${player.turnovers}</td>
+
+                    <td>${player.fouls}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:when>
+
+
+    <c:otherwise>
+        <h3>This player hasn't done anything right...</h3>
+    </c:otherwise>
+</c:choose>
+
 
 
 

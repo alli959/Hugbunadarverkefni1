@@ -284,9 +284,9 @@ public class EventController {
 
             //check if player already exists
 
-            PlayerStats playerTest = playerStatsService.getByPlayerId(playerId);
-            if(playerTest != null){
-                player.setId(playerTest.getId());
+            List<PlayerStats> playerTest = playerStatsService.getByPlayerId(playerId);
+            if(playerTest.size() != 0){
+                player.setId(playerTest.get(0).getId());
             }
 
             playerStatsService.save(player);

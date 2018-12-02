@@ -71,7 +71,7 @@ public class PlayerStatsServiceImplementation implements PlayerStatsService {
     }
 
     @Override
-    public PlayerStats getByPlayerId(Long playerId) {
+    public List<PlayerStats> getByPlayerId(Long playerId) {
         return repository.getByPlayerId(playerId);
     }
 
