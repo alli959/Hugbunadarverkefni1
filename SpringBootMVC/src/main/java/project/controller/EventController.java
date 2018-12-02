@@ -181,7 +181,7 @@ public class EventController {
 
         //----------Add substitutions --------//
 
-        String subInText = myObject.get("subIn").toString();
+       /* String subInText = myObject.get("subIn").toString();
         String subOutText = myObject.get("subOut").toString();
         if(!subInText.equals("") && !subOutText.equals("")){
             System.out.println("subOutText " +subOutText);
@@ -199,7 +199,7 @@ public class EventController {
             subOuter.setBench(true);
             gameService.save(subOuter);
             gameService.save(subIner);
-        }
+        }*/
 
 
 
@@ -211,88 +211,6 @@ public class EventController {
     @RequestMapping(value = "/game/endgame", method = RequestMethod.GET)
     public String endgame(HttpSession session, Model model) {
 
-        List<Game> players = gameService.findAllReverseOrder();
-        Game test = players.get(0);
-
-
-
-        for(int i = 0; i<players.size(); i++){
-            Long threeHit = getThreeHit(players.get(i).getPlayerId());
-            Long threeMiss = getThreeMiss(players.get(i).getPlayerId());
-            Long totalThreeAttemts = threeHit + threeMiss;
-            Long twoHit = getTwoHit(players.get(i).getPlayerId());
-            Long twoMiss = getTwoMiss(players.get(i).getPlayerId());
-            Long totalTwoAttemts = twoHit + twoMiss;
-
-
-            Long threeHitPercentF = Long.parseLong(String.valueOf(0));
-            Long twoHitPercentF = Long.parseLong(String.valueOf(0));
-
-            if(threeHit != 0){
-                threeHitPercentF = (Long) (threeHit/totalThreeAttemts)*100;
-            }
-            if(twoHit != 0){
-                twoHitPercentF = (Long) (twoHit/totalTwoAttemts)*100;
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-            String threeHitPercent = Long.toString(threeHitPercentF) + '%';
-            String twoHitPercent = Long.toString(twoHitPercentF) + '%';
-
-            Long teamId = (Long) session.getAttribute("teamId");
-            Long freeThrowHit = players.get(i).getFreeThrowHit();
-            Long freeThrowMiss = players.get(i).getFreeThrowMiss();
-            Long playerId = players.get(i).getPlayerId();
-            Long turnover = players.get(i).getTurnover();
-            Long block = players.get(i).getBlock();
-            Long steal = players.get(i).getSteal();
-            Long foul = players.get(i).getFoul();
-            Long assist = players.get(i).getAssist();
-            Long rebound = players.get(i).getRebound();
-            Long playerPoints = freeThrowHit + (threeHit*(Long.parseLong(String.valueOf(3)))) + (twoHit*(Long.parseLong(String.valueOf(2))));
-            System.out.println("this is 3 pointer " + threeHit + " this is 2 pointer " + twoHit + " this is free throw hit " + freeThrowHit + " total " + playerPoints );
-            PlayerStats player = new PlayerStats();
-            player.setPlayerName(playerService.findOne(playerId).getName());
-            player.setSteals(player.getSteals() + steal);
-            player.setPoints(playerPoints);
-            player.setTeamId(teamId);
-            player.setThreePointHit(player.getThreePointHit() + threeHit);
-            player.setThreePointMiss(player.getThreePointMiss() + threeMiss);
-            player.setTwoPointHit(player.getTwoPointHit() + twoHit);
-            player.setTwoPointMiss(player.getTwoPointMiss() + twoMiss);
-            player.setThreePointer(threeHitPercent);
-            player.setTwoPointer(twoHitPercent);
-            player.setFreeThrowHit(player.getFreeThrowHit() + freeThrowHit);
-            player.setFreeThrowMiss(player.getThreePointMiss() + freeThrowMiss);
-            player.setFreeThrow("any%");
-            player.setPlayerId(playerId);
-            player.setTurnovers(player.getTurnovers() + turnover);
-            player.setBlocks(player.getBlocks() + block);
-            player.setFouls(player.getFouls() + foul);
-            player.setAssists(player.getAssists() + assist);
-            player.setRebounds(player.getRebounds() + rebound);
-
-            //check if player already exists
-
-            List<PlayerStats> playerTest = playerStatsService.getByPlayerId(playerId);
-            if(playerTest.size() != 0){
-                player.setId(playerTest.get(0).getId());
-            }
-
-            playerStatsService.save(player);
-
-
-        }
         return "redirect:/user/stats";
     }
 
@@ -300,59 +218,6 @@ public class EventController {
 
 
 
-    /*-------HELPER FUNCTIONS DON'T LOOK --------- */
-
-    public Long getThreeHit(Long playerId){
-        Game game = gameService.findByPlayerId(playerId);
-        long value = 0;
-        value += game.getLeftWingThreeHit();
-        value += game.getRightWingThreeHit();
-        value += game.getTopThreeHit();
-        value += game.getLeftCornerThreeHit();
-        value += game.getRightCornerThreeHit();
-        return value;
-
-    }
-
-
-
-    public Long getThreeMiss(Long playerId){
-        Game game = gameService.findByPlayerId(playerId);
-        long value = 0;
-        value += game.getLeftWingThreeMiss();
-        value += game.getRightWingThreeMiss();
-        value += game.getTopThreeMiss();
-        value += game.getLeftCornerThreeMiss();
-        value += game.getRightCornerThreeMiss();
-        return value;
-
-    }
-
-    public Long getTwoHit(Long playerId){
-        Game game = gameService.findByPlayerId(playerId);
-        long value = 0;
-        value += game.getLeftShortCornerHit();
-        value += game.getRightShortCornerHit();
-        value += game.getLeftTopKeyHit();
-        value += game.getRightTopKeyHit();
-        value += game.getTopKeyHit();
-        value += game.getLayUpHit();
-
-        return value;
-    }
-
-    public Long getTwoMiss(Long playerId){
-        Game game = gameService.findByPlayerId(playerId);
-        long value = 0;
-        value += game.getLeftShortCornerMiss();
-        value += game.getRightShortCornerMiss();
-        value += game.getLeftTopKeyMiss();
-        value += game.getRightTopKeyMiss();
-        value += game.getTopKeyMiss();
-        value += game.getLayUpMiss();
-
-        return value;
-    }
 
 
 }

@@ -20,5 +20,10 @@ public interface PlayerStatsRepository extends JpaRepository<PlayerStats, Long> 
     @Query(value = "SELECT p FROM PlayerStats p WHERE teamId = ?1")
     List<PlayerStats> getByTeamId(Long teamId);
 
+    @Query(value = "SELECT p FROM PlayerStats p WHERE teamId = ?1")
+    PlayerStats getEntityByPlayerId(Long playerId);
+
+
+
     
 }
