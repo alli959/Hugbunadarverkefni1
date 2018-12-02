@@ -37,13 +37,14 @@ let scoreAway = 0;
 let FTshots;
 
 let playerSelected = false;
+/*
 let subSelected = false;
 
 
 function substitute(id){
     subId = id;
         actionPost("", "", false, "", "", subId, playerId, "", "")
-}
+}*/
 
 
 

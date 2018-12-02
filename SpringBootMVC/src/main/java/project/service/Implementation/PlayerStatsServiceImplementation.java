@@ -81,4 +81,9 @@ public class PlayerStatsServiceImplementation implements PlayerStatsService {
         Collections.reverse(players);
         return players;
     }
+
+    @Override
+    public PlayerStats getEntityByPlayerId(Long playerId) {
+        return repository.getEntityByPlayerId(playerId);
+    }
 }
