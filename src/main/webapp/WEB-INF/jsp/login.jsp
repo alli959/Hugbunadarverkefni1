@@ -9,21 +9,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Spring Login Form</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/login.css"/>"/>
+    <spring:htmlEscape defaultHtmlEscape="true" />
+
 </head>
 <body>
 
-<sf:form method="POST" modelAttribute="users" action="/login">
+
+
+<sf:form method="POST" modelAttribute="users" action="/login" htmlEscape="true">
 
     <div align="center">
         <div style="color: blue" >${msg}</div>
         <table>
             <tr>
                 <td>User Name</td>
-                <td><input type="text" name="userName" /></td>
+                <td><input type="text" name="userName" htmlEscape="true"/></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password" /></td>
+                <td><input type="password" name="password"  /></td>
             </tr>
             <tr>
             </tr>

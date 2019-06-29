@@ -9,6 +9,7 @@ import project.persistence.entities.Users;
 import project.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,7 +29,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("users") Users users, HttpSession session, Model model) {
+    public String submit(@ModelAttribute("users") @Valid Users users, HttpSession session, Model model) {
 
 
         model.addAttribute("users",new Users());

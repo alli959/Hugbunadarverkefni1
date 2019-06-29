@@ -1,5 +1,7 @@
 package project.persistence.entities;
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 import javax.persistence.*;
 import javax.validation.Validator;
 import javax.validation.constraints.Min;
@@ -18,9 +20,13 @@ public class Player {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @SafeHtml
     private Long playerNr;
+    @SafeHtml
     private String name;
+    @SafeHtml
     private String playerPos;
+    @SafeHtml
     private Long teamId;
 
 

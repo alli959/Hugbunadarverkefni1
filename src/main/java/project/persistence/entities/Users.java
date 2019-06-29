@@ -1,6 +1,8 @@
 package project.persistence.entities;
 
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 import javax.persistence.*;
 import static javax.persistence.GenerationType.*;
 
@@ -13,9 +15,13 @@ public class Users {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @SafeHtml
     private String name;
+    @SafeHtml
     private String userName;
+    @SafeHtml
     private String password;
+    @SafeHtml
     private String email;
 
     //private Team team;

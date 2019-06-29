@@ -11,6 +11,7 @@ import project.service.PlayerStatsService;
 import project.service.PlayerService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class PlayerController {
 
 
     @RequestMapping(value = "/user/team/{teamId}/player", method = RequestMethod.POST)
-    public String playerAddPost(@ModelAttribute("playerAdd") Player player,
+    public String playerAddPost(@ModelAttribute("playerAdd") @Valid Player player,
                                 HttpSession session,
                                 @PathVariable Long teamId,
                                      Model model){
