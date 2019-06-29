@@ -6,12 +6,14 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.Users;
 import project.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,16 +38,21 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String createUserPost(@ModelAttribute("createUser") Users users,
-                                 Model model) {
+    public String createUserPost(@ModelAttribute("createUser") @Valid Users users,
+                                 Model model, Errors error) {
+
+        if(error.hasErrors()){
+            model.addAttribute("error","don't even try that...");
+            return "/register";
+        }
 
         Users exists = this.userService.getByUserName(users.getName());
-
 
         if(exists != null){
             model.addAttribute("error","Users already exists");
             return "/register";
         }
+
         users.setPassword(BCrypt.hashpw(users.getPassword(), BCrypt.gensalt()));
 
         userService.save(users);

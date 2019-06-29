@@ -13,6 +13,7 @@ import project.service.TeamService;
 import project.service.PlayerService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class TeamController {
 
 
     @RequestMapping(value = "/user/team", method = RequestMethod.POST)
-    public String createTeamPost(@ModelAttribute("createTeam") Team team,
+    public String createTeamPost(@ModelAttribute("createTeam") @Valid Team team,
                                  HttpSession session,
                                  Model model) {
 
