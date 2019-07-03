@@ -170,6 +170,7 @@ public class EventController {
 
         //-----------Add foul--------//
         String foulText = myObject.get("other").toString();
+        System.out.println(foulText);
         String foulIdText = myObject.get("playerId").toString();
         if(foulText.equals("Foul") && !turnoverIdText.equals("")){
             Long foulId = Long.parseLong(foulIdText);

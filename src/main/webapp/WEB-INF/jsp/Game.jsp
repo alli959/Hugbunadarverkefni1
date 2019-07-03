@@ -249,11 +249,10 @@
 <div class="other">
     <button class="button" onclick="showFoulButton()">Foul</button>
     <button class="button" value="turnover" onclick="showTurnoverButton()">Turnover</button>
+    <button class="button end" type="submit" onclick="location.href='/game/endgame'">End Game</button>
+
 </div>
 
-<div class="other">
-    <button class="button end" type="submit" onclick="location.href='/game/endgame'">End Game</button>
-</div>
 
 <!--onclick="location.href = 'leftwingthree'"-->
 <map name="image-map">

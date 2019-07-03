@@ -4,9 +4,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import javax.validation.Validator;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import java.util.List;
 
@@ -20,13 +18,11 @@ public class Player {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @SafeHtml
     private Long playerNr;
-    @SafeHtml
+    @SafeHtml(message = "yes")
     private String name;
-    @SafeHtml
+    @SafeHtml(message = "wtf is going on?")
     private String playerPos;
-    @SafeHtml
     private Long teamId;
 
 

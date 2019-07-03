@@ -20,6 +20,7 @@ let howManyFTAway;
 let freeThrowAway;
 let turnoverPlayer;
 
+
 let shotFrom; // Hvar leikmaður skaut
 let playerId; // Leikmaðurinn sem er valin sem skýtur
 let playerAssist; // Leikmaður sem gaf stoðsendingu
@@ -165,6 +166,9 @@ function showFoulButton() {
 
 
 }
+
+
+
 
 function foul(val) { // val == 1 defensive foul, val = 0 offensive foul
     if (val == 1) { // Shooting foul og non shooting foul
