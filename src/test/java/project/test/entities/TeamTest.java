@@ -22,48 +22,49 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import project.persistence.entities.Users;
-import project.persistence.repositories.UserRepository;
-import project.service.UserService;
+import project.persistence.entities.Team;
+import project.persistence.repositories.TeamRepository;
+import project.service.TeamService;
 import project.test.ApplicationTest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserTest {
+public class TeamTest {
 
 	@Autowired
-	private UserService service;
+	private TeamService service;
 	
 	@MockBean
-	private UserRepository repository;
+	private TeamRepository repository;
 	
 	
 	@Test
-	public void getUsersTest() {
+	public void getTeamTest() {
 		when(repository.findAll()).thenReturn(Stream
-				.of( new Users((long)100,"Tester","Tester1","12345","Tester1@gmail.com"), new Users((long)200,"Tester","Tester2","12345","Tester2@gmail.com")).collect(Collectors.toList()));
+				.of( new Team((long)100,"Tester1","Tester"), new Team((long)200,"Tester1","Tester")).collect(Collectors.toList()));
 		assertEquals(2, service.findAll().size());
 	}
 	
 	@Test
-	public void getUsersByUserNameTest() {
-		String userName = "Tester1";
-		when(repository.getByUserName(userName)).thenReturn(new Users((long)200,"Tester","Tester1","12345","Tester2@gmail.com"));
-		assertNotNull(service.getByUserName(userName));
+	public void getTeamByNameTest() {
+		String teamName = "Tester1";
+		when(repository.findByName(teamName)).thenReturn(Stream
+				.of(new Team((long)200,"Tester1","Tester"),new Team((long)202, "Tester1", "Tester")).collect(Collectors.toList()));
+		assertNotNull(service.findByName(teamName));
 				
 	}
 	@Test
-	public void saveUserTest() {
-		Users user = new Users((long)100,"Tester","Tester1","12345","Tester1@gmail.com");
-		when(repository.save(user)).thenReturn(user);
-		assertEquals(user, service.save(user));
+	public void saveTeamTest() {
+		Team team = new Team((long)100,"Tester1","Tester");
+		when(repository.save(team)).thenReturn(team);
+		assertEquals(team, service.save(team));
 	}
 	@Test
-	public void deleteUserTest() {
-		Users user = new Users((long)100,"Tester","Tester1","12345","Tester1@gmail.com");
+	public void deleteTeamTest() {
+		Team team = new Team((long)100,"Tester1","Tester");
 		//Delete user
-		service.delete(user);
-		verify(repository, times(1)).delete(user);
+		service.delete(team);
+		verify(repository, times(1)).delete(team);
 	}
 	
 	
